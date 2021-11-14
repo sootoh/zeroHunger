@@ -12,6 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
+                <img src='css/images/zerohungerlogo.jpeg' />
                 <a class="navbar-brand" asp-area="" asp-page="/Index">ZeroHunger</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -27,6 +28,8 @@
                         </li>
                     </ul>
                 </div>
+                <a class="nav-link text-dark" asp-area="" asp-page="/register">Register</a>
+                <a class="nav-link text-dark" asp-area="" asp-page="/login">Login</a>
             </div>
         </nav>
     </header>
@@ -36,7 +39,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="padding-top=5px">
         <div class="container">
             &copy; 2021 - ZeroHunger - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
