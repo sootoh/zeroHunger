@@ -1,0 +1,75 @@
+﻿@page
+@model ZeroHunger.Pages.DryFoodDonationF.IndexModel
+@{
+}
+
+<br />
+<div class="container row p-0 m-0">
+    <div class="col-9">
+        <h2>Donation List</h2>
+    </div>
+    <div clss="col-3">
+        <a asp-page="AddDryFoodDonation" class="btn btn-info form-control text-white ">Create New Donation</a>
+    </div>
+    <div class="col-12border p-3 mt-3 ">
+        <form method="Post">
+            @if (Model.DFD.Count() > 0)
+            {
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th>
+                            <label asp-for="DFD.FirstOrDefault().DryFoodName">Food Name</label>
+                        </th>
+                        <th>
+                            <label asp-for="DFD.FirstOrDefault().DryFoodQuantity">Quantity</label>
+                        </th>
+                        <th>
+                            <label asp-for="DFD.FirstOrDefault().DryFoodPickDate">Pick-up Date</label>
+                        </th>
+                        <th>
+                            <label asp-for="DFD.FirstOrDefault().DryFoodRemark">Remark</label>
+                        </th>
+                        <th>
+                            <label asp-for="DFD.FirstOrDefault().DelivererId">Deliverer</label>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.DFD)
+                    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.DryFoodName)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.DryFoodQuantity)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.DryFoodPickDate)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.DryFoodRemark)
+
+                    </td>
+                    <td>
+                        
+                        @Html.DisplayFor(m => item.DelivererId)
+
+                    </td>
+
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')" asp-page-handler="Delete" asp-route-id="@item.Id">Delete</button>
+                        <a class="btn btn-success btn-sm text-white" asp-page="EditDryFoodDonation" asp-route-Id="@item.Id">Edit</a>
+                    </td>
+                </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p> No Donation</p>
+            }
+        </form>
+    </div>
+</div>
