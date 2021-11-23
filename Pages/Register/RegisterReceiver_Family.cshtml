@@ -1,0 +1,92 @@
+﻿@page
+@model ZeroHunger.Pages.Register.RegisterReceiver_FamilyModel
+@{
+    <head>
+<content charset="utf-8">
+	<title>Form-v10 by Colorlib</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="../css/montserrat-font.css">
+	<link rel="stylesheet" type="text/css" href="../fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="../css/style2.css"/>
+	<script language="javascript">
+		function validateIC(ic)
+		{
+			var dobString=ic.substring(0,2)+"-"+ic.substring(2,4)+"-"+ic.substring(4,6)+" 08:00";
+			const dob=new Date(dobString);
+			if(dob=="Invalid Date")
+			{
+				alert("Please re-check your IC Number");
+			}
+			document.getElementsByName("receiverDOB")[0].value=dob.toISOString().substr(0, 10);
+		}
+		function submit()
+		{
+			alert("The application is submitted. An email will be sent to you when the application is approved.")
+		}
+	</script>
+</head>
+<body class="form-v10">
+
+	<div class="page-content" style="display:block; padding:50px;">
+		<div style="width:100%; text-align: center;"><h1>Applying Receiver Account</h1></div>
+		<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+		<div class="form-v10-content" style="margin:20px auto 20px auto;" >
+		<h5 style="color:red;">@Model.message</h5>
+			<form class="form-detail" action="Login" method="post" id="myform" >
+				<div class="form-left">
+					<h2>Family IC and DOB</h2>
+					@for(int i=0;i< Model.noFamily;i++)
+						{
+							<div class="form-group">
+								<div class="form-row form-row-1">
+									<input asp-for="applicationFamily[i].familyIC" type="text" name="familyIC" class="icNum" id="ic" placeholder="IC Number (without '-')" onblur="validateIC(this.value)" pattern="\d{12}" required>
+								</div>
+								<div class="form-row form-row-1">
+									<input asp-for="applicationFamily[i].familyDOB" type="date" name="familyDOB" class="DOB" id="DOB" required>
+								</div>
+							</div>
+							
+						}
+					
+
+				</div>
+
+				<div class="form-right">
+					<h2>Occupation and Salary</h2>
+					@for (int i = 0; i < Model.noFamily; i++)
+				   {
+					   <div class="form-group">
+							<div class="form-row form-row-3">
+								<input type="text" asp-for="applicationFamily[i].familyOccupation" name="familyOccupation" class="occupation" id="occupation" placeholder="Occupation" required>
+							</div>
+							<div class="form-row form-row-4">
+								<select asp-for="applicationFamily[i].familySalaryGroupID" name="familySalaryGroupID">
+									<option value="Salary" disabled selected>Salary (RM)</option>
+									<option value="0">0</option>
+									<option value="1-500">1-500</option>
+									<option value="501-1000">501-1000</option>
+									<option value="1001-1500">1001-1500</option>
+									<option value="1501-2000">1501-2000</option>
+									<option value=">2000">>2000</option>
+								</select>
+								<span class="select-btn">
+							  		<i class="zmdi zmdi-chevron-down"></i>
+								</span>
+							</div>
+							
+						</div>
+				   }
+				   <div class="form-row-last ">
+								<input type="submit" name="register" class="register" value="Submit" onclick="submit()">
+							</div>
+					
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+}

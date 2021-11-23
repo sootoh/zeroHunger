@@ -1,0 +1,166 @@
+﻿@page                                                                                                                                                     
+@model ZeroHunger.Pages.Register.RegisterReceiverModel
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@using ZeroHunger.Model
+
+@{
+    <head>
+		<content charset="utf-8">
+		<title>Form-v10 by Colorlib</title>
+		<!-- Mobile Specific Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!-- Font-->
+		<link rel="stylesheet" type="text/css" href="../css/montserrat-font.css">
+		<link rel="stylesheet" type="text/css" href="../fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+		<!-- Main Style Css -->
+		<link rel="stylesheet" href="../css/style2.css"/>
+		<script language="javascript">
+		function validateIC(ic)
+		{
+			
+			var dobString=ic.substring(0,2)+"-"+ic.substring(2,4)+"-"+ic.substring(4,6)+" 08:00";
+			const dob=new Date(dobString);
+			if(dob=="Invalid Date")
+			{
+				alert("Please re-check your IC Number");
+			}
+			document.getElementsByName("receiverDOB")[0].value=dob.toISOString().substr(0, 10);
+		}
+		function submit()
+		{
+			if(document.getElementsByName("receiverFamilyNo")==0)
+			{
+				alert("The application is submitted. An email will be sent to you when the application is approved.")
+			}
+		}
+	</script>
+	</head>
+	<body class="form-v10">
+
+		<div class="page-content" style="display:block; padding:50px;">
+			<div style="width:100%; text-align: center;"><h1>Applying Receiver Account</h1></div>
+			<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+			<div class="form-v10-content" style="margin:20px auto 20px auto;" >
+			<h5 style="color:red;">@Model.message</h5>
+				<form class="form-detail" method="post" id="myform" >
+					<div class="form-left">
+						<h2>General Infomation</h2>
+						
+						<!--name-->
+							<div class="form-group">
+								<div class="form-row form-row-1">
+									<input asp-for="fName" type="text" id="first_name" class="input-text" placeholder="First Name" required>
+								</div>
+								<div class="form-row form-row-2">
+									<input asp-for="lName" type="text" id="last_name" class="input-text" placeholder="Last Name" required>
+								</div>
+							</div>
+					
+						<div class="form-group">
+						<!--gender-->
+							<div class="form-row form-row-1">
+									<select asp-for="application.receiverGender" name="receiverGender" required>
+										<option value="gender" disabled selected>Gender</option>
+										<option value="M">Male</option>
+										<option value="F">Female</option>
+									</select>
+								</div>
+					 
+						<!--ic-->
+							<div class="form-row form-row-2">
+								<input asp-for="application.receiverIC" type="text" name="receiverIC" class="icNum" id="ic" onblur="validateIC(this.value)"  placeholder="IC Number (without '-')" pattern="\d{12}" required>
+							</div> 
+							<span class="select-btn">
+									<i class="zmdi zmdi-chevron-down"></i>
+							</span>
+						</div>
+
+						<!--DOB-->
+						<div class="form-row">
+							DOB<input type="date" asp-for="application.receiverDOB" name="receiverDOB" class="DOB" id="DOB" required>
+						</div>
+					
+						<!--occupation & salary -->
+						<div class="form-group">
+							<div class="form-row form-row-3">
+								<input type="text" asp-for="application.receiverOccupation" name="receiverOccupation" class="occupation" id="occupation" placeholder="Occupation" required>
+							</div>
+							<div class="form-row form-row-4">
+								<select asp-for="application.receiverSalaryGroupID " name="receiverSalaryGroupID">
+									<option value="Salary" disabled selected>Salary (RM)</option>
+									<option value=0>0</option>
+									<option value=1>1-500</option>
+									<option value=2>501-1000</option>
+									<option value=3>1001-1500</option>
+									<option value=4>1501-2000</option>
+									<option value=5>>2000</option>
+								</select>
+								<span class="select-btn">
+							  		<i class="zmdi zmdi-chevron-down"></i>
+								</span>
+							</div>
+						</div>
+
+						<!--family-->
+						<div class="form-row">
+							<input asp-for="application.receiverFamilyNo" type="number" name="receiverFamilyNo" class="familyNo" id="familyNo" placeholder="Number of Family Member live together" min="0" required>
+						</div>
+
+					</div>
+
+					<div class="form-right">
+						<h2>Contact Details</h2>
+						<div class="form-row">
+							<input asp-for="street" type="text" class="street" id="street" placeholder="No + Street Name" required>
+						</div>
+						<div class="form-row">
+							<input asp-for="additional" type="text" class="additional" id="additional" placeholder="Additional">
+						</div>
+						<div class="form-group">
+							<div class="form-row form-row-1">
+								<input asp-for="zip" type="text"  class="zip" id="zip" placeholder="PostCode" required>
+							</div>
+							<div class="form-row form-row-2">
+								<input asp-for="city" type="text" class="city" id="city" placeholder="City" required>
+							</div>
+						</div>
+						<div class="form-row">
+							<select asp-for="state" required>
+								<option value="state" disabled selected>State</option>
+								<option value="Johor">Johor</option>
+								<option value="others">Others</option>
+							</select>
+							<span class="select-btn">
+						  		<i class="zmdi zmdi-chevron-down"></i>
+							</span>
+						</div>
+					
+						<div class="form-row">
+							<input asp-for="application.receiverPhone" type="tel" name="receiverPhone" class="phone" id="phone" placeholder="Phone Number" required>
+						</div>
+					
+						<div class="form-row">
+							<input asp-for="application.receiverEmail" type="email" name="receiverEmail" id="your_email" class="input-text"  placeholder="Your Email" required>
+						</div>
+						<div class="form-checkbox">
+							<label class="container"><p>I do accept the <a href="#" class="text">Terms and Conditions</a> of your site.</p>
+						  		<input type="checkbox" name="checkbox">
+						  		<span class="checkmark"></span>
+							</label>
+						</div>
+						<div class="form-row-last ">
+							
+							<input type="submit" class="register" value="Next" onclick="submit()">
+							
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</body>
+	
+}
+
+
+

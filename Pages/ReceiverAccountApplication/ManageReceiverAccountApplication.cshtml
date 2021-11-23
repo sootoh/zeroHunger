@@ -1,0 +1,74 @@
+﻿@page
+@using ZeroHunger.Model
+@model ZeroHunger.Pages.ManageReceiverAccountApplicationModel
+@{
+    <head>
+        <title>Manage Receiver Account Application</title>
+        <!-- Mobile Specific Metas -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!-- Font-->
+	    <link rel="stylesheet" type="text/css" href="../css/montserrat-font.css">
+	    <link rel="stylesheet" type="text/css" href="../fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+	    <!-- Main Style Css -->
+        <link rel="stylesheet" href="../css/style2.css"/>
+        <style>
+            table,th,td{
+                border:solid 1px black;
+            }
+            th{
+                padding:25px;
+                
+            }
+        </style>
+    </head>
+    <body class="form-v10">
+        <table style="text-align:center; width:100%;" class="form-v10-content">
+            <!--title-->
+                <tr>
+                    <th>IC no</th>
+                    <th>Name</th>
+                    <th>Occupation</th>
+                    <th>Salary (RM)</th>
+                    <th>No. of Family Member</th>
+                    <th>Address</th>
+                    <th>Application Status</th>
+                    <th>Click for details</th>
+                </tr>
+
+            @foreach(Receiver application in Model.applicationList)
+            {
+                <tr >
+                    <td>@Html.DisplayFor(Receiver => application.receiverIC)</td>
+                    <td>@Html.DisplayFor(Receiver => application.receiverName)</td>
+                    <td>@Html.DisplayFor(Receiver => application.receiverOccupation)</td>
+                    <td>@Html.DisplayFor(SalaryGroup => Model.salaryGroups.ElementAt(application.receiverSalaryGroupID).salaryRange)</td>
+                    <td>@Html.DisplayFor(Receiver => application.receiverFamilyNo)</td>
+                    <td>@Html.DisplayFor(Receiver => application.receiverAdrs1)
+                        <br>
+                        @Html.DisplayFor(Receiver => application.receiverAdrs2) </td>
+                    <td>@getApplicationStatus(application.applicationStatusID)</td>
+                    
+                    <td>
+                        <a asp-page="ViewReceiverAccountApplication" asp-route-id="@application.receiverIC">
+                            Details
+                        </a>
+					</td>
+                </tr>
+
+            }
+            
+        </table>
+    </body>
+}
+@functions
+{
+    public string getApplicationStatus(int statusID)
+        {
+            switch(statusID)
+            {
+                case 0:return "New!";
+                case 1:return "Processing...";
+                default:return null;
+            }
+        }
+}
