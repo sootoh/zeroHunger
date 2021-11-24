@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace zeroHunger.Pages
+namespace ZeroHunger.Pages
 {
     public class adminModel : PageModel
     {
