@@ -14,9 +14,9 @@ namespace ZeroHunger.Pages.Deliveries
         private readonly ApplicationDbContext _db;
         public Delivery Delivery { set; get; }
 
-        public List<SelectListItem> Volunteer { get; set; }
+        //public List<SelectListItem> Volunteer { get; set; }
         //public int SelectedVolunteerID { get; set; }
-        //public SelectList VolunteerList { get; set; }
+        public SelectList VolunteerList { get; set; }
         //public SelectList ReceiverList { get; set; }
         public CreateModel(ApplicationDbContext db)
         {
@@ -25,14 +25,14 @@ namespace ZeroHunger.Pages.Deliveries
         public async Task onGet()
         {
             //PopulateVolunteersDropDownList(_db);
-            var items = _db.User.Select(u => new SelectListItem
+            /*var items = _db.User.Select(u => new SelectListItem
             {
                 Value = u.UserID.ToString(),
                 Text = u.UserName
-            }).ToList();
+            }).ToList();*/
             //ViewData["Items"] = items;
-            //var items = await _db.User.Where(u => u.UserType == 2).ToListAsync();
-            //VolunteerList = new SelectList(_db.User, "UserID", "UserName");
+            var items = await _db.User.Where(u => u.UserType == 2).ToListAsync();
+            VolunteerList = new SelectList(_db.User, "UserID", "UserName");
             /*var bitems = await _db.User.Where(u => u.UserType == 3).ToListAsync();
             ReceiverList = new SelectList(bitems, "UserID", "UserName");*/
         }
