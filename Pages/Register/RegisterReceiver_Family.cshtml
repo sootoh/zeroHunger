@@ -1,4 +1,5 @@
 ﻿@page
+@using ZeroHunger.Model
 @model ZeroHunger.Pages.Register.RegisterReceiver_FamilyModel
 @{
     <head>
@@ -20,7 +21,7 @@
 			{
 				alert("Please re-check your IC Number");
 			}
-			document.getElementsByName("receiverDOB")[0].value=dob.toISOString().substr(0, 10);
+			document.getElementsByName("familyDOB")[0].value=dob.toISOString().substr(0, 10);
 		}
 		function submit()
 		{
@@ -35,35 +36,42 @@
 		<div class="text-danger" asp-validation-summary="ModelOnly"></div>
 		<div class="form-v10-content" style="margin:20px auto 20px auto;" >
 		<h5 style="color:red;">@Model.message</h5>
-			<form class="form-detail" action="Login" method="post" id="myform" >
-				<div class="form-left">
-					<h2>Family IC and DOB</h2>
-					@for(int i=0;i< Model.noFamily;i++)
+			<form class="form-detail" method="post" id="myform" class="page-content" style="display:block; padding:50px;" >
+				
+					<h2 style="width:100%; text-align: center;">Family Info</h2>
+					<input type="text" asp-for="applicationFamily.receiverIC" name="receiverFamily" value=Model.application.receiverIC hidden>
+					<table class="form-group" style="text-align:center;">
+					@if(Model.noFamily>0)
+					{
+						@foreach(ReceiverFamily familyInfo in Model.applicationFamilies)
 						{
-							<div class="form-group">
-								<div class="form-row form-row-1">
-									<input asp-for="applicationFamily[i].familyIC" type="text" name="familyIC" class="icNum" id="ic" placeholder="IC Number (without '-')" onblur="validateIC(this.value)" pattern="\d{12}" required>
-								</div>
-								<div class="form-row form-row-1">
-									<input asp-for="applicationFamily[i].familyDOB" type="date" name="familyDOB" class="DOB" id="DOB" required>
-								</div>
-							</div>
+							<tr>
 							
+								<td>@Html.DisplayFor(ReceiverFamily => familyInfo.familyIC)</td>
+								<td>@Html.DisplayFor(ReceiverFamily => familyInfo.familyDOB)</td>
+								<td>@Html.DisplayFor(ReceiverFamily => familyInfo.familyOccupation)</td>
+								<td>@Html.DisplayFor(SalaryGroup => Model.salaryGroups.ElementAt(familyInfo.familySalaryGroupID).salaryRange)</td>
+							
+							</tr>
 						}
+					}
+							<tr>
+								<td>
+									<input asp-for="applicationFamily.familyIC" type="text" name="familyIC" class="icNum" id="ic" placeholder="IC Number (without '-')" onblur="validateIC(this.value)" pattern="\d{12}" required>
+								</td>
+								<td>
+									<input asp-for="applicationFamily.familyDOB" type="date" name="familyDOB" class="DOB" id="DOB" required>
+								</td>
+							
+							
+						
 					
-
-				</div>
-
-				<div class="form-right">
-					<h2>Occupation and Salary</h2>
-					@for (int i = 0; i < Model.noFamily; i++)
-				   {
-					   <div class="form-group">
-							<div class="form-row form-row-3">
-								<input type="text" asp-for="applicationFamily[i].familyOccupation" name="familyOccupation" class="occupation" id="occupation" placeholder="Occupation" required>
-							</div>
-							<div class="form-row form-row-4">
-								<select asp-for="applicationFamily[i].familySalaryGroupID" name="familySalaryGroupID">
+					   
+							<td>
+								<input type="text" asp-for="applicationFamily.familyOccupation" name="familyOccupation" class="occupation" id="occupation" placeholder="Occupation" required>
+							</td>
+							<td>
+								<select asp-for="applicationFamily.familySalaryGroupID" name="familySalaryGroupID">
 									<option value="Salary" disabled selected>Salary (RM)</option>
 									<option value="0">0</option>
 									<option value="1-500">1-500</option>
@@ -75,16 +83,28 @@
 								<span class="select-btn">
 							  		<i class="zmdi zmdi-chevron-down"></i>
 								</span>
-							</div>
-							
-						</div>
-				   }
-				   <div class="form-row-last ">
-								<input type="submit" name="register" class="register" value="Submit" onclick="submit()">
-							</div>
+							</td>
+							<td>
+								<div class="form-row-last ">
+									<input type="submit" name="register" class="register" value="Save" style="background-color:lightblue;">
+								</div>
+							</td>
+							</tr>
+					</table>
 					
-				</div>
+							
+						
+				   
+				   
+					
+				
 			</form>
+			<div class="form-v10-content" style="width:100%">
+			<div class="form-detail">  
+			<button style="background-color:lightblue;"><a asp-page="RegisterReceiver"  onclick="submit()">
+                Done</a></button>
+			</div>
+			</div>
 		</div>
 	</div>
 

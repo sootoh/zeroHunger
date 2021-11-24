@@ -51,7 +51,7 @@ namespace ZeroHunger.Pages.Register
                 }
             }
 
-            Application.receiverName = fName + lName;
+            Application.receiverName = fName+" " + lName;
             if(!street.EndsWith(','))
             {
                 street += ",";
@@ -63,16 +63,21 @@ namespace ZeroHunger.Pages.Register
             Application.receiverAdrs1 = street+" " + additional;
             Application.receiverAdrs2 = zip + " " + city + ", " + state;
 
-            if(Application.receiverFamilyNo == 0)
-            {
-                await _db.Receiver.AddAsync(application);
-                await _db.SaveChangesAsync();
-                return RedirectToPage("Index");
-            }
-            else
-            {
-                return RedirectToPage("RegisterReceiver_Family", Application);
-            }
+            Application.receiverFamilyNo = 0;
+
+            await _db.Receiver.AddAsync(Application);
+            await _db.SaveChangesAsync();
+
+            //if(Application.receiverFamilyNo == 0)
+            //{
+            //    await _db.Receiver.AddAsync(application);
+            //    await _db.SaveChangesAsync();
+            //    return RedirectToPage("Index");
+            //}
+            //else
+            //{
+            return RedirectToPage("RegisterReceiver_Family", Application);
+            //}
             
         }
     }

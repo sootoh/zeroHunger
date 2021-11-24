@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ZeroHunger.Data;
 using ZeroHunger.Model;
@@ -17,45 +18,58 @@ namespace ZeroHunger.Pages.Register
 
         }
         [BindProperty]
-        public IList<ReceiverFamily> applicationFamily { get; set; } = new List<ReceiverFamily>();
+        public ReceiverFamily applicationFamily { get; set; }
+        public IList<ReceiverFamily> applicationFamilies { get; set; }=new List<ReceiverFamily>();
+        public IEnumerable<SalaryGroup> salaryGroups { get; set; }
         public Receiver application { get; set; }
         public int noFamily { get; set; }
         public string message { get; set; } = "";
         public void OnGet(Receiver Application)
         {
-            application = Application;
-            noFamily = application.receiverFamilyNo;
-            applicationFamily=new ReceiverFamily[noFamily];
+            
+            salaryGroups = _db.SalaryGroup;
+            if (Application!=null)
+            {
+                application = Application;
+                foreach (ReceiverFamily familyInfo in _db.ReceiverFamily)
+                {
+                    if (familyInfo.receiverIC.Equals(Application.receiverIC))
+                    {
+                        applicationFamilies.Add(familyInfo);
+                    }
+                }
+                noFamily = application.receiverFamilyNo;
+            }
+
         }
-        public async Task<IActionResult> OnPost(IList<ReceiverFamily> ApplicationFamily)
+        public async Task<IActionResult> OnPostAsync(ReceiverFamily ApplicationFamily)
         {
-            foreach(ReceiverFamily Application in ApplicationFamily)
+            
+            foreach (Receiver receiver in _db.Receiver)
             {
-                foreach (Receiver receiver in _db.Receiver)
+                if (ApplicationFamily.familyIC == receiver.receiverIC)
                 {
-                    if (Application.receiverIC == receiver.receiverIC)
-                    {
-                        message = "This IC no. has been registered.";
-                        return Page();
-                    }
-                }
-                foreach (ReceiverFamily receiverfamily in _db.ReceiverFamily)
-                {
-                    if (Application.receiverIC == receiverfamily.receiverIC)
-                    {
-                        message = "This IC no. has been registered.";
-                        return Page();
-                    }
+                    message = "This IC no. has been registered.";
+                    return Page();
                 }
             }
-            await _db.Receiver.AddAsync(application);
-            foreach (ReceiverFamily receiverFamily in applicationFamily)
+            foreach (ReceiverFamily receiverfamily in _db.ReceiverFamily)
             {
-                receiverFamily.receiverIC = application.receiverIC;
-                await _db.ReceiverFamily.AddAsync(receiverFamily);
+                if (ApplicationFamily.familyIC == receiverfamily.receiverIC)
+                {
+                    message = "This IC no. has been registered.";
+                    return Page();
+                }
             }
+            
+            await _db.ReceiverFamily.AddAsync(ApplicationFamily);
+            noFamily++;
+            application= _db.Receiver.Where(i => i.receiverIC.Equals(ApplicationFamily.receiverIC)).Single();
+            application.receiverFamilyNo=noFamily;
+            _db.Receiver.Update(application);
+
             await _db.SaveChangesAsync();
-            return RedirectToPage("Index");
+            return RedirectToPage("RegisterReceiver_Family", application);
 
         }
     }
