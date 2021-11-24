@@ -17,5 +17,6 @@ namespace ZeroHunger.Data
         public DbSet<Receiver> Receiver { get; set; }
         public DbSet<ReceiverFamily> ReceiverFamily { get; set; }
         public DbSet<SalaryGroup> SalaryGroup { get; set; }
+        public DbSet<ProductInNeed> ProductInNeed { get; set; }
     }
 }
