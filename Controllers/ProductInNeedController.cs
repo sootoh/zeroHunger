@@ -4,12 +4,12 @@ using ZeroHunger.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using zeroHunger.Model;
+using ZeroHunger.Model;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using System;
 
-namespace zeroHunger.Controllers
+namespace ZeroHunger.Controllers
 {
     [Route("api/ProductInNeed")]
     [ApiController]
