@@ -1,0 +1,94 @@
+﻿@page
+@model ZeroHunger.Pages.Deliveries.IndexModel
+
+<partial name="_Notification"/>
+
+<div class="container p=3">
+    <div class="row pt-4">
+        <div class="col-9">
+            <h2 class="text-primary">Manage Delivery</h2>
+        </div>
+        <div class="col-3 mt-2">
+            <a asp-page="Create" class="btn btn-primary">
+                <i class="bi bi-pencil-square"></i> &nbsp; Create New Delivery
+            </a>
+        </div>
+    </div>
+</div>
+
+<br/><br/>
+
+<table class="table table-table-bordered table-striped" style:width="100%">
+    <thead>
+        <tr>
+            <th>
+                Volunteer Name
+            </th>
+            <th>
+                Delivery Time
+            </th>
+            <th>
+                Delivery Status
+            </th>
+             <th>
+                Receiver Name
+            </th>
+            <th>
+                Receiver Phone
+            </th>
+            <th>
+                Receiver Address
+            </th>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Product Quantity
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+ 
+            <tr>
+                <td>Chan Yi Lin</td>
+                <td width="14%">11/12/2021 2:00 PM</td>
+                <td>Pending</td>
+                <td width="12%">Tan Chiaw Torng</td>
+                <td width="10%">012-3456789</td>
+                <td>No.123 Jalan Utama, Skudai, Johor Bahru</td>
+                <td>5kg Rice</td>
+                <td>1</td>
+                <td width="10%">
+                    <a asp-page="Edit " class="btn btn-primary mx-2">
+                    Edit &nbsp;<i class="bi bi-pencil-square"></i>
+                    </a>
+                </td>
+                <td width="10%">
+                    <a asp-page="Delete " class="btn btn-primary mx-2">
+                    Delete&nbsp;<i class="bi bi-trash-fill"></i>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>Lim Sin Jie</td>
+                <td width="14%">20/12/2021 2:00 PM</td>
+                <td>Pending</td>
+                <td>Ricky</td>
+                <td width="10%">012-3456999</td>
+                <td>No.111 Jalan Heights, Skudai, Johor Bahru</td>
+                <td>1kg Flour</td>
+                <td>5</td>
+                <td>
+                    <a asp-page="Edit" class="btn btn-primary mx-2">
+                    Edit &nbsp;<i class="bi bi-pencil-square"></i>
+                    </a>
+                </td>
+                <td>
+                    <a asp-page="Delete" class="btn btn-primary mx-2">
+                    Delete &nbsp;<i class="bi bi-trash-fill"></i>
+                    </a>
+                </td>
+            </tr>  
+    </tbody>
+</table>
