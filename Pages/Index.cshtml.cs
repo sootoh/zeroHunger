@@ -6,10 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using zeroHunger.Model;
+using ZeroHunger.Model;
 using ZeroHunger.Data;
 
-namespace zeroHunger.Pages
+namespace ZeroHunger.Pages
 {
     public class IndexModel : PageModel
     {
