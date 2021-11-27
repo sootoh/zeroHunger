@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 
-namespace Zero_Hunger.Pages
+namespace ZeroHunger.Pages
 {
     public class LogoutModel : PageModel
     {
