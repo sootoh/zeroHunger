@@ -9,13 +9,13 @@ namespace Zero_Hunger.Model
     public class UserType
     {
         [Key]
-        public int typeID { get; set; }
+        public int TypeID { get; set; }
         [Required]
         [MaxLength(255)]
-        public string typeName { get; set; }
+        public string TypeName { get; set; }
         [MaxLength(255)]
 
-        public string typeInterface { get; set; }
+        public string TypeInterface { get; set; }
        
         
     }

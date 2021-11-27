@@ -12,8 +12,10 @@ namespace Zero_Hunger.Model
     {
         [Key]
         public int UserID { get; set; }
-        [ForeignKey("FK_UserType"), Required]
-        public int UserType { get; set; }
+        //[ForeignKey("FK_User_ToUserType")][Required]
+        //public int? UserType { get; set; }
+        [ForeignKey("TypeId")]
+        public virtual UserType UserType{ get; set; }
         [Required]
         public string UserName { get; set; }
         [Required]
@@ -26,6 +28,6 @@ namespace Zero_Hunger.Model
         public string UserAdrs1 { get; set; }
         public string UserAdrs2 { get; set; }
         //public virtual ICollection<Delivery>? Deliveries { set; get; }
-
+        public bool RememberMe { get; set; }
     }
 }
