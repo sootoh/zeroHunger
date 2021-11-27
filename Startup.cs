@@ -36,6 +36,27 @@ namespace ZeroHunger
             services.AddRazorPages().AddRazorRuntimeCompilation();;
             
             services.AddControllersWithViews();
+            
+            services.AddAuthentication("ZeroHungerCookie").AddCookie("ZeroHungerCookie", options =>
+            {
+                options.Cookie.Name = "ZeroHungerCookie";
+                options.LoginPath="/login";
+                options.AccessDeniedPath = "/AccessDenied";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("MustBelongToAdmin", policy => policy.RequireClaim("UserType", "Admin"));
+            });
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);//You can set Time   
+            });
+            services.AddMemoryCache();
+            services.AddRazorPages();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +87,9 @@ namespace ZeroHunger
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
             });
+
+
+            app.UseSession();
         }
     }
 }
