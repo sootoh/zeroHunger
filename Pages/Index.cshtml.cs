@@ -7,8 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Zero_Hunger.Helpers;
-using Zero_Hunger.Model;
+using ZeroHunger.Helpers;
+using ZeroHunger.Model;
 
 namespace Zero_Hunger.Pages
 {
