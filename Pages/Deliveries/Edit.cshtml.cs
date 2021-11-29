@@ -20,9 +20,9 @@ namespace ZeroHunger.Pages.Deliveries
         }
         public async Task OnGet(int id)
         {
-            var items = await _db.User.Where(u => u.UserType == 2).ToListAsync();
+            var items = await _db.User.Where(u => u.UserType.TypeID == 2).ToListAsync();
             VolunteerList = new SelectList(items, "UserId", "UserName");
-            var bitems = await _db.User.Where(u => u.UserType == 3).ToListAsync(); ;
+            var bitems = await _db.User.Where(u => u.UserType.TypeID == 3).ToListAsync(); ;
             ReceiverList = new SelectList(bitems, "UserId", "UserName");
 
             Delivery = _db.Delivery.Find(id);
