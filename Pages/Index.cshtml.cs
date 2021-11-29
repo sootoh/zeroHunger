@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ZeroHunger.Helpers;
+//using ZeroHunger.Helpers;
 using ZeroHunger.Model;
 
 namespace Zero_Hunger.Pages
@@ -31,10 +31,10 @@ namespace Zero_Hunger.Pages
             //ID = HttpContext.Session.GetString("Name");
             HttpContext.Session.SetInt32("age", 20);
             HttpContext.Session.SetString("username", "abc");
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "user", user);
+            //SessionHelper.SetObjectAsJson(HttpContext.Session, "user", user);
             age = HttpContext.Session.GetInt32("age");
             username = HttpContext.Session.GetString("username");
-            user = SessionHelper.GetObjectFromJson<User>(HttpContext.Session, "user");
+            //user = SessionHelper.GetObjectFromJson<User>(HttpContext.Session, "user");
         }
     }
 }
