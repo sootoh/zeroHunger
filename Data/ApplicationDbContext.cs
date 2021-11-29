@@ -21,5 +21,6 @@ namespace ZeroHunger.Data
         public DbSet<CookedFoodDonation> CookedFoodDonation { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UserType> UserType { get; set; }
+        public DbSet<Delivery> Delivery { get; set; }
     }
 }
