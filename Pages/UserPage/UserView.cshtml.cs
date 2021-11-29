@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
-using Zero_Hunger.Model;
+using ZeroHunger.Model;
 using Microsoft.AspNetCore.Authorization;
+using ZeroHunger.Data;
 
 namespace Zero_Hunger.Pages.UserPage
 {
