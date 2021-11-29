@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Zero_Hunger.Model;
+using ZeroHunger.Model;
 
 namespace ZeroHunger.Model
 {
