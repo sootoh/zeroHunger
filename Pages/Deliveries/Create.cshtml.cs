@@ -32,7 +32,7 @@ namespace ZeroHunger.Pages.Deliveries
                 Text = u.UserName
             }).ToList();*/
             //ViewData["Items"] = items;
-            var items = await _db.User.Where(u => u.UserType == 2).ToListAsync();
+            var items = await _db.User.Where(u => u.UserType.TypeID == 2).ToListAsync();
             VolunteerList = new SelectList(_db.User, "UserID", "UserName");
             /*var bitems = await _db.User.Where(u => u.UserType == 3).ToListAsync();
             ReceiverList = new SelectList(bitems, "UserID", "UserName");*/
