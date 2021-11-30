@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
-using Zero_Hunger.Model;
+using ZeroHunger.Model;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Zero_Hunger.Pages.UserPage
+namespace ZeroHunger.Pages.UserPage
 {
    // [Authorize(Policy = "MustBelongToAdmin")]
     public class UserViewModel : PageModel
