@@ -8,15 +8,17 @@ namespace ZeroHunger.Model
         [Key]
         [MaxLength(12)]
         public string familyIC { get; set; }
-        [ForeignKey("Receiver")] [Required]
-        public virtual Receiver receiver { get; set; }
         public string receiverIC { get; set; }
+        [ForeignKey("receiverIC")] [Required]
+        public virtual Receiver receiver { get; set; }
+        
         [Required]
         public string familyDOB { get; set; }
         [Required]
         public string familyOccupation { get; set; }
-        [ForeignKey("FamilySalaryGroup")][Required]
-        public virtual SalaryGroup familySalaryGroup { get; set; }
         public int familySalaryGroupID { get; set; }
+        [ForeignKey("familySalaryGroupID")][Required]
+        public virtual SalaryGroup familySalaryGroup { get; set; }
+        
     }
 }
