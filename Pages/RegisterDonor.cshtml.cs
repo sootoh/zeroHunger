@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Linq;
 using System.Threading.Tasks;
-using Zero_Hunger.Model;
+using ZeroHunger.Model;
 
-namespace Zero_Hunger.Pages
+namespace ZeroHunger.Pages
 {
     public class RegisterDonorModel : PageModel
     {
