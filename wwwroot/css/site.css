@@ -69,3 +69,103 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+#CookFoodContainer
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+}
+#list {
+    display: flex;
+    flex-direction:column;
+    flex: 1 0 21%;
+    margin: 5px 5px 5px 25px;
+    border: 1px solid black;
+    padding: 10px 10px 10px 10px;
+    width: fit-content;
+}
+#cookfooditem {
+    margin: 5px 5px 5px 5px;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid black;
+    
+}
+#itemInfo {
+    border: 1px solid black;
+    padding: 15px 15px 15px 15px;
+    display: flex;
+    margin: 15px 15px 15px 15px;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-radius: 15px;
+    width: 100%;
+    background-image: url("../img/food.png");
+    background-size: cover;
+    background-position-y:30%;
+
+    background-repeat: no-repeat;
+}
+#itemInfo:hover
+{
+    background-color:aquamarine;
+    cursor:pointer;
+}
+#itemName {
+    margin: 0px 5px 5px 5px;
+    font-weight:bold;
+    background-color: transparent;
+}
+#itemQuantity {
+    margin: 0px 5px 5px 5px;
+    font-weight: bold;
+    background-color: transparent;
+}
+.itemDistance {
+    margin: 0px 5px 5px 5px;
+    background-color: transparent;
+}
+#itemContainer {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    
+    
+}
+#vckBut {
+    margin: 15px 15px 15px 15px;
+    padding: 5px 5px 5px 5px;
+}
+.promptContainer {
+    display:none;
+    width: 75%;
+    min-width:25%;
+    top: 50%;
+    left: 50%;
+    max-width: fit-content;
+    padding: 20px 20px 20px 20px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    flex-direction: column;
+    z-index:1;
+    background-color:white;
+    border:2px solid black;
+    
+}
+
+.promptTitle {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 35px;
+}
+
+.tableLeft {
+    text-align: left;
+    font-size: 20px;
+    padding: 10px 10px 10px 10px;
+}
+
+#reservedBut {
+    margin-top: 20px;
+    background-color: unset;
+}
