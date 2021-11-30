@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Protocols;
 using System;
 using System.Threading.Tasks;
-using Zero_Hunger.Model;
+using ZeroHunger.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,7 +20,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 
-namespace Zero_Hunger.Pages
+namespace ZeroHunger.Pages
 {
     public class loginModel : PageModel
     {
