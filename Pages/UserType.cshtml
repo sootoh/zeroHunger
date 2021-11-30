@@ -1,5 +1,8 @@
-﻿@page
+@page
 @model ZeroHunger.Pages.userTypeModel
+@{
+
+
 <head> <title>Choose your role</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,7 +11,21 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<link rel="stylesheet" href="/css/style.css">
+	<style>
+		.btn{
+			display:block;
+			width:200px;
+			
+		}
+		.cen{
+			align-items:center;
+		}
+		.align-items-center{
+			display:flex;
+			flex-direction:column;
+			justify-content:center;
+		}
+	</style>
 
 	<script type='text/javascript'>
     function NavigateToPage(page){
@@ -34,14 +51,14 @@
 					  
 		      	</div>
 				    <br><br>
-				  <div class="row align-items-center justify-content-center">
-				  <br><br>
-					<button  type="submit" class="btn btn-primary rounded submit" style="padding:15px" onclick='NavigateToPage("RegisterReceiver")'>Receiver</button>
-					<br><br>
-					<button type="submit" class="btn btn-primary rounded submit" style="padding:15px" onclick='NavigateToPage("RegisterDonor")'>Donor</button>
-					<br><br><br><br>
-					<button type="submit" class="btn btn-primary rounded submit" style="padding:15px" onclick='NavigateToPage("RegisterVolunteer")'>Volunteer</button>
-					<br><br>
+				  <div class="col align-items-center justify-content-center cen">
+				  <br>
+					<button  type="submit" class="btn btn-primary rounded submit btnlen" style="padding:15px" onclick='NavigateToPage("RegisterReceiver")'>Receiver</button>
+					<br>
+					<button type="submit" class="btn btn-primary rounded submit btnlen" style="padding:15px" onclick='NavigateToPage("RegisterDonor")'>Donor</button>
+					<br>
+					<button type="submit" class="btn btn-primary rounded submit btnlen" style="padding:15px" onclick='NavigateToPage("RegisterVolunteer")'>Volunteer</button>
+					<br>
 				</div>
 	            	
 	        </div>
@@ -58,3 +75,4 @@
   <script src="js/main.js"></script>
 
 </body>
+}
