@@ -1,0 +1,43 @@
+﻿@page
+@using ZeroHunger.Model
+@model ZeroHunger.Pages.Deliveries.EditModel
+
+
+<form method="post">
+    <input hidden asp-for="Delivery.DeliveryID" />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary pl-3">Edit Delivery Request</h2>
+            <hr/>
+        </div>
+        <<!--<div asp-validation-summary="All"></div>-->
+        <div class="mb-3">
+            Volunteer Name
+            <select asp-for="Delivery.VolunteerID"  asp-items="Model.VolunteerList" class="form-control">-->
+            <option>--Select the Volunteer--</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Delivery.DeliveryTime"></label>
+            <input asp-for="Delivery.DeliveryTime" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Delivery.DeliveryStatus"></label>
+            <select class="form-control" asp-for="Delivery.DeliveryStatus" asp-items="Html.GetEnumSelectList<DeliveryStatus>()"></select>
+        </div>
+        <div class="mb-3">
+            Receiver Name
+            <select id="receiverddl" asp-for="Delivery.ReceiverID" asp-items="Model.ReceiverList" class="form-control" >
+            <option>--Select the Receiever--</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px;">Update</button>
+        <a asp-page="Index" class="btn btn-secondary" style="width: 150px">Back to List</a>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"></partial>
+    }
+}

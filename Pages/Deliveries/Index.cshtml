@@ -1,0 +1,81 @@
+﻿@page
+@model ZeroHunger.Pages.Deliveries.IndexModel
+
+<partial name="_Notification"/>
+
+<div class="container p=3">
+    <div class="row pt-4">
+        <div class="col-9">
+            <h2 class="text-primary">Manage Delivery Request</h2>
+        </div>
+        <div class="col-3 mt-2">
+            <a asp-page="Create" class="btn btn-info">
+                <i class="bi bi-pencil-square"></i> &nbsp; Create New Delivery Request
+            </a>
+        </div>
+    </div>
+</div>
+
+<br/><br/>
+
+<table class="table table-bordered table-striped" style:width="100%">
+    <thead>
+        <tr>
+            <th>
+                Volunteer Name
+            </th>
+            <th>
+                Delivery Time
+            </th>
+            <th>
+                Delivery Status
+            </th>
+             <th>
+                Receiver Name
+            </th>
+            <th>
+                Receiver Phone
+            </th>
+            <th>
+                Receiver Address
+            </th><!--
+            <th>
+                Product Name
+            </th>
+            <th>
+                Product Quantity
+            </th>-->
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+     @foreach(var obj in Model.Deliveries){
+        <tr>
+            <td>@obj.Volunteer.UserName</td>
+            <td>@obj.DeliveryTime</td>
+            <td>@obj.DeliveryStatus</td>
+            <td>@obj.Receiver.UserName</td>
+            <td>@obj.Receiver.UserPhone</td>
+            <td>@obj.Receiver.UserAdrs1 @obj.Receiver.UserAdrs2</td>
+            <td></td>
+            
+            <td>
+                <a asp-page="Edit" asp-route-id="@obj.DeliveryID" class="btn btn-success mx-2">
+                Edit &nbsp;<i class="bi bi-pencil-square"></i>
+                </a>
+            </td>
+            <td>
+                <a asp-page="Delete" asp-route-id="@obj.DeliveryID" class="btn btn-danger mx-2">
+                Delete &nbsp;<i class="bi bi-trash-fill"></i>
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"></partial>
+    }
+}

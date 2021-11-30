@@ -1,0 +1,99 @@
+﻿@page
+@model ZeroHunger.Pages.Deliveries.VolunteerDeliveryModel
+@{
+}
+
+<partial name="_Notification"/>
+
+<div class="container p=3">
+    <div class="row pt-4">
+        <div class="col-9">
+            <h2 class="text-primary">List of Delivery Request</h2>
+        </div>
+    </div>
+</div>
+
+<br/><br/>
+
+<table class="table table-bordered table-striped" style:width="100%">
+    <thead>
+        <tr>
+            <th>
+                Receiver Name
+            </th>
+            <th>
+                Receiver Phone
+            </th>
+            <th>
+                Receiver Address
+            </th>
+            <th>
+                Delivery Time
+            </th>
+            <th>
+                Delivery Status
+            </th>
+            <th>Accept</th>
+            <th>Reject</th>
+            <th>Completed</th>
+             <!--
+            <th>
+                Product Name
+            </th>
+            <th>
+                Product Quantity
+            </th>
+            <th width="12%">Accept</th>
+            <th width="11%">Reject</th>
+            <th width="10%">Completed</th>-->
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(var obj in Model.MyDeliveries){
+        <tr>
+            <td>@obj.Receiver.UserName</td>
+            <td>@obj.Receiver.UserPhone</td>
+            <td>@obj.Receiver.UserAdrs1 @obj.Receiver.UserAdrs2</td>
+            <td>@obj.DeliveryTime</td>
+            <td>@obj.DeliveryStatus</td>
+            
+            <td>
+                <form asp-page-handler="Accept" asp-route-id="@obj.DeliveryID" method="post">
+                    <input type="button" value="Accept" id="accept" class="btn btn-success mx-3" onclick="accept()">
+                </form>
+            </td>
+
+            <td>
+                <form asp-page-handler="Reject" asp-route-id="@obj.DeliveryID" method="post">
+                    <input type="button" value="Reject" id="reject" class="btn btn-danger mx-3">
+                </form>
+            </td>
+            
+            <td>
+                <form asp-page-handler="Complete" asp-route-id="@obj.DeliveryID" method="post">
+                    <input type="button" style="visibility:hidden;" value="Complete" id="complete" class="btn btn-warning mx-3" onclick="done()">
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+         function accept(){
+             alert("You have accepted the delivery request");
+             document.getElementById("accept").style.visibility="hidden";
+             document.getElementById("reject").style.visibility="hidden";
+             document.getElementById("complete").style.visibility="visible";
+         }   
+
+         function done(){
+             alert("You have completed the delivery request");
+             document.getElementById("complete").style.visibility="hidden";
+         }
+</script>
+
+
+
+
+
