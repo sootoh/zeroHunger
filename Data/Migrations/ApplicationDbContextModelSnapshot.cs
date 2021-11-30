@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Zero_Hunger.Model;
+using ZeroHunger.Model;
+using ZeroHunger.Data;
+
 
 namespace Zero_Hunger.Migrations
 {
@@ -202,6 +204,149 @@ namespace Zero_Hunger.Migrations
 
                     b.Navigation("UserType");
                 });
+                
+                modelBuilder.Entity("ZeroHunger.Model.Receiver", b =>
+                {
+                    b.Property<string>("receiverIC")
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.Property<int>("applicationStatusID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("receiverAdrs1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("receiverAdrs2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("receiverDOB")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("receiverEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("receiverFamilyNo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("receiverGender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("receiverName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("receiverOccupation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("receiverPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("receiverSalaryGroupID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("userID")
+                        .HasColumnType("int");
+
+                    b.HasKey("receiverIC");
+
+                    b.HasIndex("receiverSalaryGroupID");
+
+                    b.HasIndex("userID");
+
+                    b.ToTable("Receiver");
+                });
+
+            modelBuilder.Entity("ZeroHunger.Model.ReceiverFamily", b =>
+                {
+                    b.Property<string>("familyIC")
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.Property<string>("familyDOB")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("familyOccupation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("familySalaryGroupID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("receiverIC")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(12)");
+
+                    b.HasKey("familyIC");
+
+                    b.HasIndex("familySalaryGroupID");
+
+                    b.HasIndex("receiverIC");
+
+                    b.ToTable("ReceiverFamily");
+                });
+
+            modelBuilder.Entity("ZeroHunger.Model.SalaryGroup", b =>
+                {
+                    b.Property<int>("salaryGroupID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("salaryRange")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("salaryGroupID");
+
+                    b.ToTable("SalaryGroup");
+                });
+                
+                modelBuilder.Entity("ZeroHunger.Model.Receiver", b =>
+                {
+                    b.HasOne("ZeroHunger.Model.SalaryGroup", "receiverSalaryGroup")
+                        .WithMany()
+                        .HasForeignKey("receiverSalaryGroupID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ZeroHunger.Model.User", "user")
+                        .WithMany()
+                        .HasForeignKey("userID");
+
+                    b.Navigation("receiverSalaryGroup");
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("ZeroHunger.Model.ReceiverFamily", b =>
+                {
+                    b.HasOne("ZeroHunger.Model.SalaryGroup", "familySalaryGroup")
+                        .WithMany()
+                        .HasForeignKey("familySalaryGroupID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ZeroHunger.Model.Receiver", "receiver")
+                        .WithMany()
+                        .HasForeignKey("receiverIC")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("familySalaryGroup");
+
+                    b.Navigation("receiver");
+                });
+                
+                
 #pragma warning restore 612, 618
         }
     }
