@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace ZeroHunger.Model
+namespace Zero_Hunger.Model
 {
     public class UserType
     {

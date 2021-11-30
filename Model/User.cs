@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using ZeroHunger.Model;
+using Zero_Hunger.Model;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ZeroHunger.Model
+namespace Zero_Hunger.Model
 {
     public class User
     {
@@ -14,6 +14,7 @@ namespace ZeroHunger.Model
         public int UserID { get; set; }
         //[ForeignKey("FK_User_ToUserType")][Required]
         //public int? UserType { get; set; }
+        public int TypeId { get; set; }
         [ForeignKey("TypeId")]
         public virtual UserType UserType{ get; set; }
         [Required]
@@ -28,6 +29,7 @@ namespace ZeroHunger.Model
         public string UserAdrs1 { get; set; }
         public string UserAdrs2 { get; set; }
         //public virtual ICollection<Delivery>? Deliveries { set; get; }
+        //public string DonorType { get; set; }
         public bool RememberMe { get; set; }
     }
 }
