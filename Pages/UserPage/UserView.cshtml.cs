@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using ZeroHunger.Model;
 using Microsoft.AspNetCore.Authorization;
+using ZeroHunger.Data;
 
 namespace ZeroHunger.Pages.UserPage
 {
