@@ -22,7 +22,7 @@ namespace ZeroHunger.Pages.Deliveries
         }
         public void OnGet()
         {
-            MyDeliveries = _db.Delivery.Include(d => d.Receiver).Where(r => r.VolunteerID == 2);             
+            MyDeliveries = _db.Delivery.Include(d => d.Receiver).Where(r => r.VolunteerID == 2);
         }
 
         public async Task<IActionResult> OnPostAccept(int id)
@@ -32,7 +32,8 @@ namespace ZeroHunger.Pages.Deliveries
             _db.Delivery.Update(Delivery);
             await _db.SaveChangesAsync();
             TempData["success"] = "Delivery request accepted successfully";
-             return RedirectToPage("VolunteerDelivery");
+            ViewData["GetFunction"] = "Accept";
+            return RedirectToPage("VolunteerDelivery");
         }
 
         public async Task<IActionResult> OnPostComplete(int id)
