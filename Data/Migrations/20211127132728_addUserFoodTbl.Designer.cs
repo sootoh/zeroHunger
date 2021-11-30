@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zero_Hunger.Model;
 
 namespace Zero_Hunger.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211127132728_addUserFoodTbl")]
+    partial class addUserFoodTbl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,9 +27,6 @@ namespace Zero_Hunger.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
-
-                    b.Property<DateTime>("CloseDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<float>("CookLatitude")
                         .HasColumnType("real");
@@ -44,19 +43,6 @@ namespace Zero_Hunger.Migrations
 
                     b.Property<int>("DonorUserID")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("OpenDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("RemainQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Reservation")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShopName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CookID");
 
