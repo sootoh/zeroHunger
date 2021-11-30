@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using Zero_Hunger.Model;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Zero_Hunger.Model
+namespace ZeroHunger.Model
 {
     public class CookedFoodDonation
     {
