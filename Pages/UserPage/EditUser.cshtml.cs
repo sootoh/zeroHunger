@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Zero_Hunger.Model;
+using ZeroHunger.Model;
 
-namespace Zero_Hunger.Pages.UserPage
+namespace ZeroHunger.Pages.UserPage
 {
     public class EditUserModel : PageModel
     {
