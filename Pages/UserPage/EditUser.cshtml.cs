@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZeroHunger.Model;
+using ZeroHunger.Data;
 
 namespace ZeroHunger.Pages.UserPage
 {
