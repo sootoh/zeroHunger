@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using ZeroHunger.Model;
 using System;
+using System.Collections.Generic;
 
 namespace ZeroHunger.Model
 {
