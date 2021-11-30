@@ -61,13 +61,16 @@ namespace ZeroHunger.Pages.Register
                     return Page();
                 }
             }
+            ApplicationFamily.familySalaryGroup = _db.SalaryGroup.Where(i => i.salaryGroupID.Equals(ApplicationFamily.familySalaryGroupID)).Single();
+
+
             
-            await _db.ReceiverFamily.AddAsync(ApplicationFamily);
             noFamily++;
             application= _db.Receiver.Where(i => i.receiverIC.Equals(ApplicationFamily.receiverIC)).Single();
+            ApplicationFamily.receiver = _db.Receiver.Where(i => i.receiverIC.Equals(ApplicationFamily.receiverIC)).Single();
             application.receiverFamilyNo=noFamily;
             _db.Receiver.Update(application);
-
+            await _db.ReceiverFamily.AddAsync(ApplicationFamily);
             await _db.SaveChangesAsync();
             return RedirectToPage("RegisterReceiver_Family", application);
 

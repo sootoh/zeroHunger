@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -62,6 +63,8 @@ namespace ZeroHunger.Pages.Register
             }
             Application.receiverAdrs1 = street+" " + additional;
             Application.receiverAdrs2 = zip + " " + city + ", " + state;
+            Application.receiverSalaryGroup = _db.SalaryGroup.Where(i => i.salaryGroupID.Equals(Application.receiverSalaryGroupID)).Single();
+
 
             Application.receiverFamilyNo = 0;
 
