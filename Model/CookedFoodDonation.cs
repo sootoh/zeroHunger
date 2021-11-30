@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using Zero_Hunger.Model;
+using ZeroHunger.Model;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZeroHunger.Model
