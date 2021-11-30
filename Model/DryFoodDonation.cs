@@ -17,18 +17,17 @@ namespace ZeroHunger.Model
         public string DryFoodName { get; set; }
         [Required,]
         public int DryFoodQuantity { get; set; }
+        public int DryFoodRemainQuantity { get; set; }
         [Required]
         public string DryFoodPickDate { get; set; }
         [Required]
         public string DryFoodRemark { get; set; }
-        [Required]
-        public string DonorId { get; set; }
-        public string DelivererId { get; set; }
-        /*[ForeignKey("DonorId")]
-        public virtual Donor donor_Id { get; set; }
+        
+        [ForeignKey("DonorId")]
+        public virtual User donor_Id { get; set; }
         [ForeignKey("DelivererId")]
-        public virtual Deliverer deliverer_Id { get; set; }
-        */
+        public virtual User deliverer_Id { get; set; }
+        
 
 
 
