@@ -15,7 +15,8 @@ namespace ZeroHunger.Model
         public string receiverDOB { get; set; }
         [Required]
         public string receiverOccupation { get; set; }
-        [ForeignKey("FK_Receiver_ToSalaryGroup")][Required]
+        [ForeignKey("ReceiverSalaryGroup")][Required]
+        public virtual SalaryGroup receiverSalaryGroup { get; set; }
         public int receiverSalaryGroupID { get; set; }
         [Required]
         public int receiverFamilyNo { get; set; }
@@ -28,7 +29,8 @@ namespace ZeroHunger.Model
         [Required]
         public string receiverAdrs2 { get; set; }
         public int applicationStatusID { get; set; } = 0;
-        [ForeignKey("FK_Receiver_ToUser")]
+        [ForeignKey("User")]
+        public virtual User user { get; set; }
         public int? userID { get; set; }
 
       
