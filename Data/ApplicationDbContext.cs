@@ -14,9 +14,9 @@ namespace ZeroHunger.Data
         {
         }
         public DbSet<DryFoodDonation> DryFoodDonation { get; set; }
+        public DbSet<SalaryGroup> SalaryGroup { get; set; }
         public DbSet<Receiver> Receiver { get; set; }
         public DbSet<ReceiverFamily> ReceiverFamily { get; set; }
-        public DbSet<SalaryGroup> SalaryGroup { get; set; }
         public DbSet<ProductInNeed> ProductInNeed { get; set; }
         public DbSet<CookedFoodDonation> CookedFoodDonation { get; set; }
         public DbSet<User> User { get; set; }
