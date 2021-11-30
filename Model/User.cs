@@ -28,8 +28,12 @@ namespace Zero_Hunger.Model
         public DateTime UserBirth { get; set; }
         public string UserAdrs1 { get; set; }
         public string UserAdrs2 { get; set; }
-        //public virtual ICollection<Delivery>? Deliveries { set; get; }
         //public string DonorType { get; set; }
         public bool RememberMe { get; set; }
+        [InverseProperty("Volunteer")]
+        public ICollection<Delivery> VolunteerDeliveries { get; set; }
+        [InverseProperty("Receiver")]
+        public ICollection<Delivery> ReceiverDeliveries { get; set; }
+        //public virtual ICollection<Delivery>? Deliveries { set; get; }
     }
 }
