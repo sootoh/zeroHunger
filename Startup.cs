@@ -42,7 +42,7 @@ namespace ZeroHunger
                 options.Cookie.Name = "ZeroHungerCookie";
                 options.LoginPath="/login";
                 options.AccessDeniedPath = "/AccessDenied";
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
             });
 
             services.AddAuthorization(options =>
