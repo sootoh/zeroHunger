@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,8 +20,10 @@ namespace ZeroHunger.Model
         public string visibility { get; set; }
         [DisplayName("Image")]
         public string image { get; set; }
-        [NotMapped]
-        [DisplayName("Upload File")]
+        
+     
+        
+       [NotMapped]
         public IFormFile ImageFile { get; set; }
 
 
