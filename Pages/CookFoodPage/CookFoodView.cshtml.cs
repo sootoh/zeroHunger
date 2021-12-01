@@ -29,5 +29,16 @@ namespace ZeroHunger.Pages.CookFoodPage
             CookedFood = await _db.CookedFoodDonation.Where(x=> x.DonorUserID.Equals(donor.UserID)).ToListAsync();
            // CookedFood = await _db.CookedFoodDonation.ToListAsync();
         }
+        public async Task<IActionResult> OnPostDelete(int id)
+        {
+            var food = await _db.CookedFoodDonation.FindAsync(id);
+            if (food == null)
+            {
+                return NotFound();
+            }
+            _db.CookedFoodDonation.Remove(food);
+            await _db.SaveChangesAsync();
+            return RedirectToPage("CookFoodView");
+        }
     }
 }
