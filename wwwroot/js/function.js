@@ -1,17 +1,26 @@
-﻿let map, infoWindow;
-let ulat, ulng;
+﻿let map, infoWindow;//Google Map:global variable
+let page = 1; //Paging:global variable
+
+
+//Google Map Function
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 6,
+        mapId: 'ca3e1b773e1fd477',
     });
     infoWindow = new google.maps.InfoWindow();
 
     const locationButton = document.createElement("button");
-
-    locationButton.textContent = "Pan to Current Location";
+    //locationButton.textContent = "Pan to Current Location";
     locationButton.classList.add("custom-map-control-button");
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+    locationButton.innerHTML = "<img src='https://i.ibb.co/FnJMDQp/zerohungerlogotransparent.png' style='margin:0px 0px 0px 0px;' alt='Your Location' width='100' height='100'>";
+    locationButton.style.marginTop = "0px";
+    locationButton.style.padding = '0px 0px 0px 0px';
+    
+    locationButton.style.backgroundColor = "transparent";
+    locationButton.style.border = 'unset';
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(locationButton);
     locationButton.addEventListener("click", () => {
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
@@ -73,7 +82,7 @@ function getLatLon() {
     }
 
 }
-
+//End of Google Map Function
 
 //Calculate cooked food distance
 var options = {
@@ -86,22 +95,22 @@ function success(pos) {
     var count = document.getElementById('itemCount').innerHTML;
     count = parseInt(count);
     var crd = pos.coords;
-    for (var i =0; i < count; i++) {
-    console.log("Function Called");
-    var itemLat = document.getElementsByName('itemLat')[i].innerHTML;
-    var itemLon = document.getElementsByName("itemLon")[i].innerHTML;
-    itemLat = parseFloat(itemLat);
-    itemLon = parseFloat(itemLon);
-    var x = distance(itemLat, itemLon, crd.latitude, crd.longitude);
-    x =x.toFixed(2);
-        document.getElementsByName('itemDistance')[i].innerHTML = x + "km";
-        document.getElementsByName('itemDistance')[i].style.fontWeight="bold";
-    console.log(itemLat);
-    console.log(itemLon);
-    console.log(crd.latitude);
-        console.log(crd.longitude);
-        
+    for (var i = 0; i < count; i++) {
+        if (document.getElementsByName('itemLat')[i] != null) {
+            var itemLat = document.getElementsByName('itemLat')[i].innerHTML;
+            var itemLon = document.getElementsByName("itemLon")[i].innerHTML;
+            itemLat = parseFloat(itemLat);
+            itemLon = parseFloat(itemLon);
+            var x = distance(itemLat, itemLon, crd.latitude, crd.longitude);
+            x = x.toFixed(2);
+            document.getElementsByName('itemDistance')[i].innerHTML = x + "km";
+            document.getElementsByName('itemDistance')[i].style.fontWeight = "bold";
+            console.log(crd.latitude);
+            console.log(crd.longitude);
+            }
+    
     }
+    pageLoading();
 }
 
 function error(err) {
@@ -133,52 +142,98 @@ function distance(lat1, lon1, lat2, lon2) {
 }
 //End Function Calculate Cookfood distance
 
-function displayItemBox(sn,fn,q,id)
-{
+//Display promptBox
+function displayItemBox(sn, fn, q,  id) {
 
-    console.log(document.getElementById('itemDistance.' + id))
-    console.log('itemDistance.' + id)
     var d = document.getElementById('itemDistance.' + id).innerHTML;
-    console.log(document.getElementById('itemDistance.' + id))
-    console.log('itemDistance.' + id)
     var box = document.getElementById('promptContainer');
     box.style.display = "flex";
-    box.innerHTML = "";
-
-    var form = document.createElement("form");
-    form.method = "Post";
-    
-
-    var propTitle = document.createElement("div");
-    propTitle.class = "promptTitle";
-    propTitle.innerHTML = "Donation";
-
-    var table = document.createElement("table");
-    //Food Shop Name Row
-    var shopRow = document.createElement("tr");
-    shopRow.innerHTML = "<th class='tableLeft' >Shop Name</th><td id = 'shopName' class='tableLeft' >" + sn + "</td >"
-    //Food Name Row
-    var foodRow = document.createElement("tr");
-    foodRow.innerHTML = "<th class='tableLeft' >Food Name</th><td id = 'pFoodName' class='tableLeft' >" + fn + "</td >";
-    //Food Quantity Row
-    var quantityRow = document.createElement("tr");
-    quantityRow.innerHTML = "<th class='tableLeft'>Quantity</th><td class='tableLeft' >" + q + "</td >";
-    //Food Distance Row
-    var distanceRow = document.createElement("tr");
-    distanceRow.innerHTML = "<th class='tableLeft'>Distance</th> <td class='tableLeft' >" + d + "</td >";
-    //Button Row
-    var buttonRow = document.createElement("tr");
-    buttonRow.innerHTML = "<td colspan='2' style='text-align:center;'> <input type='submit' value='Reserve'>"
-    
-    table.appendChild(shopRow);
-    table.appendChild(foodRow);
-    table.appendChild(quantityRow);
-    table.appendChild(distanceRow);
-    table.appendChild(buttonRow);
-
-    
-    box.appendChild(propTitle);
-    box.appendChild(form);
-    form.appendChild(table);
-    
+    document.getElementById('pFoodShopName').innerHTML = sn;
+    document.getElementById('pFoodName').innerHTML = fn;
+    document.getElementById('pFoodQuantity').innerHTML = q;
+    document.getElementById('pFoodDistance').innerHTML = d;
+    document.getElementById('pFoodId').value = id;
+    if (q == 0) {
+        document.getElementById('reservedBut').disabled = true;
+    }
+    else {
+        document.getElementById('reservedBut').disabled = false;
+    }
 }
+//End of Prompt Box Function
+
+
+//Paging Function
+
+//Called when html loaded
+function pageLoading() {
+    document.getElementById('pPage').disabled = 'true';
+    var x = document.getElementsByName('itemContainer');
+    for (var i = 0; i < 4; i++)
+    {
+        if (x[i] != null)
+        { x[i].style.display = "flex"; }
+    }
+}
+
+//call when client click next page
+function nextPage()
+{
+    page = page + 1;
+    var n = page;
+    var pageSize = 4
+    var x = document.getElementsByName('itemContainer');
+    
+        for (var i = n * 4; i <=(n + 1) * 4 - 1; i++) {
+            if (x[i - pageSize - 4] != null)
+            {
+                x[i - pageSize-4].style.display = "none";
+            }
+            if (x[i - pageSize] != null)
+            {
+                x[i-pageSize].style.display = "flex";
+            }
+            
+            
+            //disable next page button
+            if (Math.ceil((x.length / 4)) == page)
+            {
+                console.log(Math.ceil((x.length / 4)));
+                (document.getElementById('nPage')).disabled = true;
+            }
+            
+                (document.getElementById('pPage')).disabled = false;
+            
+            
+    }
+    (document.getElementById('pPage')).disabled = false;
+    return false;
+    }
+
+
+//called when client click previous page
+function previousPage() {
+    var n = page;
+    var x= document.getElementsByName('itemContainer');
+    var pageSize = 4;
+    for (var i = n * 4 - 1; i >= ((n - 1) * 4); i--) {
+        console.log("hide " + i);
+        console.log("displauy "+(i-pageSize))
+        if (x[i] != null) {
+        x[i].style.display = 'none';
+        
+        }
+        if (x[i-pageSize] != null) {
+            x[i - pageSize].style.display = 'flex';
+        }
+    }
+    page = page - 1;
+    //Disable previous page button
+    if (page == 1) {
+        document.getElementById('pPage').disabled = true;
+
+    }
+    document.getElementById('nPage').disabled = false;
+}
+
+//End of Paging Function
