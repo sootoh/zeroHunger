@@ -1,14 +1,14 @@
-﻿@page
+@page
 @model ZeroHunger.Pages.Deliveries.IndexModel
 
 <partial name="_Notification"/>
 
 <div class="container p=3">
     <div class="row pt-4">
-        <div class="col-9">
+        <div class="col-8">
             <h2 class="text-primary">Manage Delivery Request</h2>
         </div>
-        <div class="col-3 mt-2">
+        <div class="col-4 mt-2">
             <a asp-page="Create" class="btn btn-info">
                 <i class="bi bi-pencil-square"></i> &nbsp; Create New Delivery Request
             </a>
@@ -18,13 +18,13 @@
 
 <br/><br/>
 
-<table class="table table-bordered table-striped" style:width="100%">
+<table class="table table-bordered table-striped" style="text-align:center">
     <thead>
         <tr>
             <th>
                 Volunteer Name
             </th>
-            <th>
+            <th width="11%">
                 Delivery Time
             </th>
             <th>
@@ -36,15 +36,23 @@
             <th>
                 Receiver Phone
             </th>
-            <th>
+            <th width="15%">
                 Receiver Address
-            </th><!--
+            </th>
+            <th width="13%">
+                Dry Food Name
+            </th>
+            <th>
+                Quantity
+            </th>
+            <!--
             <th>
                 Product Name
             </th>
             <th>
                 Product Quantity
             </th>-->
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -57,15 +65,17 @@
             <td>@obj.Receiver.UserName</td>
             <td>@obj.Receiver.UserPhone</td>
             <td>@obj.Receiver.UserAdrs1 @obj.Receiver.UserAdrs2</td>
-            <td></td>
+            <td>10kg Rice <br /> Sugar</td>
+            <td>1 <br />1</td>
+            
             
             <td>
-                <a asp-page="Edit" asp-route-id="@obj.DeliveryID" class="btn btn-success mx-2">
+                <a asp-page="Edit" asp-route-id="@obj.DeliveryID" class="btn btn-success mx-2" style="width:80px">
                 Edit &nbsp;<i class="bi bi-pencil-square"></i>
                 </a>
             </td>
             <td>
-                <a asp-page="Delete" asp-route-id="@obj.DeliveryID" class="btn btn-danger mx-2">
+                <a asp-page="Delete" asp-route-id="@obj.DeliveryID" class="btn btn-danger mx-2" style="width:100px">
                 Delete &nbsp;<i class="bi bi-trash-fill"></i>
                 </a>
             </td>
