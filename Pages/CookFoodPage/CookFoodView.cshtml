@@ -25,41 +25,41 @@
                         </th>
                         <th>
                             @*@Html.DisplayNameFor(m=>m.Users.FirstOrDefault().userName)*@
-                            <label asp-for="CookedFood.FirstOrDefault().ShopName"></label>
+                            <label asp-for="CookedFood.FirstOrDefault().ShopName">Shop Name</label>
                         </th>
                         <th>
                             @*@Html.DisplayNameFor(m=>m.Users.FirstOrDefault().userName)*@
-                            <label asp-for="CookedFood.FirstOrDefault().CookName"></label>
+                            <label asp-for="CookedFood.FirstOrDefault().CookName">Food Name</label>
                         </th>
                         <th>
                             @*@Html.DisplayNameFor(m=>m.Users.FirstOrDefault().userName)*@
-                            <label asp-for="CookedFood.FirstOrDefault().OpenDate"></label>
+                            <label asp-for="CookedFood.FirstOrDefault().OpenDate">Opening Time</label>
                         </th>
                         <th>
                             @*@Html.DisplayNameFor(m=>m.Users.FirstOrDefault().userName)*@
-                            <label asp-for="CookedFood.FirstOrDefault().CloseDate"></label>
+                            <label asp-for="CookedFood.FirstOrDefault().CloseDate">Closing Time</label>
                         </th>
                         <th>
-                            <label asp-for="CookedFood.FirstOrDefault().CookLatitude"></label>
+                            <label asp-for="CookedFood.FirstOrDefault().CookLatitude">Location Latitude</label>
                         </th>
                         <th>
-                            <label asp-for="CookedFood.FirstOrDefault().CookLongtitude"></label>
+                            <label asp-for="CookedFood.FirstOrDefault().CookLongtitude">Location Longitude</label>
                         </th>
                         <th>
-                            <label asp-for="CookedFood.FirstOrDefault().CookQuantity"></label>
-                        </th>
-                        <th>
-                            @*@Html.DisplayNameFor(m=>m.Users.FirstOrDefault().userName)*@
-                            <label asp-for="CookedFood.FirstOrDefault().Reservation"></label>
+                            <label asp-for="CookedFood.FirstOrDefault().CookQuantity">Quantity</label>
                         </th>
                         <th>
                             @*@Html.DisplayNameFor(m=>m.Users.FirstOrDefault().userName)*@
-                            <label asp-for="CookedFood.FirstOrDefault().RemainQuantity"></label>
+                            <label asp-for="CookedFood.FirstOrDefault().Reservation">Reserved Quantity</label>
                         </th>
                         <th>
                             @*@Html.DisplayNameFor(m=>m.Users.FirstOrDefault().userName)*@
-                            <label asp-for="CookedFood.FirstOrDefault().DonorUserID"></label>
+                            <label asp-for="CookedFood.FirstOrDefault().RemainQuantity">Remain Quantity</label>
                         </th>
+                        @*<th>
+                            
+                            <label asp-for="CookedFood.FirstOrDefault().DonorUserID" style="hidden"></label>
+                        </th>*@
                         
                         <th>
 
@@ -98,9 +98,9 @@
                             <td>
                                 @Html.DisplayFor(m=>item.RemainQuantity)
                             </td>
-                            <td>
+                            @*<td>
                                 @Html.DisplayFor(m=>item.DonorUserID)
-                            </td>
+                            </td>*@
                             <td>
                                 <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')" asp-page-handler="Delete" asp-route-id="@item.CookID">Delete</button>
                                  <a class="btn btn-success btn-sm text-white"@* asp-page="EditUser" *@asp-route-Id="@item.CookID">Edit</a>
