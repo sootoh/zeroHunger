@@ -13,7 +13,7 @@
 
 <br/><br/>
 
-<table class="table table-responsive-sm table-bordered table-striped w-auto" style="text-align:center">
+<table class="table table-bordered table-striped w-auto" style="text-align:center">
     <thead>
         <tr>
             <th>
@@ -22,10 +22,10 @@
             <th>
                 Receiver Phone
             </th>
-            <th>
+            <th width="18%">
                 Receiver Address
             </th>
-            <th>
+            <th width="20%">
                 Dry Food Name
             </th>
             <th>
@@ -37,7 +37,7 @@
             <th>
                 Delivery Status
             </th>
-            <th>
+            <th width="5%">
                 Accept
             </th>
             <th>
@@ -46,6 +46,20 @@
             <th>
                 Completed
             </th>
+
+             <!--
+             <th width="14%">
+                Arrival Time
+            </th>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Product Quantity
+            </th>
+            <th width="12%">Accept</th>
+            <th width="11%">Reject</th>
+            <th width="10%">Completed</th>-->
         </tr>
     </thead>
     <tbody>
@@ -63,26 +77,26 @@
             @if(@obj.DeliveryStatus== 0){
                 <td>
                     <form method="post">
-                    <button type="submit" asp-page-handler="Accept" asp-route-id="@obj.DeliveryID" class="btn btn-success mx-3">Accept &nbsp;<i class="bi bi-check-square-fill"></i></button>
+                    <button type="submit" asp-page-handler="Accept" asp-route-id="@obj.DeliveryID" class="btn btn-success" style="width:100px">Accept &nbsp;<i class="bi bi-check-square-fill"></i></button>
                     </form>
                 </td>
                 <td>
                     <form method="post">
-                    <button type="submit" asp-page-handler="Reject" asp-route-id="@obj.DeliveryID" class="btn btn-danger mx-3">Reject &nbsp;<i class="bi bi-x-square-fill"></i></button>
+                    <button type="submit" asp-page-handler="Reject" asp-route-id="@obj.DeliveryID" class="btn btn-danger" style="width:100px"> Reject &nbsp;<i class="bi bi-x-square-fill"></i></button>
                     </form>
                 </td>
                 <td>
                     <form method="post">
-                    <button type="submit" asp-page-handler="Complete" asp-route-id="@obj.DeliveryID" style="visibility:hidden;" class="btn btn-warning mx-3">Complete &nbsp;<i class="bi bi-check-square-fill"></i></button>
+                    <button type="submit" asp-page-handler="Complete" asp-route-id="@obj.DeliveryID" style="visibility:hidden;width:100px" class="btn btn-warning">Complete &nbsp;<i class="bi bi-check-square-fill"></i></button>
                     </form>
                 </td>
              }
             else if((int)@obj.DeliveryStatus== 1){
                 <td></td>
                 <td></td>
-                <td width="13%">
+                <td>
                     <form method="post">
-                    <button type="submit" asp-page-handler="Complete" asp-route-id="@obj.DeliveryID" class="btn btn-warning mx-3">Complete &nbsp;<i class="bi bi-check-square-fill"></i></button>
+                    <button type="submit" asp-page-handler="Complete" asp-route-id="@obj.DeliveryID" class="btn btn-warning" style="width:120px">Complete &nbsp;<i class="bi bi-check-square-fill"></i></button>
                     </form>
                 </td>
                 }
@@ -96,7 +110,11 @@
     </tbody>
 </table>
 
-
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"></partial>
+    }
+}
 
 
 
