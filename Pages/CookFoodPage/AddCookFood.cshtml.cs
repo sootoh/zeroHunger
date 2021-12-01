@@ -28,15 +28,24 @@ namespace ZeroHunger.Pages.CookFoodPage
         public async Task<IActionResult> OnPost()
         {
             cook.DonorId= (_db.User.Where(b => b.UserEmail.Equals(@User.Identity.Name)).FirstOrDefault());
-            cook.DonorUserID = cook.DonorId.UserID;
-            cook.Reservation = 0;
-            cook.RemainQuantity = cook.CookQuantity;
-            
-            //if (ModelState.IsValid)
-            //{
+            if (cook.DonorId == null)
+            {
+                //ViewData["Message"] = string.Format("Please login first.");
+                return RedirectToPage("../login");
+            }
+            else
+            {
+                cook.DonorUserID = cook.DonorId.UserID;
+                cook.Reservation = 0;
+                cook.RemainQuantity = cook.CookQuantity;
+
+                //if (ModelState.IsValid)
+                //{
                 await _db.CookedFoodDonation.AddAsync(cook);
                 await _db.SaveChangesAsync();
                 return RedirectToPage("CookFoodView");
+            }
+            
             //}
             //else
             //{
