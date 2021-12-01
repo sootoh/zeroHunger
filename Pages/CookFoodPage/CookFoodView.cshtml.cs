@@ -19,11 +19,15 @@ namespace ZeroHunger.Pages.CookFoodPage
             _db = db;
 
         }
+        [BindProperty]
         public IEnumerable<CookedFoodDonation> CookedFood { get; set; }
-        //public IEnumerable<User> donor { get; set; }
+        public User donor { get; set; }
         public async Task OnGet()
         {
-            CookedFood = await _db.CookedFoodDonation.ToListAsync();
+            
+            donor= _db.User.Where(x => x.UserEmail.Equals(User.Identity.Name)).FirstOrDefault();
+            CookedFood = await _db.CookedFoodDonation.Where(x=> x.DonorUserID.Equals(donor.UserID)).ToListAsync();
+           // CookedFood = await _db.CookedFoodDonation.ToListAsync();
         }
     }
 }
