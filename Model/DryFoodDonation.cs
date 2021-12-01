@@ -22,7 +22,9 @@ namespace ZeroHunger.Model
         public string DryFoodPickDate { get; set; }
         [Required]
         public string DryFoodRemark { get; set; }
-        
+        [Required]
+        public int donorid { get; set; }
+        public int deliveryid { get; set; }
         [ForeignKey("DonorId")]
         public virtual User donor_Id { get; set; }
         [ForeignKey("DelivererId")]
