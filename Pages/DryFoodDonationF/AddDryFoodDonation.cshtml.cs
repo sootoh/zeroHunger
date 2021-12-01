@@ -25,7 +25,7 @@ namespace ZeroHunger.Pages.DryFoodDonationF
         }
         public async Task<IActionResult> OnPost(DryFoodDonation dfd)
         {
-            dfd.DonorId = "Lalisa";
+            //dfd.DonorId = "Lalisa";
             if (ModelState.IsValid)
             {
                 
