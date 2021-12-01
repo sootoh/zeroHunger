@@ -28,5 +28,16 @@ namespace ZeroHunger.Pages.UserPage
         {
             Users = await _db.User.ToListAsync();
         }
+        public async Task<IActionResult> OnPostDelete(int id)
+        {
+            var user = await _db.User.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            _db.User.Remove(user);
+            await _db.SaveChangesAsync();
+            return RedirectToPage("UserView");
+        }
     }
 }
