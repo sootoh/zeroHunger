@@ -107,7 +107,7 @@
                 {
                     <tr>
                         <td>@Html.DisplayFor(ReceiverFamily => familyInfo.familyIC)</td>
-                        <td>@Html.DisplayFor(ReceiverFamily => familyInfo.familyDOB)</td>
+                        <td>@Html.DisplayFor(ReceiverFamily => familyInfo.familyDOB) (@getAge(familyInfo.familyDOB) years old)</td>
                         <td>@Html.DisplayFor(ReceiverFamily => familyInfo.familyOccupation)</td>
                         <td>@Html.DisplayFor(SalaryGroup => Model.salaryGroups.ElementAt(familyInfo.familySalaryGroupID).salaryRange)</td>
                     </tr>
@@ -146,14 +146,14 @@
         }
         public int getAge(string DOB)
         {
-            int birthyear=int.Parse(DOB.Substring(7));
+            int birthyear=int.Parse(DOB.Substring(0,4));
             int thisyear = DateTime.Now.Year;
-            thisyear %= 1000;
-            thisyear %= 100;
-            if(thisyear<birthyear)
-            {
-                thisyear += 100;
-            }
+            //thisyear %= 1000;
+            //thisyear %= 100;
+            //if(thisyear<birthyear)
+            //{
+            //    thisyear += 100;
+            //}
             return thisyear - birthyear;
         }
     }
