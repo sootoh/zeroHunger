@@ -17,13 +17,25 @@
 		<script language="javascript">
 		function validateIC(ic)
 		{
-			
-			var dobString=ic.substring(0,2)+"-"+ic.substring(2,4)+"-"+ic.substring(4,6)+" 08:00";
-			const dob=new Date(dobString);
-			if(dob=="Invalid Date")
+			if(new Date((ic.substring(0,2)+"-"+ic.substring(2,4)+"-"+ic.substring(4,6)+" 08:00"))=="Invalid Date")
 			{
 				alert("Please re-check your IC Number");
+				return;
 			}
+			var dob=new Date();
+			const today=new Date();
+			if(parseInt( ic.substring(0,2))>(today.getYear()%1000%100))
+			{
+				dob.setYear(ic.substring(0,2));
+			}
+			else 
+			{
+				dob.setYear("20"+ic.substring(0,2));
+			}
+			dob.setMonth((parseInt(ic.substring(2,4))-1));
+			dob.setDate(ic.substring(4,6));
+			dob.setHours(8);
+			
 			document.getElementsByName("receiverDOB")[0].value=dob.toISOString().substr(0, 10);
 		}
 		function submit()

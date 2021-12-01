@@ -65,10 +65,9 @@ namespace ZeroHunger.Pages.Register
 
 
             
-            noFamily++;
             application= _db.Receiver.Where(i => i.receiverIC.Equals(ApplicationFamily.receiverIC)).Single();
             ApplicationFamily.receiver = _db.Receiver.Where(i => i.receiverIC.Equals(ApplicationFamily.receiverIC)).Single();
-            application.receiverFamilyNo=noFamily;
+            application.receiverFamilyNo+=1;
             _db.Receiver.Update(application);
             await _db.ReceiverFamily.AddAsync(ApplicationFamily);
             await _db.SaveChangesAsync();
