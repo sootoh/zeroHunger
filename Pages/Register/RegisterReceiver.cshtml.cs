@@ -51,6 +51,22 @@ namespace ZeroHunger.Pages.Register
                     return Page();
                 }
             }
+            foreach (Receiver receiver in _db.Receiver)
+            {
+                if (Application.receiverEmail == receiver.receiverEmail)
+                {
+                    message = "This email has been registered.";
+                    return Page();
+                }
+            }
+            foreach (User user in _db.User)
+            {
+                if (Application.receiverEmail == user.UserEmail)
+                {
+                    message = "This email has been registered.";
+                    return Page();
+                }
+            }
 
             Application.receiverName = fName+" " + lName;
             if(!street.EndsWith(','))
