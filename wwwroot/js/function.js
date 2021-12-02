@@ -59,9 +59,6 @@ function initMap() {
     for (let i = 0; i < loopsize; i++) {
         var x = { lat: parseFloat(document.getElementsByName('itemLat')[i].innerHTML), lng: parseFloat(document.getElementsByName('itemLon')[i].innerHTML) };
         var t = document.getElementsByName('itemName')[i].innerHTML;
-        console.log();
-        console.log(t);
-        
         
             listOfMarkes.push(new google.maps.Marker(
                 {
@@ -144,10 +141,11 @@ function success(pos) {
             var x = distance(itemLat, itemLon, crd.latitude, crd.longitude);
             x = x.toFixed(2);
 
-            [i].innerHTML = x + "km";
+            document.getElementsByName('itemDistance')[i].innerHTML = x + "km";
             document.getElementsByName('itemDistance')[i].style.fontWeight = "bold";
             console.log(crd.latitude);
             console.log(crd.longitude);
+            console.log(x);
             }
     
     }
@@ -204,6 +202,13 @@ function displayItemBox(sn, fn, q,  id) {
     else {
         document.getElementById('reservedBut').disabled = false;
     }
+}
+
+
+function closeRePrompt()
+{
+    var box = document.getElementById('promptContainer');
+    box.style.display = "none";
 }
 //End of Prompt Box Function
 
@@ -262,8 +267,8 @@ function previousPage() {
     var x= document.getElementsByName('itemContainer');
     var pageSize = 4;
     for (var i = n * 4 - 1; i >= ((n - 1) * 4); i--) {
-        console.log("hide " + i);
-        console.log("displauy "+(i-pageSize))
+
+
         if (x[i] != null) {
         x[i].style.display = 'none';
         
