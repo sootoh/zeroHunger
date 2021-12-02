@@ -5,8 +5,8 @@ let page = 1; //Paging:global variable
 //Google Map Function
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 6,
+        center: { lat: 3.8925533126426664, lng: 102.10080302222984 },
+        zoom: 8, 
         mapId: 'ca3e1b773e1fd477',
     });
     infoWindow = new google.maps.InfoWindow();
@@ -45,6 +45,46 @@ function initMap() {
             handleLocationError(false, infoWindow, map.getCenter());
         }
     });
+
+    //setMarker(map);
+    let loopsize = document.getElementsByName('itemLat').length;
+    var images =
+    {
+        url: "../images/markericon.png",
+        size: new google.maps.Size(71, 71),
+        scaledSize: new google.maps.Size(25, 25),
+    };
+    var listOfMarkes = []
+    var listOfInfoWindow=[]
+    for (let i = 0; i < loopsize; i++) {
+        var x = { lat: parseFloat(document.getElementsByName('itemLat')[i].innerHTML), lng: parseFloat(document.getElementsByName('itemLon')[i].innerHTML) };
+        var t = document.getElementsByName('itemName')[i].innerHTML;
+        console.log();
+        console.log(t);
+        
+        
+            listOfMarkes.push(new google.maps.Marker(
+                {
+                    position: x,
+                    map,
+                    title: t,
+                    icon: images,
+                }));
+        listOfInfoWindow.push( new google.maps.InfoWindow({
+            content: t,
+        }));
+        listOfMarkes[i].addListener("click", () => {
+            listOfInfoWindow[i].open({
+                anchor: listOfMarkes[i],
+                map,
+                shouldFocus: false,
+            })
+        });
+    }
+
+    //Rearrange
+    
+
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -103,13 +143,15 @@ function success(pos) {
             itemLon = parseFloat(itemLon);
             var x = distance(itemLat, itemLon, crd.latitude, crd.longitude);
             x = x.toFixed(2);
-            document.getElementsByName('itemDistance')[i].innerHTML = x + "km";
+
+            [i].innerHTML = x + "km";
             document.getElementsByName('itemDistance')[i].style.fontWeight = "bold";
             console.log(crd.latitude);
             console.log(crd.longitude);
             }
     
     }
+    //SortDistance();
     pageLoading();
 }
 
@@ -139,6 +181,9 @@ function distance(lat1, lon1, lat2, lon2) {
         dist = dist * 1.609344
         return dist;
     }
+}
+function SortDistance() {
+
 }
 //End Function Calculate Cookfood distance
 
@@ -237,3 +282,8 @@ function previousPage() {
 }
 
 //End of Paging Function
+
+//Google Map Marker
+function setMarker(m) {
+   
+}
