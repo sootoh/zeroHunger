@@ -6,7 +6,11 @@
         <h3 style="text-align:end;margin-right:25px;">Donation List</h3>
         <div class='promptContainer' id="promptContainer">
 
-            <div class='promptTitle'>Donation</div>
+            <div style="display:flex;justify-content:space-around;">
+                <div class='promptTitle'>Donation</div>
+                <vid onClick="closeRePrompt();" >X</vid>
+            </div>
+
             <div>
                 <form method="post">
                     <table>
@@ -58,7 +62,7 @@
                         <div id="itemContainer" name="itemContainer" onClick="displayItemBox('@item.ShopName', '@item.CookName', ' @(item.RemainQuantity-item.Reservation)', '@item.CookID')">
                             <div id="itemInfo">
                                 <div>
-                                    <div id="itemName">
+                                    <div id="itemName" name="itemName">
                                         @Html.DisplayFor(m => item.CookName)
                                     </div>
                                     <div id="itemQuantity">

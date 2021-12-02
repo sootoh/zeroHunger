@@ -36,9 +36,6 @@ namespace ZeroHunger.Pages.CookFood
 
         public async Task OnPost(int ID)
         {
-            //getUs
-
-
 
             var cfd = await _db.CookedFoodDonation.FindAsync(ID);
             if (cfd.Reservation < cfd.RemainQuantity)
