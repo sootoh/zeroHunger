@@ -10,6 +10,12 @@
     height: 60px;
 }
 
+.imageThumbnail {
+    object-fit: contain;
+    width: 200px;
+    height: 250px;
+}
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
