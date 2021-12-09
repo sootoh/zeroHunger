@@ -21,6 +21,7 @@ namespace ZeroHunger.Pages.Register
         }
         [BindProperty]
         public Receiver application { get; set; }
+        public IEnumerable<SalaryGroup> salaryGroups { get; set; }
         public string fName { get; set; }
         public string lName { get; set; }
         public string street { get; set; }
@@ -31,7 +32,7 @@ namespace ZeroHunger.Pages.Register
         public string message { get; set; } = "";
         public void OnGet()
         {
-            
+            salaryGroups = _db.SalaryGroup;
         }
         public async Task<IActionResult> OnPost(Receiver Application, string fName, string lName, string street, string additional, string zip, string city, string state)
         {

@@ -100,12 +100,16 @@
 							<div class="form-row form-row-4">
 								<select asp-for="application.receiverSalaryGroupID " name="receiverSalaryGroupID">
 									<option value="Salary" disabled selected>Salary (RM)</option>
-									<option value=0>0</option>
+									@foreach(SalaryGroup salaryGroup in @Model.salaryGroups)
+									{
+										<option value=@Html.DisplayFor(SalaryGroup => salaryGroup.salaryGroupID)>@Html.DisplayFor(SalaryGroup => salaryGroup.salaryRange)</option>
+									}
+									<!--<option value=0>0</option>
 									<option value=1>1-500</option>
 									<option value=2>501-1000</option>
 									<option value=3>1001-1500</option>
 									<option value=4>1501-2000</option>
-									<option value=5>>2000</option>
+									<option value=5>>2000</option>-->
 								</select>
 								<span class="select-btn">
 							  		<i class="zmdi zmdi-chevron-down"></i>

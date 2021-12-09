@@ -86,12 +86,16 @@
 							<td>
 								<select asp-for="applicationFamily.familySalaryGroupID" name="familySalaryGroupID">
 									<option value="Salary" disabled selected>Salary (RM)</option>
-									<option value="0">0</option>
+									@foreach(SalaryGroup salaryGroup in @Model.salaryGroups)
+									{
+										<option value=@Html.DisplayFor(SalaryGroup => salaryGroup.salaryGroupID)>@Html.DisplayFor(SalaryGroup => salaryGroup.salaryRange)</option>
+									}
+									<!--<option value="0">0</option>
 									<option value="1-500">1-500</option>
 									<option value="501-1000">501-1000</option>
 									<option value="1001-1500">1001-1500</option>
 									<option value="1501-2000">1501-2000</option>
-									<option value=">2000">>2000</option>
+									<option value=">2000">>2000</option>-->
 								</select>
 								<span class="select-btn">
 							  		<i class="zmdi zmdi-chevron-down"></i>
