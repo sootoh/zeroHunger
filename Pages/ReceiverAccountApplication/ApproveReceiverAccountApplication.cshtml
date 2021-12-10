@@ -4,9 +4,11 @@
 @{
     <head><title>Approved!</title></head>
     <body>
-        <a asp-page="ManageReceiverAccountApplication">
-            back
-        </a>
+        <div class="col-3">
+            <a asp-page="Index" class="btn btn-info">
+                <i class="bi bi-arrow-bar-left"></i> &nbsp;Back To List
+            </a>
+        </div>
         <p>@Model.message</p>
 
     </body>
