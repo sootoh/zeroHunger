@@ -1,4 +1,4 @@
-﻿var dataTable;
+var dataTable;
 
 $(document).ready(function () {
     loadDataTable();
@@ -23,13 +23,13 @@ function loadDataTable() {
                 "data": "product_id",
                 "render": function (data) {
                     return `<div class="text-center">
-                        <a href="/ProductInNeedList/Update?id=${data}" class='btn btn-success text-white' style='cursor:pointer; width:70px;'>
-                            Edit
+                        <a href="/ProductInNeedList/Update?id=${data}" class='btn btn-success text-white' style='cursor:pointer; width:90px; margin-bottom:5px;'>
+                            Edit <i class="bi bi-pencil-square"></i>
                         </a>
                         &nbsp;
-                        <a class='btn btn-danger text-white' style='cursor:pointer; width:70px;'
+                        <a class='btn btn-danger text-white' style='cursor:pointer; width:90px;margin-bottom:5px;'
                             onclick=Delete('/api/productinneed?id='+${data})>
-                            Delete
+                            Delete<i class="bi bi-trash-fill"></i>
                         </a>
                         </div>`;
                 }, "width": "50%"
