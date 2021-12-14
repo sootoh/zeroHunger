@@ -1,121 +1,47 @@
-﻿@page
+@page
 @model ZeroHunger.Pages.CookFoodPage.CookFoodViewModel
 @{
-    //ViewData["userName"] = "User";
+    ViewData["Title"] = "Cook Food View";
 }
-<br>
-<h1> View Cook Food Donation</h1>
+<br />
 <div class="container row p-0 m-0">
-    <div class="col-9">
-        <h2 class="text-info">Cook Food Donation List</h2>
+    <div class="col-8">
+        <h2>Cooked Food Donation List</h2>
     </div>
-    <div class="col-3">
-        <a asp-page="AddCookFood" class="btn btn-info form-control text-white">Create New Donation</a>
-
+    <div class="col-4">
+        <a asp-page="AddCookFood" class="btn btn-info "><i class="bi bi-pencil-square"></i> Donate New Food</a>
     </div>
+    <div class="col-17 border p-3">
 
-    <div class="col-15 border p-3 mt-3">
-        <form method="post">
-            @if (Model.CookedFood.Count() > 0)
-            {
-                <table class="table progress-bar-striped border" style="border:solid">
-                    <tr class="table-secondary">
-                        <th>
-                            <label asp-for="CookedFood.FirstOrDefault().CookID"></label>
-                        </th>
-                        <th>
-                            @*@Html.DisplayNameFor(m=>m.Users.FirstOrDefault().userName)*@
-                            <label asp-for="CookedFood.FirstOrDefault().ShopName">Shop Name</label>
-                        </th>
-                        <th>
-                            @*@Html.DisplayNameFor(m=>m.Users.FirstOrDefault().userName)*@
-                            <label asp-for="CookedFood.FirstOrDefault().CookName">Food Name</label>
-                        </th>
-                        <th>
-                            @*@Html.DisplayNameFor(m=>m.Users.FirstOrDefault().userName)*@
-                            <label asp-for="CookedFood.FirstOrDefault().OpenDate">Opening Time</label>
-                        </th>
-                        <th>
-                            @*@Html.DisplayNameFor(m=>m.Users.FirstOrDefault().userName)*@
-                            <label asp-for="CookedFood.FirstOrDefault().CloseDate">Closing Time</label>
-                        </th>
-                        <th>
-                            <label asp-for="CookedFood.FirstOrDefault().CookLatitude">Location Latitude</label>
-                        </th>
-                        <th>
-                            <label asp-for="CookedFood.FirstOrDefault().CookLongtitude">Location Longitude</label>
-                        </th>
-                        <th>
-                            <label asp-for="CookedFood.FirstOrDefault().CookQuantity">Quantity</label>
-                        </th>
-                        <th>
-                            @*@Html.DisplayNameFor(m=>m.Users.FirstOrDefault().userName)*@
-                            <label asp-for="CookedFood.FirstOrDefault().Reservation">Reserved Quantity</label>
-                        </th>
-                        <th>
-                            @*@Html.DisplayNameFor(m=>m.Users.FirstOrDefault().userName)*@
-                            <label asp-for="CookedFood.FirstOrDefault().RemainQuantity">Remain Quantity</label>
-                        </th>
-                        @*<th>
-                            
-                            <label asp-for="CookedFood.FirstOrDefault().DonorUserID" style="hidden"></label>
-                        </th>*@
-                        
-                        <th>
-
-                        </th>
-                    </tr>
-                    @foreach(var item in Model.CookedFood)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(m=>item.CookID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m=>item.ShopName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m=>item.CookName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m=>item.OpenDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m=>item.CloseDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m=>item.CookLatitude)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m=>item.CookLongtitude)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m=>item.CookQuantity)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m=>item.Reservation)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m=>item.RemainQuantity)
-                            </td>
-                            @*<td>
-                                @Html.DisplayFor(m=>item.DonorUserID)
-                            </td>*@
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')" asp-page-handler="Delete" asp-route-id="@item.CookID">Delete</button>
-                                 <a class="btn btn-success btn-sm text-white"@* asp-page="EditUser" *@asp-route-Id="@item.CookID">Edit</a>
-                            </td>
-                        </tr>
-                    }
-                </table>
-            }
-            else
-            {
-                <p>No Cook Food Donation</p>
-            }
-        </form>
+        <table id="food_load" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    @*<th>CookID</th>*@
+                    
+                    <th>Food Name</th>
+                    <th>Quantity</th>
+                    
+                    
+                   @* <th>Location Longitude</th>
+                    <th>Location Latitude</th>*@
+                    <th>Opening Time</th>
+                    <th>Closing Time</th>
+                    
+                    <th>Remain Quantity</th>
+                    <th>Reserved Quantity</th>
+                    
+                    <th>Shop Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </div>
-<br>
-<br>
+<br /><br /><br /><br />
+@section Scripts{
+    <script src="~/js/cookFood.js"></script>
+}
+
+
+
 
