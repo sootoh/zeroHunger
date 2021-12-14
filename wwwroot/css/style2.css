@@ -182,7 +182,7 @@ body {
 .form-v10-content .form-detail .form-right input,
 .form-v10-content .form-detail .form-right select {
 	border-bottom: 1px solid #000;
-	border-bottom-color: rgba(255, 255, 255, 0.3);
+	border-bottom-color: #000;
 }
 .form-v10-content .form-detail .form-right input:focus,
 .form-v10-content .form-detail .form-right select:focus {
@@ -230,7 +230,7 @@ body {
 }
 .form-v10-content .form-detail .form-checkbox p {
     margin-left: 34px;
-    color: #e5e5e5;
+    color: #000;
     font-size: 14px;
     font-weight: 400;
 }
