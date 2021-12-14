@@ -17,28 +17,24 @@ namespace ZeroHunger.Pages.CookFoodPage
         public CookFoodViewModel(ApplicationDbContext db)
         {
             _db = db;
-
         }
-        [BindProperty]
-        public IEnumerable<CookedFoodDonation> CookedFood { get; set; }
-        public User donor { get; set; }
+        public IEnumerable<CookedFoodDonation> cookfood { get; set; }
         public async Task OnGet()
         {
-            
-            donor= _db.User.Where(x => x.UserEmail.Equals(User.Identity.Name)).FirstOrDefault();
-            CookedFood = await _db.CookedFoodDonation.Where(x=> x.DonorUserID.Equals(donor.UserID)).ToListAsync();
-           // CookedFood = await _db.CookedFoodDonation.ToListAsync();
+            cookfood = await _db.CookedFoodDonation.ToListAsync();
         }
         public async Task<IActionResult> OnPostDelete(int id)
         {
-            var food = await _db.CookedFoodDonation.FindAsync(id);
-            if (food == null)
+            var cook= await _db.CookedFoodDonation.FindAsync(id);
+            if (cook == null)
             {
                 return NotFound();
             }
-            _db.CookedFoodDonation.Remove(food);
+            _db.CookedFoodDonation.Remove(cook);
             await _db.SaveChangesAsync();
+
             return RedirectToPage("CookFoodView");
         }
+        
     }
 }
