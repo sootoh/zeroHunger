@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using ZeroHunger.Model;
 using ZeroHunger.Data;
+using Microsoft.AspNetCore.Http;
+using System.Diagnostics;
 
 namespace ZeroHunger.Pages
 {
@@ -19,14 +21,24 @@ namespace ZeroHunger.Pages
 
         public IEnumerable<ProductInNeed> products { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext db)
+        public IndexModel(ApplicationDbContext db)
         {
-            _logger = logger;
+            //_logger = logger;
             _db = db;
         }
 
         public async Task OnGet()
         {
+            if((Request.Cookies["ZeroHungerCookie"]!=null))
+                {
+                User u = _db.User.Where(b => b.UserEmail.Equals(@User.Identity.Name)).FirstOrDefault();
+                if (HttpContext.Session.GetString("userid") == null)
+                {
+                    HttpContext.Session.SetString("userid", u.UserID.ToString());
+                }
+            }
+            //
+            //HttpContext.Session.setString("userid", User.Identity.Name);
             products = await _db.ProductInNeed.Where(e => e.visibility == "Visible").ToListAsync();
         }
     }
