@@ -19,12 +19,10 @@ namespace ZeroHunger.Model
         public DateTime? DeliveryTime { get; set; }
         public int? VolunteerID { get; set; }
         public int? ReceiverID { get; set; }
-        //public int? DryFoodID { get; set; }
         [ForeignKey("VolunteerID")]
         public virtual User? Volunteer { get; set; }
         [ForeignKey("ReceiverID")]
         public virtual User? Receiver { get; set; }
-        //[ForeignKey("DryFoodID")]
-        public virtual ICollection<DryFoodDonation>? DryFoodDonations { get; set; }
+        public virtual ICollection<DeliveryItem>? DeliveryItems { get; set; }
     }
 }
