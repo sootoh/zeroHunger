@@ -22,5 +22,6 @@ namespace ZeroHunger.Data
         public DbSet<User> User { get; set; }
         public DbSet<UserType> UserType { get; set; }
         public DbSet<Delivery> Delivery { get; set; }
+        public DbSet<CookReservation> CookReservation { get; set; }
     }
 }
