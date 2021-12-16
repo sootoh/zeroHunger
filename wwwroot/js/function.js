@@ -49,7 +49,7 @@ function initMaps() {
 
 
     //setMarker(map);
-    const images =
+    const img =
     {
         url: "../images/markericon.png",
         // This marker is 20 pixels wide by 32 pixels high.
@@ -60,9 +60,31 @@ function initMaps() {
         anchor: new google.maps.Point(0, 32),
         scaledSize: new google.maps.Size(25,25)
     };
-    
-    
 
+    var y = document.getElementsByName('itemLat');
+    for (var i = 0; i <y.length; i++) {
+        var x = { lat: parseFloat(document.getElementsByName('itemLat')[i].value), lng: parseFloat(document.getElementsByName('itemLon')[i].value) };
+        console.log(x);
+        var marker = new google.maps.Marker(
+            {
+                position: x,
+                map,
+                title: "Hello",
+                icon: img
+             });
+        var ifw = new google.maps.InfoWindow({
+            content: document.getElementsByName('itemName')[i].innerHTML,
+        });
+        ifw.addListener("click", () => {
+            ifw.open({
+                anchor: marker,
+                map,
+                shouldFocus: false,
+            })
+        });
+
+    }
+    
     //Rearrange
     
 
