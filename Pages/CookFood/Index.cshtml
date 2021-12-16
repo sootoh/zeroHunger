@@ -3,19 +3,18 @@
         <script>window.onload = navigator.geolocation.getCurrentPosition(success, error, options);</script>
         <h1 style="text-align:center;">Cook Food Donation</h1>
 
-        <h3 style="text-align:end;margin-right:25px;">Donation List</h3>
+        
         <div class='promptContainer' id="promptContainer">
-
-            <div style="display:flex;justify-content:space-around;">
-                <div class='promptTitle'>Donation</div>
-                <vid onClick="closeRePrompt();" >X</vid>
+            <div style="display:flex;justify-content:center;background-color:transparent;">
+                <div class='promptTitle'>Donation   <i class="bi bi-x-square-fill" onClick="closeRePrompt();" id="closeWindow"></i></div>
+                
             </div>
+            <form method="post">
+                <div style="display: flex; justify-content: center; background-color: transparent;">
 
-            <div>
-                <form method="post">
                     <table>
                         <tr>
-                            <th class='tableLeft'>Food Name</th>
+                            <th class='tableLeft'>Shop Name</th>
                             <td id='pFoodShopName' class='tableLeft'></td>
                         </tr>
                         <tr>
@@ -30,31 +29,36 @@
                             <th class='tableLeft'>Distance</th>
                             <td id="pFoodDistance" class='tableLeft'></td>
                         </tr>
-                        <tr>
-                            <td colspan='2' style="text-align:center;">
-                                <input type='submit' value='Reserve' id='reservedBut'>
-                            </td>
-                        </tr>
+
                     </table>
                     <input id="pFoodId" type="hidden" asp-for="id" value="0" />
-                </form>
-            </div>
+
+                </div>
+                <div style="display: flex; justify-content: center; background-color: transparent;">
+                    <input type='submit' value='Reserve' class="btn" id='reservedBut'>
+                </div>
+            </form>
         </div>
 
         <div id="CookFoodContainer">
             <div id="map" style="width:800px;height:500px;">
-                Map
-                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2fBiU-KdwozQVPPLeB_IW0y26-zwthaQ&maps_ids=ca3e1b773e1fd477&callback=initMap"></script>
+                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2fBiU-KdwozQVPPLeB_IW0y26-zwthaQ&maps_ids=ca3e1b773e1fd477&callback=initMaps"></script>
                 <!-- https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyAz32WUfTmcByLCFFmeKQ20wktlZkPyZhI-->
             </div>
             <div id="list">
+                <div><h3 style="text-align:center">Donation List</h3></div>
+                
+                <div id="pageButtonContainer">
+                    <button onclick="previousPage()" id="pPage" class="btn btn-info"><</button>
+                    <button onclick="nextPage()" id="nPage" class="btn btn-info">></button>
+                </div>
                 @if (Model.CFD.Count() == 0)
                 {
                     <p>No Cooked Food In List</p>
                 }
                 else
                 {
-                    
+
                     @foreach (var item in Model.CFD)
                     {
 
@@ -86,11 +90,9 @@
 
 
                 }
-                <div id="pageButtonContainer">
-                    <button onclick="previousPage()" id="pPage"><</button>
-                    <button onclick="nextPage()" id="nPage">></button>
-                </div>
+
             </div>
+            
         </div>
         
  
