@@ -143,12 +143,17 @@
 #HistoryContainer
 {
     display:none;
+    width:100%;
+    position:relative;
 }
-#ReservationContainer
-{
-    display:flex;
-    flex-direction:column;
+#HistoryContainer:first-child {
+        width: 100%;
+
 }
+    #ReservationContainer {
+        display: flex;
+        flex-direction: column;
+    }
 .ReservationTitle
 {
     color:black;
