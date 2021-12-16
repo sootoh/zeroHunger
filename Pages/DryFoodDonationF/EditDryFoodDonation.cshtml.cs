@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -25,9 +26,11 @@ namespace ZeroHunger.Pages.DryFoodDonationF
         }
         public async Task<IActionResult> OnPost()
         {
+            var User = await _db.User.FindAsync(DFD.donorid);
+            
             if (ModelState.IsValid)
             {
-                var DFDFromDb = await _db.DryFoodDonation.FindAsync(DFD.Id);
+                DryFoodDonation DFDFromDb= await _db.DryFoodDonation.FindAsync(DFD.Id);
                 DFDFromDb.DryFoodName = DFD.DryFoodName;
                 DFDFromDb.DryFoodQuantity= DFD.DryFoodQuantity;
                 DFDFromDb.DryFoodPickDate = DFD.DryFoodPickDate;
@@ -37,7 +40,7 @@ namespace ZeroHunger.Pages.DryFoodDonationF
             }
             else
             {
-                return RedirectToPage();
+                return Page();
             }
         }
         
