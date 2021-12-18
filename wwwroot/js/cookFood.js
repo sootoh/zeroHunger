@@ -1,4 +1,4 @@
-﻿var foodTable;
+var foodTable;
 
 $(document).ready(function () {
     loadFoodTable();
@@ -12,14 +12,14 @@ function loadFoodTable() {
             "datatype": "json"
         },
         "columns": [
-            
+
             /*{ "data": "cookID", "width": "5%" },*/
             { "data": "cookName", "width": "8%" },
             { "data": "cookQuantity", "width": "5%" },
-            
+
             //{ "data": "cookLongtitude", "width": "5%" },
             //{ "data": "cookLatitude", "width": "5%" },
-            
+
             {
                 "data": "openDate",
                 "render": function (data) {
@@ -59,7 +59,7 @@ function loadFoodTable() {
                         "<br>" + hours + ":" + min;
                 }, "width": "8%"
             },
-           /* {"data":"remainQuantity"},*/
+
             {
                 "data": "cookID",
                 "render": function (data, type,row) {
@@ -72,6 +72,7 @@ function loadFoodTable() {
                             <i class="bi bi-plus-circle"></i></a></div>` ;
                 }, "width": "13%"
             },
+
             { "data": "reservation", "width": "5%" },
             { "data": "shopName", "width": "10%" },
             {
@@ -82,7 +83,7 @@ function loadFoodTable() {
                  Edit <i class="bi bi-pencil-square"></i>
                         </a>
                         <a class='btn btn-info text-white' style='cursor:pointer; width:90px;margin-bottom:5px;'
-                             onclick=End('/api/cookfood?id='+${data})>
+                             onclick=End('/api/cookfood/End?endID='+${data})>
                             End <i class="bi bi-x-octagon"></i>
                         </a>
                         <a class='btn btn-danger text-white' style='cursor:pointer; width:90px;margin-bottom:5px;'
@@ -99,6 +100,7 @@ function loadFoodTable() {
         "width": "100%"
     });
 }
+
 
 
 function Add(url) {
@@ -153,7 +155,6 @@ function Minus(url) {
         }
     });
 }
-
 
 function End(url) {
     swal({
