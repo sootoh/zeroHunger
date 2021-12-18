@@ -64,6 +64,7 @@
     </thead>
     <tbody>
     @foreach(var obj in Model.MyDeliveries){
+        @if((int)@obj.DeliveryStatus!= 4){
         <tr>
             <td>@obj.Receiver.UserName</td>
             <td>@obj.Receiver.UserPhone</td>
@@ -106,7 +107,7 @@
                <td></td>     
             }
             </tr>
-        }
+        }}
     </tbody>
 </table>
 
