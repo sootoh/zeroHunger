@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using ZeroHunger.Data;
 using ZeroHunger.Model;
@@ -16,11 +17,33 @@ namespace ZeroHunger.Pages
 
         }
         public Receiver application { get; set; }
-        [BindProperty]
         public User user { get; set; }
         public string message { get; set; } = "";
+        public string emailBody { get; set; } = "";
 
-        public async Task OnGetAsync(string? id)
+        public static void SendEmail(string emailbody, string userEmail)
+        {
+            // Specify the from and to email address
+            MailMessage mailMessage = new MailMessage("vtechzerohunger@gmail.com", userEmail);
+            // Specify the email body
+            mailMessage.Body = emailbody;
+            // Specify the email Subject
+            mailMessage.Subject = "Your application is approved!";
+
+            // Specify the SMTP server name and post number
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            // Specify your gmail address and password
+            smtpClient.Credentials = new System.Net.NetworkCredential()
+            {
+                UserName = "vtechzerohunger@gmail.com",
+                Password = "ad_0hunger"
+            };
+            // Gmail works on SSL, so set this property to true
+            smtpClient.EnableSsl = true;
+            // Finall send the email message using Send() method
+            smtpClient.Send(mailMessage);
+        }
+        public async Task<IActionResult> OnGetAsync(string? id)
         {
             application= new Receiver();
             user= new User();
@@ -51,11 +74,25 @@ namespace ZeroHunger.Pages
 
                 await _db.SaveChangesAsync();
 
+                emailBody = "We appreciate you taking the time to apply as a receiver to ZeroHunger. "
+                    + "We are pleased to tell you that your application is approved.\\"
+                    + "Please login to your account with the following information:\\"
+                    + "Email: " + application.receiverEmail
+                    + "\\Password: 123"
+                    + "\\https://localhost:44306/login";
+
+                SendEmail(emailBody, application.receiverEmail);
+
                 message = "The application is approved. An email is sent to the applicant's e-mail address. " +
                     "email: " + application.receiverEmail + " " +
                     "password: " + "123";
+                TempData["alertMessage"] = "The application is approved. An email is sent to the applicant." +
+                    "email: " + application.receiverEmail + " " +
+                    "password: " + "123";
+                return RedirectToPage("Index");
             }
-            
+            message = "Error!";
+            return RedirectToPage();
 
         }
     }

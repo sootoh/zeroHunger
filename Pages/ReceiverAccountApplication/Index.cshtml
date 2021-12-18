@@ -9,6 +9,12 @@
         
     </head>
     <body >
+    @if(null != TempData["alertMessage"])
+               {
+                  <script type="text/javascript">
+                   alert('@TempData["alertMessage"]');
+                  </script>
+               }
     <div class="container row p-0 m-0">
         <div class="col-9">
             <h2>Receiver Account Application List</h2>
