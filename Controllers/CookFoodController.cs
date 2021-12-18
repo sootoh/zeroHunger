@@ -68,5 +68,36 @@ namespace ZeroHunger.Controllers
 
             return Json(new { success = true, message = "Ended Successfully" });
         }
+        
+        
+        [HttpPost]
+        public async Task<IActionResult> Add(int addID)
+        {
+            var cookFromDb = await _db.CookedFoodDonation.FirstOrDefaultAsync(u => u.CookID == addID);
+
+            if (cookFromDb == null)
+            {
+                return Json(new { success = false, message = "Error while Increasing" });
+            }
+            cookFromDb.RemainQuantity += 1;
+            await _db.SaveChangesAsync();
+
+            return Json(new { success = true, message = "Increased Successfully" });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Minus(int minusID)
+        {
+            var cookFromDb = await _db.CookedFoodDonation.FirstOrDefaultAsync(u => u.CookID == minusID);
+            
+            if (cookFromDb == null)
+            {
+                return Json(new { success = false, message = "Error while Decreasing" });
+            }
+            cookFromDb.RemainQuantity -= 1;
+            await _db.SaveChangesAsync();
+
+            return Json(new { success = true, message = "Decreased Successfully" });
+        }
     }
 }
