@@ -53,24 +53,25 @@ namespace ZeroHunger.Controllers
             
             return Json(new { success = true, message = "Delete successful" });
         }
-        
+
         [HttpPost]
-        public async Task<IActionResult> End(int id)
+        [Route("[action]")]
+        public async Task<IActionResult> End(int endID)
         {
-            var cookFromDb = await _db.CookedFoodDonation.FirstOrDefaultAsync(u => u.CookID == id);
-            cookFromDb.RemainQuantity = 0;
+            var cookFromDb = await _db.CookedFoodDonation.FirstOrDefaultAsync(u => u.CookID == endID);
+
             if (cookFromDb == null)
             {
                 return Json(new { success = false, message = "Error while Ending" });
             }
-            
+            cookFromDb.RemainQuantity = 0;
             await _db.SaveChangesAsync();
 
             return Json(new { success = true, message = "Ended Successfully" });
         }
-        
-        
+
         [HttpPost]
+        [Route("[action]")]
         public async Task<IActionResult> Add(int addID)
         {
             var cookFromDb = await _db.CookedFoodDonation.FirstOrDefaultAsync(u => u.CookID == addID);
@@ -86,6 +87,7 @@ namespace ZeroHunger.Controllers
         }
 
         [HttpPost]
+        [Route("[action]")]
         public async Task<IActionResult> Minus(int minusID)
         {
             var cookFromDb = await _db.CookedFoodDonation.FirstOrDefaultAsync(u => u.CookID == minusID);
