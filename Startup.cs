@@ -78,7 +78,7 @@ namespace ZeroHunger
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -89,7 +89,7 @@ namespace ZeroHunger
             });
 
 
-            app.UseSession();
+            
         }
     }
 }
