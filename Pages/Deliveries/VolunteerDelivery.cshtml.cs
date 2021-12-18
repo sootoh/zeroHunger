@@ -45,5 +45,17 @@ namespace ZeroHunger.Pages.Deliveries
             TempData["success"] = "Delivery request completed successfully";
             return RedirectToPage("VolunteerDelivery");
         }
+        
+        public async Task<IActionResult> OnPostReject(int id)
+        {
+            Delivery = await _db.Delivery.FindAsync(id);
+            Delivery.DeliveryStatus = (DeliveryStatus)4;
+            Delivery.VolunteerID = 0;
+            Delivery.Volunteer = null;
+            _db.Delivery.Update(Delivery);
+            await _db.SaveChangesAsync();
+            TempData["success"] = "Delivery request rejected successfully";
+            return RedirectToPage("VolunteerDelivery");
+        }
     }
 }
