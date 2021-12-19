@@ -29,16 +29,9 @@ namespace ZeroHunger.Pages.Deliveries
             ReceiverList = new SelectList(bitems, "UserID", "UserName");
 
             Delivery = _db.Delivery.Find(id);
-            //Category = _db.Category.FirstOrDefault(u=>u.Id==id);
-            //Category = _db.Category.SingleOrDefault(u=>u.Id==id);
-            //Category = _db.Category.Where(u => u.Id == id).FirstOrDefault();
         }
         public async Task<IActionResult> OnPost()
         {
-            /*if (Delivery.Name == Delivery.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("Category.Name", "The DisplayOrder cannot exactly match the Name.");
-            }*/
             if (ModelState.IsValid)
             {
                 _db.Delivery.Update(Delivery);
