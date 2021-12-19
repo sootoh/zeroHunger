@@ -79,7 +79,7 @@ function loadFoodTable() {
                 "data": "cookID",
                 "render": function (data) {
                     return `<div class="text-center">
-                        <a href="/CookFoodPage/EditCookFood?id=${data}" class='btn btn-success text-white' style='cursor:pointer; width:90px; margin-bottom:5px;'>
+                        <a href='/CookFoodPage/EditCookFood?id=${data}' class='btn btn-success text-white' style='cursor:pointer; width:90px; margin-bottom:5px;'>
                  Edit <i class="bi bi-pencil-square"></i>
                         </a>
                         <a class='btn btn-info text-white' style='cursor:pointer; width:90px;margin-bottom:5px;'
@@ -104,14 +104,14 @@ function loadFoodTable() {
 
 
 function Add(url) {
-    swal({
-        title: "Are you sure?",
-        text: "Once ended, the donation will not be displayed on map.",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true
-    }).then((willMinus) => {
-        if (willMinus) {
+    //swal({
+    //    title: "Are you sure?",
+    //    text: "Once ended, the donation will not be displayed on map.",
+    //    icon: "warning",
+    //    buttons: true,
+    //    dangerMode: true
+    //}).then((willAdd) => {
+    //    if (willAdd) {
     $.ajax({
         type: "POST",
         url: url,
@@ -125,20 +125,20 @@ function Add(url) {
                     }
                 }
     });
-        }
-        });
+        //}
+        //});
 
 }
 
 function Minus(url) {
-    swal({
-        title: "Are you sure?",
-        text: "Once ended, the donation will not be displayed on map.",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true
-}).then((willMinus) => {
-        if (willMinus) {
+//    swal({
+//        title: "Are you sure?",
+//        text: "Once ended, the donation will not be displayed on map.",
+//        icon: "warning",
+//        buttons: true,
+//        dangerMode: true
+//}).then((willMinus) => {
+//        if (willMinus) {
             $.ajax({
                 type: "POST",
                 url: url,
@@ -152,8 +152,8 @@ function Minus(url) {
                     }
                 }
             });
-        }
-    });
+    //    }
+    //});
 }
 
 function End(url) {
