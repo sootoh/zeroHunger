@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZeroHunger.Model
@@ -7,9 +7,12 @@ namespace ZeroHunger.Model
     {
         [Key]
         public int ItemID { get; set; }
-
+        [Required]
         public int DryFoodID { get; set; }
+        [Required]
         public int DeliveryID { get; set; }
+        [Required]
+        public int Quantity { get; set; }
 
         [ForeignKey("DryFoodID")]
         public virtual DryFoodDonation DryFood { get; set; }
@@ -17,6 +20,5 @@ namespace ZeroHunger.Model
         [ForeignKey("DeliveryID")]
         public virtual Delivery Delivery { get; set; }
 
-        public int Quantity;
     }
 }
