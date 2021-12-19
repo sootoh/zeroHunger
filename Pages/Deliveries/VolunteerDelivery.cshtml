@@ -1,75 +1,121 @@
-using ZeroHunger.Data;
-using ZeroHunger.Model;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using ZeroHunger.Model;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
+@page
+@model ZeroHunger.Pages.Deliveries.VolunteerDeliveryModel
 
-namespace ZeroHunger.Pages.Deliveries
-{
-    public class VolunteerDeliveryModel : PageModel
-    {
-        private readonly ApplicationDbContext _db;
-        public IEnumerable<Delivery> MyDeliveries { set; get; }
-        public List<DeliveryItem> DeliveryItems { set; get; }
-        public IEnumerable<DryFoodDonation> DryFoods { set; get; }
-        [BindProperty]
-        public Delivery Delivery { set; get; }
-        public DeliveryItem DeliveryItem { set; get; }
-        public VolunteerDeliveryModel(ApplicationDbContext db)
-        {
-            _db = db;
-        }
-        public void OnGet()
-        {
-            MyDeliveries = _db.Delivery.Include(d => d.Receiver).Where(r => r.VolunteerID == 2);
+<partial name="_Notification"/>
+
+<div class="container p=3">
+    <div class="row pt-4">
+        <div class="col-9">
+            <h2 class="text-primary">List of Delivery Request</h2>
+        </div>
+    </div>
+</div>
+
+<br/><br/>
+
+<table class="table table-bordered table-striped w-auto" style="text-align:center">
+    <thead>
+        <tr>
+            <th>
+                Receiver Name
+            </th>
+            <th>
+                Receiver Phone
+            </th>
+            <th width="18%">
+                Receiver Address
+            </th>
+            <th width="20%">
+                Dry Food Name
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th width="14%">
+                Delivery Time
+            </th>
+            <th>
+                Delivery Status
+            </th>
+            <th width="5%">
+                Accept
+            </th>
+            <th>
+                Reject
+            </th>
+            <th>
+                Completed
+            </th>
+
+             <!--
+             <th width="14%">
+                Arrival Time
+            </th>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Product Quantity
+            </th>
+            <th width="12%">Accept</th>
+            <th width="11%">Reject</th>
+            <th width="10%">Completed</th>-->
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(var obj in Model.MyDeliveries){
+        <tr>
+            <td>@obj.Receiver.UserName</td>
+            <td>@obj.Receiver.UserPhone</td>
+            <td>@obj.Receiver.UserAdrs1 @obj.Receiver.UserAdrs2</td>
+            <td>10kg Rice <br /> Sugar</td>
+            <td>1 <br />1</td>
+
+            <td>@obj.DeliveryTime</td>
+            <td>@obj.DeliveryStatus</td>
             
-            foreach(var obj in MyDeliveries)
-            {
-                DeliveryItem = _db.DeliveryItem.FirstOrDefault(d => d.DeliveryID == obj.DeliveryID);
-                var deliveryitem = new DeliveryItem();
-                deliveryitem.ItemID = DeliveryItem.ItemID;
-                deliveryitem.DeliveryID = DeliveryItem.DeliveryID;
-                deliveryitem.DryFoodID = DeliveryItem.DryFoodID;
-                deliveryitem.Quantity = DeliveryItem.Quantity;
-                DeliveryItems.Add(deliveryitem);
+            @if(@obj.DeliveryStatus== 0){
+                <td>
+                    <form method="post">
+                    <button type="submit" asp-page-handler="Accept" asp-route-id="@obj.DeliveryID" class="btn btn-success" style="width:100px">Accept &nbsp;<i class="bi bi-check-square-fill"></i></button>
+                    </form>
+                </td>
+                <td>
+                    <form method="post">
+                    <button type="submit" asp-page-handler="Reject" asp-route-id="@obj.DeliveryID" class="btn btn-danger" style="width:100px"> Reject &nbsp;<i class="bi bi-x-square-fill"></i></button>
+                    </form>
+                </td>
+                <td>
+                    <form method="post">
+                    <button type="submit" asp-page-handler="Complete" asp-route-id="@obj.DeliveryID" style="visibility:hidden;width:100px" class="btn btn-warning">Complete &nbsp;<i class="bi bi-check-square-fill"></i></button>
+                    </form>
+                </td>
+             }
+            else if((int)@obj.DeliveryStatus== 1){
+                <td></td>
+                <td></td>
+                <td>
+                    <form method="post">
+                    <button type="submit" asp-page-handler="Complete" asp-route-id="@obj.DeliveryID" class="btn btn-warning" style="width:120px">Complete &nbsp;<i class="bi bi-check-square-fill"></i></button>
+                    </form>
+                </td>
+                }
+            else{
+               <td></td>
+               <td></td>
+               <td></td>     
             }
-            DryFoods = _db.DryFoodDonation;
+            </tr>
         }
+    </tbody>
+</table>
 
-        public async Task<IActionResult> OnPostAccept(int id)
-        {
-            Delivery = await _db.Delivery.FindAsync(id);
-            Delivery.DeliveryStatus = (DeliveryStatus)1;
-            _db.Delivery.Update(Delivery);
-            await _db.SaveChangesAsync();
-            TempData["success"] = "Delivery request accepted successfully";
-            ViewData["GetFunction"] = "Accept";
-            return RedirectToPage("VolunteerDelivery");
-        }
-
-        public async Task<IActionResult> OnPostComplete(int id)
-        {
-            Delivery = await _db.Delivery.FindAsync(id);
-            Delivery.DeliveryStatus = (DeliveryStatus)2;
-            _db.Delivery.Update(Delivery);
-            await _db.SaveChangesAsync();
-            TempData["success"] = "Delivery request completed successfully";
-            return RedirectToPage("VolunteerDelivery");
-        }
-        public async Task<IActionResult> OnPostReject(int id)
-        {
-            Delivery = await _db.Delivery.FindAsync(id);
-            Delivery.DeliveryStatus = (DeliveryStatus)4;
-            Delivery.VolunteerID = 0;
-            Delivery.Volunteer = null;
-            _db.Delivery.Update(Delivery);
-            await _db.SaveChangesAsync();
-            TempData["success"] = "Delivery request rejected successfully";
-            return RedirectToPage("VolunteerDelivery");
-        }
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"></partial>
     }
 }
+
+
+
+
