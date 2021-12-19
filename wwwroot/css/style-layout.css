@@ -6,6 +6,12 @@
  */
 
 /*Layout css starts*/
+.imageThumbnail {
+    object-fit: contain;
+    width: 200px;
+    height: 250px;
+}
+
 .logo {
     height: 60px;
 }
