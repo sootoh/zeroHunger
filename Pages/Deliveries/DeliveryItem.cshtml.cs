@@ -37,12 +37,11 @@ namespace ZeroHunger.Pages.Deliveries
 
         public async Task<IActionResult> OnPost(int itemid)
         {
-            DeliveryItem = await _db.DeliveryItem.FirstOrDefaultAsync(d=>d.ItemID == itemid);
+            List<DeliveryItem> delItemlist = await _db.DeliveryItem.ToListAsync();
+            DeliveryItem = delItemlist.Where(d =>d.ItemID == itemid).FirstOrDefault();
             List<DryFoodDonation> dfdlist = await _db.DryFoodDonation.ToListAsync();
             var dryfood = dfdlist.Where(d => d.Id == DeliveryItem.DryFoodID).FirstOrDefault();
-            //var dryfood = await _db.DryFoodDonation.FirstOrDefaultAsync(d=>d.Id == DeliveryItem.DryFoodID);
             dryfood.DryFoodRemainQuantity += DeliveryItem.Quantity;
-            _db.DryFoodDonation.Update(dryfood);
             _db.DeliveryItem.Remove(DeliveryItem);
             await _db.SaveChangesAsync();
             TempData["success"] = "Delivery Item deleted successfully";
