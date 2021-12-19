@@ -6,19 +6,18 @@
 <div class="container p=3">
     <div class="row pt-4">
         <div class="col-8">
-            <h2 class="text-primary">Manage Delivery Request</h2>
+            <h2 class="text-info">Manage Delivery Request</h2>
         </div>
         <div class="col-4 mt-2">
-            <a asp-page="Create" class="btn btn-info">
+            <a asp-page="Create" class="btn btn-info form-control">
                 <i class="bi bi-pencil-square"></i> &nbsp; Create New Delivery Request
             </a>
         </div>
-    </div>
+    </div>  
 </div>
-
 <br/><br/>
 
-<table class="table table-bordered table-striped" style="text-align:center">
+    <table id="DT_load" class="table table-bordered table-striped" style="text-align:center">
     <thead>
         <tr>
             <th>
@@ -40,24 +39,15 @@
                 Receiver Address
             </th>
             <th width="13%">
-                Dry Food Name
+                Delivery Item
             </th>
-            <th>
-                Quantity
-            </th>
-            <!--
-            <th>
-                Product Name
-            </th>
-            <th>
-                Product Quantity
-            </th>-->
             <th></th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody>    
      @foreach(var obj in Model.Deliveries){
+         if((int)@obj.DeliveryStatus!=4){
         <tr>
             <td>@obj.Volunteer.UserName</td>
             <td>@obj.DeliveryTime</td>
@@ -65,10 +55,11 @@
             <td>@obj.Receiver.UserName</td>
             <td>@obj.Receiver.UserPhone</td>
             <td>@obj.Receiver.UserAdrs1 @obj.Receiver.UserAdrs2</td>
-            <td>10kg Rice <br /> Sugar</td>
-            <td>1 <br />1</td>
-            
-            
+            <td>
+                <a asp-page="DeliveryItem" asp-route-id="@obj.DeliveryID" class="btn btn-info mx-2" style="width:100px">
+                Update &nbsp;<i class="bi bi-pencil-square"></i>
+                </a>
+            </td>
             <td>
                 <a asp-page="Edit" asp-route-id="@obj.DeliveryID" class="btn btn-success mx-2" style="width:80px">
                 Edit &nbsp;<i class="bi bi-pencil-square"></i>
@@ -81,10 +72,37 @@
             </td>
         </tr>
         }
+        else{
+            <tr>
+            <td>Null</td>
+            <td>@obj.DeliveryTime</td>
+            <td>@obj.DeliveryStatus</td>
+            <td>@obj.Receiver.UserName</td>
+            <td>@obj.Receiver.UserPhone</td>
+            <td>@obj.Receiver.UserAdrs1 @obj.Receiver.UserAdrs2</td>
+            <td>
+                <a asp-page="DeliveryItem" asp-route-id="@obj.DeliveryID" class="btn btn-info mx-2" style="width:100px">
+                Update &nbsp;<i class="bi bi-pencil-square"></i>
+                </a>
+            </td>
+            <td>
+                <a asp-page="Edit" asp-route-id="@obj.DeliveryID" class="btn btn-success mx-2" style="width:80px">
+                Edit &nbsp;<i class="bi bi-pencil-square"></i>
+                </a>
+            </td>
+            <td>
+                <a asp-page="Delete" asp-route-id="@obj.DeliveryID" class="btn btn-danger mx-2" style="width:100px">
+                Delete &nbsp;<i class="bi bi-trash-fill"></i>
+                </a>
+            </td>
+        </tr>
+        }}
     </tbody>
-</table>
+</table>         
+
 
 @section Scripts{
+    <!--<script src="~/js/DeliveryList.js"></script>-->
     @{
         <partial name="_ValidationScriptsPartial"></partial>
     }
