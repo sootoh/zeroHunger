@@ -1,4 +1,4 @@
-@page
+@page "{itemid?}"
 @model ZeroHunger.Pages.Deliveries.DeliveryItemModel
 
 <partial name="_Notification"/>
@@ -6,10 +6,10 @@
 <div class="container p=3">
     <div class="row pt-4">
         <div class="col-8">
-            <h2 class="text-info">Manage Delivery Item</h2>
+            <h2 class="text-info">Delivery Item</h2>
         </div>
         <div class="col-4 mt-2">
-            <a asp-page="AddDeliveryItem" asp-route-id="@Model.DeliveryId" class="btn btn-info form-control">
+            <a asp-page="AddDeliveryItem" asp-route-id="@Model.DeliveryId" class="btn btn-info">
                 <i class="bi bi-pencil-square"></i> &nbsp; Add New Delivery Item
             </a>
         </div>
@@ -43,13 +43,12 @@
              }
             <td>@obj.Quantity</td>
             <td>
-                <form method="post">
-                <input value="@obj.ItemID" name="itemid" type="hidden"/>
-                <button type="submit" asp-page="EditDeliveryItem" asp-route-id="@obj.ItemID" class="btn btn-success mx-2" style="width:100px">
-                Edit &nbsp;<i class="bi bi-pencil-square"></i>
-                </button>
+                <a asp-page="EditDeliveryItem" asp-route-id="@obj.ItemID" class="btn btn-success mx-2" style="width:100px">
+                 Edit &nbsp;<i class="bi bi-pencil-square"></i>
+                </a>
                 <br/><br/>
-                <button type="submit" asp-page="DeliveryItem" class="btn btn-danger mx-2" style="width:100px">
+                <form method="post">
+                <button type="submit" asp-page-handler="Delete" asp-route-id="@obj.ItemID" class="btn btn-danger mx-2" style="width:100px">
                 Delete &nbsp;<i class="bi bi-trash-fill"></i>
                 </button>       
                 </form>
@@ -61,15 +60,16 @@
 }
 else
 {
-    <p>No Delivery Item Yet</p>
+    <div class="container p=3">
+    <p class="text-danger"><b>No Delivery Item Yet</b></p>
+    </div>
     
 }
 <br />
-<a asp-page="Index" class="btn btn-secondary" style="width: 150px">Back to Delivery</a>
+<a asp-page="Index" class="btn btn-secondary" style="width:150px;display:block;margin:auto">Back to Delivery</a>
 
 
 @section Scripts{
-    <script src="~/js/DeliveryItem.js"></script>
     @{
         <partial name="_ValidationScriptsPartial"></partial>
     }
