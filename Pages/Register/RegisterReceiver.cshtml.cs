@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using ZeroHunger.Data;
 using ZeroHunger.Model;
@@ -30,6 +31,28 @@ namespace ZeroHunger.Pages.Register
         public string city { get; set; }
         public string state { get; set; }
         public string message { get; set; } = "";
+        public static void SendEmail(string emailbody, string userEmail)
+        {
+            // Specify the from and to email address
+            MailMessage mailMessage = new MailMessage("vtechzerohunger@gmail.com", userEmail);
+            // Specify the email body
+            mailMessage.Body = emailbody;
+            // Specify the email Subject
+            mailMessage.Subject = "We had received your application!";
+
+            // Specify the SMTP server name and post number
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            // Specify your gmail address and password
+            smtpClient.Credentials = new System.Net.NetworkCredential()
+            {
+                UserName = "vtechzerohunger@gmail.com",
+                Password = "ad_0hunger"
+            };
+            // Gmail works on SSL, so set this property to true
+            smtpClient.EnableSsl = true;
+            // Finall send the email message using Send() method
+            smtpClient.Send(mailMessage);
+        }
         public void OnGet()
         {
             salaryGroups = _db.SalaryGroup;
@@ -87,6 +110,20 @@ namespace ZeroHunger.Pages.Register
 
             await _db.Receiver.AddAsync(Application);
             await _db.SaveChangesAsync();
+
+            string emailBody = "Thank you for trusting Zero Hunger. "
+                    + "We had received your application to become a receiver to us. "
+                    + "The below is a summary of your information:\n"
+                    + "Name: " + Application.receiverName
+                    + "\nIC no: " + Application.receiverIC
+                    + "\nOccupation: " + Application.receiverOccupation
+                    + "\nSalary: RM" + Application.receiverSalaryGroup.salaryRange
+                    + "\nPhone No.: " + Application.receiverPhone
+                    + "\nEmail: " + Application.receiverEmail
+                    + "\nAddress: " + Application.receiverAdrs1 + Application.receiverAdrs2
+                    + "\n\nWe will contact you as soon as possible. Please contact us if there is any problem.";
+
+            SendEmail(emailBody, Application.receiverEmail);
 
             //if(Application.receiverFamilyNo == 0)
             //{
