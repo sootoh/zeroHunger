@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using ZeroHunger.Data;
 using Microsoft.EntityFrameworkCore;
@@ -10,16 +10,18 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
 
 namespace ZeroHunger.Controllers
 {
-    [Route("api/delivery")]
+    [Route("api/Delivery")]
     [ApiController]
     public class DeliveryController : Controller
     {
         private readonly ApplicationDbContext _db;
         private readonly IWebHostEnvironment _hostEnvironment;
-        private User loginUser;
+        public Delivery delivery { get; set; }
+        public IEnumerable<Delivery> deliveries { get; set; }
 
         public DeliveryController(ApplicationDbContext db, IWebHostEnvironment hostEnvironment)
         {
@@ -38,9 +40,19 @@ namespace ZeroHunger.Controllers
             }
             else
             {*/
-                //var volunteername =  _db.Delivery.Include(d => d.Receiver).ToListAsync(); , volunteer = volunteername 
-                return Json(new { data = await _db.Delivery.ToListAsync() });
+            //var volunteername =  _db.Delivery.Include(d => d.Receiver).ToListAsync(); , volunteer = volunteername 
+
+            deliveries = await _db.Delivery.ToListAsync();
+            //int.TryParse(HttpContext.Session.GetString("userid"), out uid);
+            //CR = await _db.CookReservation.Where(b => b.userId.Equals(uid)).ToListAsync();
+            foreach (var item in deliveries)
+            {
+
+                item.Volunteer = await _db.User.FindAsync(item.VolunteerID);
+                item.Receiver = await _db.User.FindAsync(item.ReceiverID);
+            }
             
+            return Json(new { data = deliveries });
 
         }
 
