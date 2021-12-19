@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model ZeroHunger.Pages.Deliveries.DeliveryItemModel
 
 <partial name="_Notification"/>
@@ -16,7 +16,7 @@
     </div>  
 </div>
 <br/><br/>
-
+    @if(Model.DeliveryItems.Count()>0){
     <table class="table table-bordered table-striped" style="text-align:center">
     <thead>
         <tr>
@@ -43,8 +43,9 @@
              }
             <td>@obj.Quantity</td>
             <td>
-                <form method="post" asp-route-id="@obj.ItemID">
-                <button class="btn btn-danger mx-2" style="width:100px">
+                <form method="post">
+                <input value="@obj.ItemID" name="itemid" type="hidden"/>
+                <button type="submit" class="btn btn-danger mx-2" style="width:100px">
                 Delete &nbsp;<i class="bi bi-trash-fill"></i>
                 </button>
                 </form>
@@ -52,7 +53,13 @@
         </tr>
         }
     </tbody>
-</table>    
+    </table>
+}
+else
+{
+    <p>No Delivery Item Yet</p>
+    
+}
 <br />
 <a asp-page="Index" class="btn btn-secondary" style="width: 150px">Back to Delivery</a>
 
