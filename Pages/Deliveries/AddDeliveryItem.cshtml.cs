@@ -34,18 +34,12 @@ namespace ZeroHunger.Pages.Deliveries
         {
             if (ModelState.IsValid)
             {
-               
-                //DeliveryItem deliveryitem = new DeliveryItem();
-                //deliveryitem.DeliveryID = D
-                //deliveryitem.DryFoodID = DeliveryItem.DryFoodID;
-                //deliveryitem.Quantity = DeliveryItem.Quantity;
-               
                 await _db.DeliveryItem.AddAsync(DeliveryItem);
                 //Delivery.DeliveryItems.Add(DeliveryItem);
                 var dryfood = _db.DryFoodDonation.Find(DeliveryItem.DryFoodID);
                 dryfood.DryFoodRemainQuantity -= DeliveryItem.Quantity;
+                //_db.DryFoodDonation.Update(dryfood);
                 await _db.SaveChangesAsync();
-                //DeliveryItem.DryFood.DryFoodRemainQuantity -= DeliveryItem.Quantity;
                 TempData["success"] = "Delivery Item added successfully";
                 return RedirectToPage("DeliveryItem");
             }
