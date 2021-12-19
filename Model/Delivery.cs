@@ -18,13 +18,13 @@ namespace ZeroHunger.Model
         [Required]
         [DataType(DataType.DateTime)]
         [Display(Name = "Delivery Time")]
-        public DateTime? DeliveryTime { get; set; }
+        public DateTime DeliveryTime { get; set; }
         public int? VolunteerID { get; set; }
-        public int? ReceiverID { get; set; }
+        public int ReceiverID { get; set; }
         [ForeignKey("Volunteerref")]
         public virtual User? Volunteer { get; set; }
         [ForeignKey("Receiverref")]
-        public virtual User? Receiver { get; set; }
+        public virtual User Receiver { get; set; }
         
     }
 }
