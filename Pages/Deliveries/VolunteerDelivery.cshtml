@@ -26,11 +26,11 @@
                 Receiver Address
             </th>
             <th width="20%">
-                Dry Food Name
+                Delivery Item
             </th>
-            <th>
+            <!--<th>
                 Quantity
-            </th>
+            </th>-->
             <th width="14%">
                 Delivery Time
             </th>
@@ -46,20 +46,6 @@
             <th>
                 Completed
             </th>
-
-             <!--
-             <th width="14%">
-                Arrival Time
-            </th>
-            <th>
-                Product Name
-            </th>
-            <th>
-                Product Quantity
-            </th>
-            <th width="12%">Accept</th>
-            <th width="11%">Reject</th>
-            <th width="10%">Completed</th>-->
         </tr>
     </thead>
     <tbody>
@@ -69,11 +55,13 @@
             <td>@obj.Receiver.UserName</td>
             <td>@obj.Receiver.UserPhone</td>
             <td>@obj.Receiver.UserAdrs1 @obj.Receiver.UserAdrs2</td>
-            <td>10kg Rice <br /> Sugar</td>
-            <td>1 <br />1</td>
-
             <td>@obj.DeliveryTime</td>
             <td>@obj.DeliveryStatus</td>
+            <td>
+                <a asp-page="ViewDeliveryItem" class="btn btn-info mx-2" style="width:100px">
+                View &nbsp;<i class="bi bi-list"></i>
+                </a>
+            </td>
             
             @if(@obj.DeliveryStatus== 0){
                 <td>
@@ -100,13 +88,13 @@
                     <button type="submit" asp-page-handler="Complete" asp-route-id="@obj.DeliveryID" class="btn btn-warning" style="width:120px">Complete &nbsp;<i class="bi bi-check-square-fill"></i></button>
                     </form>
                 </td>
-                }
+             }
             else{
                <td></td>
                <td></td>
                <td></td>     
             }
-            </tr>
+        </tr>
         }}
     </tbody>
 </table>
