@@ -1,7 +1,9 @@
 @page
 @model ZeroHunger.Pages.Deliveries.AddDeliveryItemModel
 
-
+<br />
+<h2 class="text-info">Add Delivery Item</h2>
+<br />
 <form method="post">
         <input hidden asp-for="DeliveryItem.DeliveryID" value="@Model.DeliveryId"/>
         <div class="mb-3">
@@ -14,13 +16,14 @@
             Quantity
             <input id="quantity" asp-for="DeliveryItem.Quantity" min="1" class="form-control" />
         </div>
-         <button type="submit" asp-route-id="@Model.DeliveryId"class="btn btn-primary" style="width:150px;">Add Delivery Item</button>
+         <button type="submit" asp-route-id="@Model.DeliveryId" class="btn btn-primary" style="width:150px;">Add Delivery Item</button>
         <a asp-page="DeliveryItem" class="btn btn-secondary" style="width: 150px;">Back to List</a> 
 </form>
 
 @section Scripts{
     @{
         <script src="~/js/DeliveryItem.js"></script>
+        <partial name="_ValidationScriptsPartial"></partial>
     }
 }
 
