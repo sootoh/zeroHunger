@@ -12,8 +12,10 @@ namespace ZeroHunger.Model
         [Key]
         [Display(Name = "Delivery ID")]
         public int DeliveryID { get; set; }
+        [Required]
         [Display(Name = "Delivery Status")]
         public DeliveryStatus DeliveryStatus { get; set; }
+        [Required]
         [DataType(DataType.DateTime)]
         [Display(Name = "Delivery Time")]
         public DateTime? DeliveryTime { get; set; }
