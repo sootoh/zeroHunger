@@ -1,0 +1,52 @@
+﻿@page
+@model ZeroHunger.Pages.Deliveries.ViewDeliveryItemModel
+@{
+}
+
+<partial name="_Notification"/>
+
+<div class="container p=3">
+    <div class="row pt-4">
+        <div class="col-8">
+            <h2 class="text-info">View Delivery Item</h2>
+        </div>
+    </div>  
+</div>
+<br/><br/>
+    @if(Model.DeliveryItems.Count()>0){
+    <table class="table table-bordered table-striped" style="text-align:center">
+    <thead>
+        <tr>
+            <th>
+                Delivery Item Name
+            </th>
+            <th>
+                Quantity
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+     @foreach(var obj in Model.DeliveryItems){
+            <tr>
+             @foreach(var dryfood in Model.DryFoods){
+                  if(@dryfood.Id == @obj.DryFoodID){
+                        var dryfoodname = @dryfood.DryFoodName;
+                        <td>@dryfoodname</td>
+                        break;
+                    }  
+             }
+            <td>@obj.Quantity</td>
+        </tr>
+        }}
+    </tbody>
+    </table>
+}
+else
+{
+    <p>No Delivery Item Yet</p>
+    
+}
+<br />
+<a asp-page="VolunteerDelivery" class="btn btn-secondary" style="width: 150px">Back to Delivery Request</a>
+
+
