@@ -8,7 +8,7 @@ using ZeroHunger.Model;
 
 namespace ZeroHunger.Pages.Deliveries
 {
-    public class AddDeliveryItemModel : PageModel
+    public class EditDeliveryItemModel : PageModel
     {
         private readonly ApplicationDbContext _db;
         public int DeliveryId { get; set; }
@@ -18,7 +18,7 @@ namespace ZeroHunger.Pages.Deliveries
         public Delivery Delivery { set; get; }
         public SelectList DeliveryItemList { set; get; }
 
-        public AddDeliveryItemModel(ApplicationDbContext db)
+        public EditDeliveryItemModel(ApplicationDbContext db)
         {
             _db = db;
         }
