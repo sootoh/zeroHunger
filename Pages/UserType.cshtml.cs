@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ZeroHunger.Pages
 {
-    public class userTypeModel : PageModel
+    public class UserTypeModel : PageModel
     {
         public void OnGet()
         {
