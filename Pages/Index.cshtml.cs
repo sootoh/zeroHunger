@@ -32,9 +32,12 @@ namespace ZeroHunger.Pages
             if((Request.Cookies["ZeroHungerCookie"]!=null))
                 {
                 User u = _db.User.Where(b => b.UserEmail.Equals(@User.Identity.Name)).FirstOrDefault();
+                if(u!=null)
+                {
                 if (HttpContext.Session.GetString("userid") == null)
                 {
                     HttpContext.Session.SetString("userid", u.UserID.ToString());
+                }
                 }
             }
             //
