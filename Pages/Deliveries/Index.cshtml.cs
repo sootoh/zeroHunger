@@ -20,17 +20,7 @@ namespace ZeroHunger.Pages.Deliveries
         }
         public void OnGet()
         {
-
-            //Deliveries = _db.Delivery.Include(d => d.User);
             Deliveries = _db.Delivery.Include(d => d.Volunteer).Include(d=>d.Receiver);
-
-            //.Include(d=>d.DryFoodDonations)
-
-            /*  .Where(d => d.User.UserType == 2)
-              .AsNoTracking()
-              .ToListAsync();*/
-            //var query = _db.Delivery.Include(c => c.User);
-            //Deliveries = await query.ToListAsync();
         }
     }
 }
