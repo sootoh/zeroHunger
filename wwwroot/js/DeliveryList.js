@@ -5,28 +5,47 @@ $(document).ready(function () {
 });
 
 function loadDataTable() {
-    dataTable = $('#delivery_load').DataTable({
+    dataTable = $('#Delivery_load').DataTable({
         "ajax": {
             "url": "/api/delivery",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            /*"dataSrc": function (data) {
-                for (var i = 0, ien = json.data.length; i < ien; i++) {
-                    json.data[i][0] = '<a href="/message/' + json.data[i][0] + '>View message</a>';
-                },*/
-            { "data": "volunteer.userName","width": "5%" },
-            { "data": "deliveryTime", "width": "10%" },
-            { "data": "deliveryStatus", "width": "2%" },
+            { "data": "volunteer.userName", "width": "5%" },
+            { "data": "deliveryTime", "width": "15%" },
+            {
+                "data": "deliveryStatus",
+                "render": function (data) {
+                    var status;
+                    if (data == 0) {
+                        status = "pending";
+                    }
+                    else if (data == 1) {
+                        status = "incomplete";
+                    }
+                    else if (data == 2) {
+                        status = "complete";
+                    }
+                    else if (data == 3) {
+                        status = "rejected";
+                    }
+                    return status;
+                }, "width": "2%"
+            },
             { "data": "receiver.userName", "width": "5%" },
             { "data": "receiver.userPhone", "width": "5%" },
-            { "data": "receiver.userAdrs1", "width": "15%" },
+            {
+                "data": "receiver.userAdrs1",
+                "render": function (data, type, row) {
+                    return data + ' ' + row.receiver.userAdrs2;
+            }, "width": "15%"
+            },
             {
                 "data": "deliveryID",
                 "render": function (data) {
                     return `<td>
-                        <a href="/Deliveries/DeliveryItem?id=${data}" class='btn btn-info text-white' style='cursor:pointer; width:70px;'>
+                        <a href="/Deliveries/DeliveryItem?id=${data}" class='btn btn-info text-white' style='cursor:pointer; width:100px;'>
                             Update &nbsp;<i class="bi bi-pencil-square"></i>
                         </a>
                         </td>`;
@@ -36,7 +55,7 @@ function loadDataTable() {
                 "data": "deliveryID",
                 "render": function (data) {
                     return `<td>
-                        <a href="/Deliveries/Edit?id=${data}" class="btn btn-success mx-2 text-white" style="cursor:pointer;width:80px">
+                        <a href="/Deliveries/Edit?id=${data}" class="btn btn-success mx-2 text-white" style="cursor:pointer;width:100px">
                         Edit &nbsp;<i class="bi bi-pencil-square"></i>
                         </a>
                         </td>`;
@@ -46,14 +65,14 @@ function loadDataTable() {
                 "data": "deliveryID",
                 "render": function (data) {
                     return `<td>
-                        <a onclick="/api/delivery?id=${data}" class="btn btn-danger mx-2 text-white" style="cursor:pointer;width:100px">
+                        <a class="btn btn-danger mx-2 text-white" style="cursor:pointer;width:100px"
+                           onclick=Delete('/api/delivery?id='+${data})>
                         Delete &nbsp;<i class="bi bi-trash-fill"></i>
                         </a>
                         </td>`;
                 }, "width": "10%"
             }
         ],
-
         "language": {
             "emptyTable": "no data found"
         },
@@ -103,11 +122,3 @@ function Delete(url) {
 
 
 
-/*
-{
-                "data": "Receiver",
-                "render": function () {
-                    return `data.userAdrs1 + data.userAdrs2`;
-                }, "width": "50%"
-            }
-            */
