@@ -49,6 +49,7 @@ function initMaps() {
 
 
     //setMarker(map);
+    var y = document.getElementsByName('itemLat');
     const img =
     {
         url: "../images/markericon.png",
@@ -58,20 +59,18 @@ function initMaps() {
         origin: new google.maps.Point(0, 0),
         // The anchor for this image is the base of the flagpole at (0, 32).
         anchor: new google.maps.Point(0, 32),
-        scaledSize: new google.maps.Size(25,25)
+        scaledSize: new google.maps.Size(25, 25)
     };
-
-    var y = document.getElementsByName('itemLat');
-    for (var i = 0; i <y.length; i++) {
-        var x = { lat: parseFloat(document.getElementsByName('itemLat')[i].value), lng: parseFloat(document.getElementsByName('itemLon')[i].value) };
+    for (var i = 0; i < y.length; i++) {
+        var x = { lat: parseFloat(document.getElementsByName('itemLat')[i].innerHTML), lng: parseFloat(document.getElementsByName('itemLon')[i].innerHTML) };
         console.log(x);
         var marker = new google.maps.Marker(
             {
                 position: x,
                 map,
-                title: "Hello",
-                icon: img
-             });
+                title: document.getElementsByName('itemName')[i].innerHTML,
+                icon:img,
+            });
         var ifw = new google.maps.InfoWindow({
             content: document.getElementsByName('itemName')[i].innerHTML,
         });
@@ -401,6 +400,9 @@ function pageLoading() {
 
     (document.getElementById('pPage')).disabled = true;
     }
+    
+    
+   
 }
 
 //call when client click next page
