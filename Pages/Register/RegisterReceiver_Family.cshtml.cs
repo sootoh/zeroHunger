@@ -63,7 +63,8 @@ namespace ZeroHunger.Pages.Register
             }
             ApplicationFamily.familySalaryGroup = _db.SalaryGroup.Where(i => i.salaryGroupID.Equals(ApplicationFamily.familySalaryGroupID)).Single();
 
-
+            ApplicationFamily.healthStatus = "None";
+            ApplicationFamily.unhealthyHabit = "None";
             
             application= _db.Receiver.Where(i => i.receiverIC.Equals(ApplicationFamily.receiverIC)).Single();
             ApplicationFamily.receiver = _db.Receiver.Where(i => i.receiverIC.Equals(ApplicationFamily.receiverIC)).Single();

@@ -111,7 +111,7 @@ namespace ZeroHunger.Pages.Register
             await _db.Receiver.AddAsync(Application);
             await _db.SaveChangesAsync();
 
-            string emailBody = "Thank you for trusting Zero Hunger. "
+           /* string emailBody = "Thank you for trusting Zero Hunger. "
                     + "We had received your application to become a receiver to us. "
                     + "The below is a summary of your information:\n"
                     + "Name: " + Application.receiverName
@@ -123,7 +123,7 @@ namespace ZeroHunger.Pages.Register
                     + "\nAddress: " + Application.receiverAdrs1 + Application.receiverAdrs2
                     + "\n\nWe will contact you as soon as possible. Please contact us if there is any problem.";
 
-            SendEmail(emailBody, Application.receiverEmail);
+            SendEmail(emailBody, Application.receiverEmail);*/
 
             //if(Application.receiverFamilyNo == 0)
             //{

@@ -81,6 +81,20 @@
 							</span>
 						</div>
 
+						
+						<!--marital status-->
+						<div class="form-row">
+							<select asp-for="application.receiverMarital " name="receiverMarital">
+									<option value="Marital" disabled selected>Marital Status</option>
+									<option value="Single">Single</option>
+									<option value="Married">Married</option>
+									<option value="Divorce">Divorce</option>
+									<option value="Widow">Widow</option>
+									<option value="Widower">Widower</option>
+									<option value="Other">Other</option>
+							</select>
+						</div>
+
 						<!--DOB-->
 						<div class="form-row">
 							DOB<input type="date" asp-for="application.receiverDOB" name="receiverDOB" class="DOB" id="DOB" required>
@@ -109,6 +123,9 @@
 							  		<i class="zmdi zmdi-chevron-down"></i>
 								</span>
 							</div>
+						</div>
+						<div class="form-row">
+							<input type="text" asp-for="application.receiverCompany" name="receiverCompany" class="company" id="company" placeholder="Company or School name">
 						</div>
 
 						<!--family-->
