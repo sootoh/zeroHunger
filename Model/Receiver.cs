@@ -14,7 +14,11 @@ namespace ZeroHunger.Model
         [Required]
         public string receiverDOB { get; set; }
         [Required]
+        public string receiverMarital { get; set; }
+        [Required]
         public string receiverOccupation { get; set; }
+
+        public string receiverCompany { get; set; }
         public int receiverSalaryGroupID { get; set; }
         [ForeignKey("receiverSalaryGroupID")][Required]
         public virtual SalaryGroup receiverSalaryGroup { get; set; }

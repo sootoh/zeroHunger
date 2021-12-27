@@ -11,7 +11,12 @@ namespace ZeroHunger.Model
         public string receiverIC { get; set; }
         [ForeignKey("receiverIC")] [Required]
         public virtual Receiver receiver { get; set; }
-        
+        [Required]
+        public string familyName { get; set; }
+        [Required]
+        public string relationship { get; set; }
+        public string familyCompanyOrSchool { get; set; }
+
         [Required]
         public string familyDOB { get; set; }
         [Required]
@@ -19,6 +24,11 @@ namespace ZeroHunger.Model
         public int familySalaryGroupID { get; set; }
         [ForeignKey("familySalaryGroupID")][Required]
         public virtual SalaryGroup familySalaryGroup { get; set; }
+        [Required]
+        public string healthStatus { get; set; }
+        [Required]
+        public string unhealthyHabit { get; set; }
+        
         
     }
 }
