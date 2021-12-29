@@ -1,10 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using ZeroHunger.Model;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel;
 
 namespace ZeroHunger.Model
 {
@@ -12,8 +14,6 @@ namespace ZeroHunger.Model
     {
         [Key]
         public int UserID { get; set; }
-        //[ForeignKey("FK_User_ToUserType")][Required]
-        //public int? UserType { get; set; }
         public int TypeId { get; set; }
         [ForeignKey("TypeId")]
         public virtual UserType UserType{ get; set; }
@@ -28,12 +28,14 @@ namespace ZeroHunger.Model
         public DateTime UserBirth { get; set; }
         public string UserAdrs1 { get; set; }
         public string UserAdrs2 { get; set; }
-        //public string DonorType { get; set; }
+        [DisplayName("Image")]
+        public string ProfileImage { get; set; }
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
         public bool RememberMe { get; set; }
         [InverseProperty("Volunteer")]
         public ICollection<Delivery> VolunteerDeliveries { get; set; }
         [InverseProperty("Receiver")]
         public ICollection<Delivery> ReceiverDeliveries { get; set; }
-        //public virtual ICollection<Delivery>? Deliveries { set; get; }
     }
 }
