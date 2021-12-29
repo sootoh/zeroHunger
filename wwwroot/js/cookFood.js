@@ -15,7 +15,7 @@ function loadFoodTable() {
 
             /*{ "data": "cookID", "width": "5%" },*/
             { "data": "cookName", "width": "8%" },
-            { "data": "cookQuantity", "width": "5%" },
+            { "data": "cookQuantity", "width": "3%" },
 
             //{ "data": "cookLongtitude", "width": "5%" },
             //{ "data": "cookLatitude", "width": "5%" },
@@ -70,28 +70,28 @@ function loadFoodTable() {
                         ` <a class='btn btn-info text-white' style='cursor:pointer;'
                              onclick=Add('/api/cookfood/Add?addID='+${data})> 
                             <i class="bi bi-plus-circle"></i></a></div>` ;
-                }, "width": "13%"
+                }, "width": "15%"
             },
 
             { "data": "reservation", "width": "5%" },
-            { "data": "shopName", "width": "10%" },
+            { "data": "shopName", "width": "8%" },
             {
                 "data": "cookID",
                 "render": function (data) {
                     return `<div class="text-center">
-                        <a href='/CookFoodPage/EditCookFood?id=${data}' class='btn btn-success text-white' style='cursor:pointer; width:90px; margin-bottom:5px;'>
+                        <a href='/CookFoodPage/EditCookFood?id=${data}' class='btn btn-success text-white' style='cursor:pointer; width:80px;'>
                  Edit <i class="bi bi-pencil-square"></i>
                         </a>
-                        <a class='btn btn-info text-white' style='cursor:pointer; width:90px;margin-bottom:5px;'
+                        <a class='btn btn-info text-white' style='cursor:pointer; width:80px;'
                              onclick=End('/api/cookfood/End?endID='+${data})>
                             End <i class="bi bi-x-octagon"></i>
                         </a>
-                        <a class='btn btn-danger text-white' style='cursor:pointer; width:90px;margin-bottom:5px;'
+                        <a class='btn btn-danger text-white' style='cursor:pointer; width:100px;'
                              onclick=Delete('/api/cookfood?id='+${data})>
                Delete <i class="bi bi-trash-fill"></i>
                         </a>
                         </div>`;
-                }, "width": "30%"
+                }, "width": "45%"
             }
         ],
         "language": {
