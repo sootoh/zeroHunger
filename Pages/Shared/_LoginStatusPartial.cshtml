@@ -1,4 +1,4 @@
-﻿<head>
+<head>
     <style>
         .a{
             display:inline-block;
@@ -9,6 +9,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {
+    <a class="nav-link nav-item" style="color:#ff9494;" asp-page="/profile"><i class="fa fa-2x fa-user-circle"></i></a>
     <form method="post" class="form-inline" asp-page="/Logout">
         Welcome @User.Identity.Name
         <button type="submit" class="ml-2 btn btn-link">Logout</button>
@@ -16,6 +17,7 @@
 }
 else
 {
+    
     <a class="nav-link nav-item" style="color:#ff9494;" asp-page="/login">Login</a>
    <a class="nav-link nav-item" style="color:#ff9494;" asp-page="/UserType">Register</a>
 }
