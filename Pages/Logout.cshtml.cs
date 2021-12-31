@@ -10,6 +10,11 @@ namespace ZeroHunger.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             await HttpContext.SignOutAsync("ZeroHungerCookie");
+            if(Request.Cookies["role"]!=null)
+            {
+                Response.Cookies.Delete("role");
+                Response.Cookies.Delete("userid");
+            }
             return RedirectToPage("/login");
         }
     }
