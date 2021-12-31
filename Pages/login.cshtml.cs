@@ -76,6 +76,13 @@ namespace ZeroHunger.Pages
                         name = obj.UserName.ToString();
                         //HttpContext.Session.SetString("username", name);
                         //Session["UserName"] = user.UserName;
+                        
+                    CookieOptions option = new CookieOptions();
+                    if(obj.TypeId!=null)
+                    Response.Cookies.Append("role", obj.TypeId.ToString(), option);
+                    if (obj.UserID != null)
+                    Response.Cookies.Append("userid", obj.UserID.ToString(), option);
+                    
                         var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, user.UserEmail),
