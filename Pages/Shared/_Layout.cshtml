@@ -23,8 +23,7 @@
 
 
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script src="~/js/function.js"></script>
 </head>
 <body>
@@ -52,7 +51,7 @@
                         @if (Context.Request.Cookies["role"] != null && Context.Request.Cookies["role"].Equals("1")){
                             
                             <div class="nav-item dropdown">
-                            <a  class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">Services</a>
+                            <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">Services</a>
                             <div class="dropdown-menu">
                                 <a href="~/ViewDelivery?id=@Context.Request.Cookies["userid"]" class="dropdown-item">Dry Food Delivery</a>
                                 <a asp-page="/CookFood/Index" class="dropdown-item">Get Cook Food </a>
@@ -62,14 +61,14 @@
                         }else if(Context.Request.Cookies["role"] != null && Context.Request.Cookies["role"].Equals("2")){
 
                         <div class="nav-item dropdown">
-                            <a  class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">Services</a>
+                            <a  href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">Services</a>
                             <div class="dropdown-menu">
                                 <a asp-page="/Deliveries/VolunteerDelivery" class="dropdown-item">Delivery</a>
                             </div>
                         </div>
                         }else if(Context.Request.Cookies["role"] != null && Context.Request.Cookies["role"].Equals("3")){
                         <div class="nav-item dropdown">
-                            <a  class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">Services</a>
+                            <a  href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">Services</a>
                             <div class="dropdown-menu">
                                 <a asp-page="/CookFoodPage/AddCookFood" class="dropdown-item">Donate Cook Food</a>
                                 <a href="/DryFoodDonationF/Index" class="dropdown-item">Donate Dry Food</a>
@@ -166,7 +165,7 @@
             });
         }
     </script>
-
+    
 
     @await RenderSectionAsync("Scripts", required: false)
 
