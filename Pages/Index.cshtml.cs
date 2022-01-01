@@ -42,7 +42,7 @@ namespace ZeroHunger.Pages
             }
             //
             //HttpContext.Session.setString("userid", User.Identity.Name);
-            products = await _db.ProductInNeed.Where(e => e.visibility == "Visible").ToListAsync();
+            products = await _db.ProductInNeed.ToListAsync();
         }
     }
 }
