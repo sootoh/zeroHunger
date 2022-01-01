@@ -2,7 +2,7 @@
 @model ZeroHunger.Pages.ProductInNeedList.UpdateModel
 @{
     ViewData["Title"] = "Update";
-    var photopath="~/images/"+Model.product.image;
+    var photopath="../images/"+Model.product.image;
 }
 <head>
     <link type="text/css" href="~/css~/css/style-layout.css" />
@@ -50,26 +50,15 @@
             <span asp-validation-for="product.amount" class="text-danger"></span>
         </div>
         
-        <div class="form-group row">
-            <div class="col-4">
-                <label asp-for="product.visibility">Visibility</label>
-            </div>
-            <div class="col-6">
-                <select asp-for="product.visibility" class="form-control" required>
-                    <option selected value="Visible">Visible</option>
-                    <option value="Invisible">Invisible</option>
-                </select>
-            </div>
-            <span asp-validation-for="product.visibility" class="text-danger"></span>
-        </div>
+        
         <input asp-for="product.image" type="hidden"/>
         <div class="form-group row">
             <div class="col-4">
                 <label>New Image</label>
             </div>
             <div class="col-6">
-                <input asp-for="ImageFile" class="custom-file-input" accept="image/*" >
-                <label class="custom-file-label">Upload New Image (Optional)</label>
+                <input asp-for="ImageFile" class="custom-file-input" accept="image/*" id="image_input" >
+                <label class="custom-file-label" id="imgupload">Upload New Image (Optional)</label>
             </div>
             <span asp-validation-for="ImageFile" class="text-danger"></span>
         </div>
@@ -78,8 +67,8 @@
             <div class="col-4">
                 <label>Image In Database</label>
             </div>
-            <div class="col-6">
-                <img class="imageThumbnail"  src="@photopath" asp-append-version="true"/>
+            <div class="col-6" id="display_image" style="background-image: url(@photopath);  background-size: contain; width: auto; height: 300px;border: 1px solid black;  background-position: center; background-repeat:no-repeat;">
+                <!--<img id="imageThumbnail" class="imageThumbnail"  src="@photopath" asp-append-version="true"/>-->
             </div>
             
         </div>
@@ -100,17 +89,28 @@
     </form>
 </div>
 <div></div>
+<script>
+    const image_input = document.querySelector("#image_input");
+    image_input.addEventListener("change", function() {
+    
+       const reader = new FileReader();
+       reader.addEventListener("load", () => {
+       const uploaded_image = reader.result;
+       document.querySelector("#display_image").style.backgroundImage = `url(${uploaded_image})`;
+    });
+       reader.readAsDataURL(this.files[0]);
+       var image=document.getElementById("image_input");
+       document.getElementById("imgupload").innerHTML=image.value.split("\\").pop();
+    });
+
+
+    
+
+</script>
 
 @section Scripts{
     <partial-name ="_ValidationScriptsPartial" />
-        <script>
-        $document.ready(function(){
-           $('.custom-file-input').on("change",function(){
-                var filename=$(this).val().split("\\").pop();
-                $(this).next('.custom-file-label').html(filename);
-           }); 
-        });
-        </script>
+       
    
     
 }
