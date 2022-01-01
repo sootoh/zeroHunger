@@ -16,8 +16,6 @@ function loadDataTable() {
             { "data": "product_name", "width": "10%" },
             { "data": "product_description", "width": "10%" },
             { "data": "amount", "width": "5%" },
-           
-            { "data": "visibility", "width": "5%" },
             { "data": "image", "width": "5%" },
             {
                 "data": "product_id",
