@@ -62,7 +62,7 @@ namespace ZeroHunger.Pages.ProductInNeedList
                     productFromDB.product_description = product.product_description;
 
                 productFromDB.amount = product.amount;
-                productFromDB.visibility = product.visibility;
+                
 
                 if (ImageFile != null)
                 {
