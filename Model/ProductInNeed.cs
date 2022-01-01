@@ -15,16 +15,15 @@ namespace ZeroHunger.Model
         public string product_description { get; set; }
         [Required]
         public int amount { get; set; }
+       
         
-        [Required]
-        public string visibility { get; set; }
         [DisplayName("Image")]
         public string image { get; set; }
-        
-     
-        
-       [NotMapped]
+
+        [NotMapped]
         public IFormFile ImageFile { get; set; }
+
+
 
 
 
