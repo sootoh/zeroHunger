@@ -34,7 +34,11 @@ namespace ZeroHunger.Pages.ProductInNeedList
             if (ImageFile != null)
             {
                 string uploadsFolder = Path.Combine(_hostEnvironment.WebRootPath, "images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(ImageFile.FileName);
+                String filename = ImageFile.FileName;
+                filename = filename.Replace(" ", String.Empty);
+                filename = filename.Replace("\'", String.Empty);
+                filename = filename.Replace("\"", String.Empty);
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(filename);
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
