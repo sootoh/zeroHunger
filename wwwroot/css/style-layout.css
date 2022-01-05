@@ -3712,7 +3712,7 @@ input[type="button"].btn-block {
     .dropdown-item.active, .dropdown-item:active {
         color: #fff;
         text-decoration: none;
-        background-color: #007bff;
+        background-color: #ff8080;
     }
 
     .dropdown-item.disabled, .dropdown-item:disabled {
@@ -4635,7 +4635,7 @@ input[type="button"].btn-block {
     .nav-pills .nav-link.active,
     .nav-pills .show > .nav-link {
         color: #fff;
-        background-color: #007bff;
+        background-color: #ff8080;
     }
 
 .nav-fill .nav-item {
