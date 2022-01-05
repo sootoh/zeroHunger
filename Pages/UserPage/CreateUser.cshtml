@@ -1,6 +1,8 @@
-﻿@page
+@page
 @model ZeroHunger.Pages.UserPage.CreateUserModel
-
+@{
+@if (@HttpContext.Request.Cookies["role"] != null && @HttpContext.Request.Cookies["role"].Equals("4"))
+    {
 <div class="page-content">
     <form method="post" class="form-v10-content">
         <h2 class="text-info" style="text-align:center;margin:0px 10px 30px 10px;">Add User</h2>
@@ -77,6 +79,12 @@
     </form>
 </div>
 <div></div>
+}else{
+<script>
+     alert("Sorry, you are not eligible to enter this page.");
+     location.href = '/Index';
+     </script>
+}}
 
 
 @*<!--
