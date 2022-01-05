@@ -1,8 +1,8 @@
 @page
 @model ZeroHunger.Pages.UserPage.UserViewModel
 @{
-    ViewData["Title"] = "User List";
-}
+@if (@HttpContext.Request.Cookies["role"] != null && @HttpContext.Request.Cookies["role"].Equals("4"))
+    {
 
 <br />
 <div class="container row p-0 m-0">
@@ -39,4 +39,9 @@
     <script src="~/js/userList.js"></script>
 }
 
-
+}else{
+<script>
+     alert("Sorry, you are not eligible to enter this page.");
+     location.href = '/Index';
+     </script>
+}}
