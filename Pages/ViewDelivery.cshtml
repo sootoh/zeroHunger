@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model ZeroHunger.Pages.ViewDeliveryModel
 @{
     var i = 0;
@@ -79,34 +79,30 @@
                         <img src="https://cdn.dribbble.com/users/2459530/screenshots/8029114/media/ec7402c26d95030fd111401b35482144.gif" alt="Waiting..." width="500" >
                         break;
                 }
-
-            }
-            @if (i == 1)
-            {
-                <br/><h1>History</h1><br />
-            }
-            <div class="deliveryitem">
-            <h5>Delivery ID - @obj.DeliveryID</h5>
+                <div class="deliveryitem">
+            <h5>Reference ID - @obj.DeliveryID</h5>
                 @if (obj.DeliveryStatus.ToString() == "Incomplete")
                 {
-                    <span style="font-size:30px;">Pending...</span><br>
+                    <span style="font-size:30px;">On the way...</span><br>
                 }else if(obj.DeliveryStatus.ToString() == "Complete")
                 {
                     <span style="font-size:30px;">Delivered</span><br>
                 }else{
                     <span style="font-size:30px;">Pending...</span><br>
                 }
-                
-            @obj.DeliveryTime<br>
-            
+          
+               <p>Delivery Time: Around @obj.DeliveryTime </p><br>
                 
             </div>
-            
-                    i += 1;
-                
-          
+            }
+            break;
+ 
         }
         }
+        <br />
+        <a href="~/DeliveryHistory?id=@Request.Cookies["userid"]" >
+            <button class="btn btn-primary form-control">View History</button>
+        </a>
 
       
     </div>
