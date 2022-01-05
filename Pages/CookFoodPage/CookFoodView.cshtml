@@ -7,11 +7,12 @@
 
         <br />
         <div class="container row p-0 m-0">
-            <div class="col-8">
+            <div class="col-7">
                 <h2>Cooked Food Donation</h2>
             </div>
-            <div class="col-4">
+            <div class="col-col-5 text-right">
                 <a asp-page="AddCookFood" class="btn btn-info "><i class="bi bi-pencil-square"></i> Donate New Food</a>
+                <button align="center" class="btn btn-danger" onclick="javascript:generatePDF();">Generate PDF</button>
             </div>
             <div class="col-18 border p-3">
 
@@ -40,8 +41,23 @@
         </div>
         <br /><br /><br /><br />
         @section Scripts{
-    <script src="~/js/cookFood.js"></script>
-}
+            <script src="~/js/cookFood.js"></script>
+            <script>
+            function generatePDF(){
+                var table = document.getElementById('pTable').innerHTML;
+                var win = window.open('', '', 'height=100%,width=100%');
+                win.document.write('<html><head><title>Cook Food Donation History</title>');
+                win.document.write('<style> h2{text-align:center;} #printTable{margin-left:auto; margin-right:auto;} th,td{border: 1px solid black;} table,th,td{ border-collapse:collapse; margin:20px auto;} th:last-child,td:last-child{display:none; border:0;} td{text-align:center;}</style>');
+                win.document.write('</head><body>');
+                win.document.write('<h2>Cook Food Donation History</h2>');
+                win.document.write(table);
+                win.document.write('</body></html>');
+                win.document.close();
+                win.print(); 
+                setTimeout(function(){win.close()}, 500);  
+            }
+            </script>  
+        }
     }
     else
     {
