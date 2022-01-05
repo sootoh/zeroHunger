@@ -41,8 +41,16 @@
                     <td>@Html.DisplayFor(Receiver => Model.application.receiverDOB) (@getAge(Model.application.receiverDOB) years old)</td>
                 </tr>
                 <tr>
+                    <th>Marital Status</th>
+                    <td>@Html.DisplayFor(Receiver => Model.application.receiverMarital)</td>
+                </tr>
+                <tr>
                     <th>Occupation</th>
                     <td>@Html.DisplayFor(Receiver => Model.application.receiverOccupation)</td>
+                </tr>
+                <tr>
+                    <th>School or Company</th>
+                    <td>@Html.DisplayFor(Receiver => Model.application.receiverCompany)</td>
                 </tr>
                 <tr>
                     <th>Salary (RM)</th>
@@ -60,6 +68,14 @@
                     <th>Address</th>
                     <td>@Html.DisplayFor(Receiver => Model.application.receiverAdrs1)
                         <br>@Html.DisplayFor(Receiver => Model.application.receiverAdrs2)</td>
+                </tr>
+                <tr>
+                    <th>Health Status</th>
+                    <td>@Html.Raw(Model.application.healthStatus )</td>
+                </tr>
+                <tr>
+                    <th>Unhealthy Habit</th>
+                    <td>@Html.Raw(Model.application.unhealthyHabit )</td>
                 </tr>
 
             </table>
@@ -81,9 +97,14 @@
                 <thead>    
                     <tr>
                         <th>IC no</th>
+                        <th>Name</th>
+                        <th>Relationship</th>
                         <th>DOB</th>
                         <th>Occupation</th>
-                        <th>Salary (RM)</th>              
+                        <th>Company or School</th>
+                        <th>Salary (RM)</th>      
+                        <th>Health Status</th>
+                        <th>Unhealthy Habit</th>
                     </tr>
                 </thead>
 
@@ -91,11 +112,58 @@
                     {
                         <tr>
                             <td>@Html.DisplayFor(ReceiverFamily => familyInfo.familyIC)</td>
-                            <td>@Html.DisplayFor(ReceiverFamily => familyInfo.familyDOB) (@getAge(familyInfo.familyDOB) years old)</td>
+                            <td>@Html.DisplayFor(ReceiverFamily => familyInfo.familyName)</td>
+                            <td>@Html.DisplayFor(ReceiverFamily => familyInfo.relationship)</td>
+                            <td>@Html.DisplayFor(ReceiverFamily => familyInfo.familyDOB) <br>(@getAge(familyInfo.familyDOB) years old)</td>
                             <td>@Html.DisplayFor(ReceiverFamily => familyInfo.familyOccupation)</td>
+                            <td>@Html.DisplayFor(ReceiverFamily => familyInfo.familyCompanyOrSchool)</td>
                             <td>@Html.DisplayFor(SalaryGroup => Model.salaryGroups.ElementAt(familyInfo.familySalaryGroupID).salaryRange)</td>
+                            <td>@Html.Raw(familyInfo.healthStatus )</td>
+                            <td>@Html.Raw(familyInfo.unhealthyHabit )</td>
                         </tr>
                     }
+            
+                </table>
+            }
+        </div>
+
+         <br>
+        <div class="col-12 border m-3 p-3">
+            @if(Model.questionnaire==null )
+            {
+                <div class="col-9">
+                    <h5>This applicant did not fill the questionnaire.</h5>
+                </div>
+            }
+            else
+            {
+                <div class="col-9">
+                    <h2>Questionnaire</h2>
+                </div>
+                <table style="text-align:center; width:100%;" class="table table-striped table-bordered">
+                   
+                    <tr>
+                        <th>Date</th>
+                        <td>@Html.Raw( Model.questionnaire.date )</td>
+                    </tr>
+                    <tr>
+                        <th>Reason for application</th>
+                        <td>@Html.Raw( Model.questionnaire.reason )</td>
+                    </tr>
+                    <tr>
+                        <th>Other Sponsorship</th>
+                        <td>@Html.Raw( Model.questionnaire.otherSponsorship )</td>
+                    </tr>
+                    <tr>
+                        <th>Type of Property</th>
+                        <td>@Html.Raw( Model.questionnaire.property )</td>
+                    </tr>
+                    <tr>
+                        <th>Additional Information</th>
+                        <td>@Html.Raw( Model.questionnaire.additional )</td>
+                    </tr>
+               
+                    
             
                 </table>
             }
