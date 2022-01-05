@@ -82,7 +82,9 @@ namespace ZeroHunger.Pages
                     Response.Cookies.Append("role", obj.TypeId.ToString(), option);
                     if (obj.UserID != null)
                     Response.Cookies.Append("userid", obj.UserID.ToString(), option);
-                    
+                    if (obj.UserName != null)
+                        Response.Cookies.Append("name", obj.UserName.ToString(), option);
+                        
                         var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, user.UserEmail),
