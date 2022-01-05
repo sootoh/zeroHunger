@@ -22,23 +22,39 @@ namespace ZeroHunger.Pages
         [BindProperty]
         public ReceiverQuestionnaire questionnaire { get; set; }
         public Receiver receiver { get; set; }
+        [BindProperty]
         public bool property_soHouse { get; set; } = false;
+        [BindProperty]
         public bool property_soHouseRent { get; set; } = false;
+        [BindProperty]
         public string property_soHouseLoan { get; set; }
+        [BindProperty]
         public bool property_rHouse { get; set; } = false;
+        [BindProperty]
         public string property_rHouseLoan { get; set; }
+        [BindProperty]
         public bool car { get; set; } = false;
+        [BindProperty]
         public string carLoan { get; set; }
+        [BindProperty]
         public bool motorcycle { get; set; } = false;
+        [BindProperty]
         public string motorcycleLoan { get; set; }
 
+        [BindProperty]
         public bool relatives { get; set; } = false;
+        [BindProperty]
         public string relativesSponsor { get; set; }
+        [BindProperty]
         public bool adopt { get; set; } = false;
+        [BindProperty]
         public bool otherSponsorships { get; set; } = false;
+        [BindProperty]
         public string otherSponsorshipsSponsor { get; set; }
 
+        [BindProperty]
         public bool partTime { get; set; } = false;
+        [BindProperty]
         public bool willingPartTime { get; set; } = false;
         public void OnGet(string id)
         {
@@ -110,7 +126,7 @@ namespace ZeroHunger.Pages
                 }
                 else
                 {
-                    questionnaire.additional += "15 years old and above children do not work as part time during weekends/ holiday to support family.<br>";
+                    questionnaire.additional += "No 15 years old and above children work as part time during weekends/ holiday to support family.<br>";
                 }
                 if(willingPartTime)
                 {
@@ -127,7 +143,7 @@ namespace ZeroHunger.Pages
             await _db.ReceiverQuestionnaire.AddAsync(questionnaire);
             
             await _db.SaveChangesAsync();
-            return RedirectToPage("/FamilyStatus");
+            return RedirectToPage("FamilyStatus",new { id= questionnaire.receiverIC });
         }
     }
 }
