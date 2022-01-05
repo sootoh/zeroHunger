@@ -34,6 +34,10 @@ namespace ZeroHunger.Model
         [Required]
         public string receiverAdrs2 { get; set; }
         public int applicationStatusID { get; set; } = 0;
+
+        public string healthStatus { get; set; }
+        public string unhealthyHabit { get; set; }
+
         public int? userID { get; set; }
         [ForeignKey("userID")]
         public virtual User? user { get; set; }
