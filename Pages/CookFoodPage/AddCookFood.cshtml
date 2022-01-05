@@ -1,7 +1,9 @@
 @page
 @model ZeroHunger.Pages.CookFoodPage.AddCookFoodModel
-
-<br />
+@{
+@if (@HttpContext.Request.Cookies["role"] != null && @HttpContext.Request.Cookies["role"].Equals("3"))
+{
+    <br />
 <h2 class="text-info">Donate Cook Food</h2>
 <br />
 
@@ -166,3 +168,9 @@
        </form>
 </div>
 <br /><br /><br />
+}else{
+     <script>
+     alert("Sorry, you are not eligible to enter this page.");
+     location.href = '/Index';
+     </script>
+}}
