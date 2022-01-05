@@ -1,7 +1,8 @@
-﻿@page
+@page
 @model ZeroHunger.Pages.CookFoodPage.EditCookFoodModel
 @{
-}
+    @if (@HttpContext.Request.Cookies["role"] != null && @HttpContext.Request.Cookies["role"].Equals("3"))
+    {
 <div class="page-content">
     <form method="post" class="form-v10-content">
         <input asp-for="cookfood.CookID" class="'form-control'" type='hidden'>
@@ -10,14 +11,6 @@
         <div>
             <div class="form-group row">
 
-                 cookfoodFromDB.CookName = cookfood.CookName;
-                cookfoodFromDB.CookQuantity = cookfood.CookQuantity;
-                cookfoodFromDB.CookLongtitude = cookfood.CookLongtitude;
-                cookfoodFromDB.CookLatitude = cookfood.CookLatitude;
-                cookfoodFromDB.OpenDate = cookfood.OpenDate;
-                cookfoodFromDB.CloseDate = cookfood.CloseDate;
-                cookfoodFromDB.Reservation=cookfood.Reservation;
-                cookfoodFromDB.RemainQuantity = cookfood.RemainQuantity;
 
                 <div class="col-4">
                    <label asp-for="cookfood.CookName">Food Name</label>
@@ -166,3 +159,9 @@
     </form>
 </div>
 <div></div>
+}else{
+<script>
+     alert("Sorry, you are not eligible to enter this page.");
+     location.href = '/Index';
+     </script>
+}}
