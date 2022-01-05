@@ -25,7 +25,22 @@
                         <img src="images/carousel-1.jpg" alt="Image">
                     </div>
                     <div class="carousel-text">
-                        <h1>HOL 448 <span> Food Bank!</span></h1>
+                         @if(Request.Cookies["role"] == null)
+                            {
+                                <h1>HOL 448 <span> Food Bank!</span></h1>
+                            }else if(Request.Cookies["role"] != null && Request.Cookies["role"].Equals("1"))
+                            {
+                                <h1>Welcome, <span> User!</span></h1>
+                            }else if(Request.Cookies["role"] != null && Request.Cookies["role"].Equals("2"))
+                            {
+                                <h1>Welcome, <span> Volunteer!</span></h1>
+                            }else if(Request.Cookies["role"] != null && Request.Cookies["role"].Equals("3"))
+                            {
+                                <h1>Welcome, <span> Donor!</span></h1>
+                            }else if(Request.Cookies["role"] != null && Request.Cookies["role"].Equals("4"))
+                            {
+                                <h1>Welcome, <span> Admin!</span></h1>
+                            }
                         <p>
                             Join us today. Share food to the poor needy families. <br>Together, We Love & Care.
                         </p>
