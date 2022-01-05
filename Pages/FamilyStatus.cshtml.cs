@@ -82,6 +82,7 @@ namespace ZeroHunger.Pages
             receiverToUpdate.receiverSalaryGroupID = receiver.receiverSalaryGroupID;
             receiverToUpdate.receiverSalaryGroup = _db.SalaryGroup.Where(i => i.salaryGroupID.Equals(receiverToUpdate.receiverSalaryGroupID)).Single();
             receiverToUpdate.receiverOccupation = receiver.receiverOccupation;
+            receiverToUpdate.receiverCompany = receiver.receiverCompany;
 
             receiverToUpdate.healthStatus = receiver.healthStatus;
             if (receiverToUpdate.healthStatus.Equals("Sick"))
@@ -95,27 +96,24 @@ namespace ZeroHunger.Pages
                 receiverToUpdate.healthStatus += "<br>Medical Cost: RM" + rMCost;
             }
             
-            receiverToUpdate.unhealthyHabit = "<ul>";
+            receiverToUpdate.unhealthyHabit = "";
             if (rSmoking)
             {
-                receiverToUpdate.unhealthyHabit += "<li>Smoking</li>";
+                receiverToUpdate.unhealthyHabit += "Smoking<br>";
             }
             if (rDrinking)
             {
-                receiverToUpdate.unhealthyHabit += "<li>Drinking</li>";
+                receiverToUpdate.unhealthyHabit += "Drinking<br>";
             }
             if (rGambling)
             {
-                receiverToUpdate.unhealthyHabit += "<li>Gambling</li>";
+                receiverToUpdate.unhealthyHabit += "<>Gambling<br>";
             }
-            if (receiverToUpdate.unhealthyHabit.Equals("<ul>"))
+            if (receiverToUpdate.unhealthyHabit.Equals(""))
             {
                 receiverToUpdate.unhealthyHabit = "None";
             }
-            else
-            {
-                receiverToUpdate.unhealthyHabit += "</ul>";
-            }
+
             _db.Receiver.Update(receiverToUpdate);
 
             ReceiverFamily familyToUpdate;
@@ -123,6 +121,7 @@ namespace ZeroHunger.Pages
             {
                 familyToUpdate = _db.ReceiverFamily.Where(j => j.familyIC.Equals(receiverFamilies[i].familyIC)).Single();
                 familyToUpdate.familyOccupation = receiverFamilies[i].familyOccupation;
+                familyToUpdate.familyCompanyOrSchool = receiverFamilies[i].familyCompanyOrSchool;
                 familyToUpdate.familySalaryGroupID = receiverFamilies[i].familySalaryGroupID;
                 familyToUpdate.familySalaryGroup = _db.SalaryGroup.Where(i => i.salaryGroupID.Equals(familyToUpdate.familySalaryGroupID)).Single();
 
@@ -137,27 +136,24 @@ namespace ZeroHunger.Pages
                     familyToUpdate.healthStatus += "<br>Hospital: " + fhospital[i];
                     familyToUpdate.healthStatus += "<br>Medical Cost: RM" + fCost[i];
                 }
-                familyToUpdate.unhealthyHabit = "<ul>";
+                familyToUpdate.unhealthyHabit = "";
                 if (fSmoking[i])
                 {
-                    familyToUpdate.unhealthyHabit += "<li>Smoking</li>";
+                    familyToUpdate.unhealthyHabit += "Smoking<br>";
                 }
                 if (fDrinking[i])
                 {
-                    familyToUpdate.unhealthyHabit += "<li>Drinking</li>";
+                    familyToUpdate.unhealthyHabit += "Drinking<br>";
                 }
                 if (fGambling[i])
                 {
-                    familyToUpdate.unhealthyHabit += "<li>Gambling</li>";
+                    familyToUpdate.unhealthyHabit += "Gambling<br>";
                 }
-                if (familyToUpdate.unhealthyHabit.Equals("<ul>"))
+                if (familyToUpdate.unhealthyHabit.Equals(""))
                 {
                     familyToUpdate.unhealthyHabit = "None";
                 }
-                else
-                {
-                    familyToUpdate.unhealthyHabit += "</ul>";
-                }
+
                 _db.ReceiverFamily.Update(familyToUpdate);
 
 
