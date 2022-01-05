@@ -104,7 +104,8 @@ namespace ZeroHunger.Pages.Register
             Application.receiverAdrs1 = street+" " + additional;
             Application.receiverAdrs2 = zip + " " + city + ", " + state;
             Application.receiverSalaryGroup = _db.SalaryGroup.Where(i => i.salaryGroupID.Equals(Application.receiverSalaryGroupID)).Single();
-
+            Application.healthStatus = "None";
+            Application.unhealthyHabit = "None";
 
             Application.receiverFamilyNo = 0;
 

@@ -54,56 +54,57 @@
 					<h2 style="width:100%; text-align: center;">Family Info</h2>
 					<input type="text" asp-for="applicationFamily.receiverIC" name="receiverFamily" value=Model.application.receiverIC hidden>
 					<table class="form-group" style="text-align:center;">
-					<tr>
-						<th>Relationship</th>
-						<th>Name</th>
-						<th>IC no.</th>
-						<th>DOB</th>
+					<tr style="border:double 2.5px black; border-bottom:solid 1px black;">
+						<th style="border:solid 1px black;">Relationship</th>
+						<th style="border:solid 1px black;">Name</th>
+						<th style="border:solid 1px black;">IC no.</th>
+						<th style="border:solid 1px black;">DOB</th>
 					</tr>
-					<tr>
-						<th>Occupation</th>
-						<th>Salary (RM)</th>
-						<th>Company or School</th>
+					<tr style="border:double 2.5px black; border-top:solid 1px black;">
+						<th style="border:solid 1px black;">Occupation</th>
+						<th style="border:solid 1px black;">Salary (RM)</th>
+						<th style="border:solid 1px black;">Company or School</th>
+						<th style="border:solid 1px black;"></th>
 					</tr>
 					@if(Model.noFamily>0)
 					{
 						@foreach(ReceiverFamily familyInfo in Model.applicationFamilies)
 						{
-							<tr>
-								<td style="color:black;">@Html.DisplayFor(ReceiverFamily => familyInfo.relationship)</td>
-								<td style="color:black;">@Html.DisplayFor(ReceiverFamily => familyInfo.familyName)</td>
-								<td style="color:black;">@Html.DisplayFor(ReceiverFamily => familyInfo.familyIC)</td>
-								<td style="color:black;">@Html.DisplayFor(ReceiverFamily => familyInfo.familyDOB)</td>
+							<tr style="border:double 2.5px black; border-bottom:solid 1px black;">
+								<td style="color:black;border:solid 1px black;">@Html.DisplayFor(ReceiverFamily => familyInfo.relationship)</td>
+								<td style="color:black;border:solid 1px black;">@Html.DisplayFor(ReceiverFamily => familyInfo.familyName)</td>
+								<td style="color:black;border:solid 1px black;">@Html.DisplayFor(ReceiverFamily => familyInfo.familyIC)</td>
+								<td style="color:black;border:solid 1px black;">@Html.DisplayFor(ReceiverFamily => familyInfo.familyDOB)</td>
 							</tr>
-							<tr>
-								<td style="color:black;">@Html.DisplayFor(ReceiverFamily => familyInfo.familyOccupation)</td>
-								<td style="color:black;">@Html.DisplayFor(SalaryGroup => Model.salaryGroups.ElementAt(familyInfo.familySalaryGroupID).salaryRange)</td>
-								<td style="color:black;">@Html.DisplayFor(ReceiverFamily => familyInfo.familyCompanyOrSchool)</td>
+							<tr style="border:double 2.5px black; border-top:solid 1px black;">
+								<td style="color:black;border:solid 1px black;">@Html.DisplayFor(ReceiverFamily => familyInfo.familyOccupation)</td>
+								<td style="color:black;border:solid 1px black;">@Html.DisplayFor(SalaryGroup => Model.salaryGroups.ElementAt(familyInfo.familySalaryGroupID).salaryRange)</td>
+								<td style="color:black;border:solid 1px black;">@Html.DisplayFor(ReceiverFamily => familyInfo.familyCompanyOrSchool)</td>
 							</tr>
 						}
 					}
-							<tr>
-								<td>
+							<tr style="border:double 2.5px black; border-bottom:solid 1px black;">
+								<td style="border:solid 1px black;">
 									<input asp-for="applicationFamily.relationship" type="text" name="relationship" class="relationship" id="relationship" placeholder="Relationship" required>
 								</td>
-								<td>
+								<td style="border:solid 1px black;">
 									<input asp-for="applicationFamily.familyName" type="text" name="familyName" class="name" id="name" placeholder="Name" required>
 								</td>
-								<td>
+								<td style="border:solid 1px black;">
 									<input asp-for="applicationFamily.familyIC" type="text" name="familyIC" class="icNum" id="ic" placeholder="IC No. (no '-')" onblur="validateIC(this.value)" pattern="\d{12}" required>
 								</td>
-								<td>
+								<td style="border:solid 1px black;">
 									<input asp-for="applicationFamily.familyDOB" type="date" name="familyDOB" class="DOB" id="DOB" required>
 								</td>
 							
 							</tr>
-							<tr>
+							<tr style="border:double 2.5px black; border-top:solid 1px black;">
 					
 					   
-							<td>
+							<td style="border:solid 1px black;">
 								<input type="text" asp-for="applicationFamily.familyOccupation" name="familyOccupation" class="occupation" id="occupation" placeholder="Occupation" required>
 							</td>
-							<td>
+							<td style="border:solid 1px black;">
 								<select asp-for="applicationFamily.familySalaryGroupID" name="familySalaryGroupID">
 									<option value="Salary" disabled selected>Salary (RM)</option>
 									@foreach(SalaryGroup salaryGroup in @Model.salaryGroups)
@@ -121,10 +122,10 @@
 							  		<i class="zmdi zmdi-chevron-down"></i>
 								</span>
 							</td>
-							<td>
+							<td style="border:solid 1px black;">
 								<input type="text" asp-for="applicationFamily.familyCompanyOrSchool" name="familyCompanyOrSchool" class="company" id="company" placeholder="Company/School" >
 							</td>
-							<td>
+							<td style="border:solid 1px black;">
 								<div class="form-row-last text-center">
 									<input type="submit" name="register" class="btn btn-info" value="Save" style="cursor:pointer; width:80px; background:#ff8f8f;">
 								</div>
