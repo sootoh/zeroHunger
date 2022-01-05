@@ -46,16 +46,16 @@
                          <a class="nav-link nav-item text-dark" href="#footer">Contact Us</a> 
                          @if(Context.Request.Cookies["role"] != null)
                         {
-                           <a class="nav-link nav-item text-dark" >Profile</a>  
+                           <a class="nav-link nav-item text-dark" asp-page="/profile">Profile</a>  
                         }
                         @if (Context.Request.Cookies["role"] != null && Context.Request.Cookies["role"].Equals("1")){
                             
                             <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">Services</a>
                             <div class="dropdown-menu">
-                                <a href="~/ViewDelivery?id=@Context.Request.Cookies["userid"]" class="dropdown-item">Dry Food Delivery</a>
-                                <a asp-page="/CookFood/Index" class="dropdown-item">Get Cook Food </a>
-                                <a asp-page="/CookFood/Reservation" class="dropdown-item">Cook Food Reservation </a>
+                                <a href="~/ViewDelivery?id=@Context.Request.Cookies["userid"]" class="dropdown-item" onMouseOver="this.style.backgroundColor='#ff8080'" onMouseOut="this.style.backgroundColor='#f8f9fa'">Dry Food Delivery</a>
+                                <a asp-page="/CookFood/Index" class="dropdown-item" onMouseOver="this.style.backgroundColor='#ff8080'" onMouseOut="this.style.backgroundColor='#f8f9fa'">Get Cook Food </a>
+                                <a asp-page="/CookFood/Reservation" class="dropdown-item" onMouseOver="this.style.backgroundColor='#ff8080'" onMouseOut="this.style.backgroundColor='#f8f9fa'">Cook Food Reservation </a>
                             </div>
                         </div>
                         }else if(Context.Request.Cookies["role"] != null && Context.Request.Cookies["role"].Equals("2")){
@@ -63,21 +63,22 @@
                         <div class="nav-item dropdown">
                             <a  href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">Services</a>
                             <div class="dropdown-menu">
-                                <a asp-page="/Deliveries/VolunteerDelivery" class="dropdown-item">Delivery</a>
+                                <a asp-page="/Deliveries/VolunteerDelivery" class="dropdown-item" onMouseOver="this.style.backgroundColor='#ff8080'" onMouseOut="this.style.backgroundColor='#f8f9fa'">Delivery</a>
                             </div>
                         </div>
                         }else if(Context.Request.Cookies["role"] != null && Context.Request.Cookies["role"].Equals("3")){
                         <div class="nav-item dropdown">
                             <a  href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">Services</a>
                             <div class="dropdown-menu">
-                                <a asp-page="/CookFoodPage/AddCookFood" class="dropdown-item">Donate Cook Food</a>
-                                <a href="/DryFoodDonationF/Index" class="dropdown-item">Donate Dry Food</a>
+                                <a asp-page="/CookFoodPage/AddCookFood" class="dropdown-item" onMouseOver="this.style.backgroundColor='#ff8080'" onMouseOut="this.style.backgroundColor='#f8f9fa'">Donate Cook Food</a>
+                                <a href="/CookFoodPage/CookFoodView" class="dropdown-item" onMouseOver="this.style.backgroundColor='#ff8080'" onMouseOut="this.style.backgroundColor='#f8f9fa'">Cook Food Donation History</a>
+                                <a href="/DryFoodDonationF/Index" class="dropdown-item" onMouseOver="this.style.backgroundColor='#ff8080'" onMouseOut="this.style.backgroundColor='#f8f9fa'">Donate Dry Food</a>
                             </div>
                         </div>
                         
                         }else if(Context.Request.Cookies["role"] != null && Context.Request.Cookies["role"].Equals("4"))
                         {
-                            <a class="nav-link nav-item text-dark" asp-area="" asp-page="/admin">Admin</a>
+                            <a class="nav-link nav-item text-dark" asp-area="" asp-page="/admin" >Admin</a>
                         
 
 
