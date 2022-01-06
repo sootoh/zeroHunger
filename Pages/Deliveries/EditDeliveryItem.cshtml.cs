@@ -27,7 +27,7 @@ namespace ZeroHunger.Pages.Deliveries
         {
             DeliveryId = id;
             Delivery = _db.Delivery.Find(id);
-            DeliveryItem = _db.DeliveryItem.Where(d => d.DeliveryID == id);
+            DeliveryItem = (DeliveryItem)_db.DeliveryItem.Where(d => d.DeliveryID == id);
             quantity = DeliveryItem.Quantity;
             var deliveryitems = await _db.DryFoodDonation.ToListAsync();
             DeliveryItemList = new SelectList(deliveryitems, "Id", "DryFoodName");
