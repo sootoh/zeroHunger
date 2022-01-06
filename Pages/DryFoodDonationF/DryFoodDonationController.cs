@@ -33,7 +33,7 @@ namespace ZeroHunger.Pages.DryFoodDonationF
         {
             string uids = HttpContext.Session.GetString("userid");
             List<DryFoodDonation> dfdl = await _db.DryFoodDonation.ToListAsync();
-            dfdl=dfdl.FindAll(x => x.donorid.ToString().Equals(uids));
+            dfdl=dfdl.FindAll(x => x.donorid.ToString().Equals(uids)&&x.DryFoodRemainQuantity!=0);
             return Json(new { data = dfdl });
             
 
