@@ -23,6 +23,7 @@ namespace ZeroHunger.Model
         [Required]
         public string DryFoodRemark { get; set; }
         [Required]
+        public string DeliveryMethod { get; set; }
         public int donorid { get; set; }
         public int? deliveryid { get; set; }
         [ForeignKey("DonorIdfk")]

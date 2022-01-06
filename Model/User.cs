@@ -28,6 +28,8 @@ namespace ZeroHunger.Model
         public DateTime UserBirth { get; set; }
         public string UserAdrs1 { get; set; }
         public string UserAdrs2 { get; set; }
+        public float? latitude { get; set; }
+        public float? longitute { get; set; }
         [DisplayName("Image")]
         public string ProfileImage { get; set; }
         [NotMapped]
