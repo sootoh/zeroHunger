@@ -12,10 +12,11 @@ function loadDataTable() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "dryFoodName", "width": "20%" },
-            { "data": "dryFoodQuantity", "width": "20%" },
-            { "data": "dryFoodPickDate", "width": "20%" },
-            { "data": "dryFoodRemark", "width": "20%" },
+            { "data": "dryFoodName", "width": "16%" },
+            { "data": "dryFoodQuantity", "width": "16%" },
+            { "data": "deliveryMethod", "width": "16%" },
+            { "data": "dryFoodPickDate", "width": "16%" },
+            { "data": "dryFoodRemark", "width": "16%" },
             {
                 "data": "id",
                 "render": function (data) {

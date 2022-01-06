@@ -62,14 +62,10 @@ function loadFoodTable() {
 
             {
                 "data": "cookID",
-                "render": function (data, type,row) {
+                "render": function (data, type, row) {
                     return `<div class="text-center"><a class='btn btn-info text-white' style='cursor:pointer;'
-                             onclick=Minus('/api/cookfood/Minus?minusID='+${data})>
-                            <i class="bi bi-dash-circle"></i></a> `
-                        +  row.remainQuantity +
-                        ` <a class='btn btn-info text-white' style='cursor:pointer;'
-                             onclick=Add('/api/cookfood/Add?addID='+${data})> 
-                            <i class="bi bi-plus-circle"></i></a></div>` ;
+                             href=DonationApplier?cookFood=${data}>` + row.remainQuantity + '</a>';
+                
                 }, "width": "15%"
             },
 
