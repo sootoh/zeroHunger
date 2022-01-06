@@ -21,7 +21,8 @@ namespace ZeroHunger.Pages.DryFoodDonationF
         public IEnumerable<DryFoodDonation> DFD { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            DFD= await _db.DryFoodDonation.ToListAsync();
+            DFD= await _db.DryFoodDonation.Where(b=>b.DryFoodRemainQuantity!=0).ToListAsync();
+            
             string uids = HttpContext.Session.GetString("userid");
             if (uids == null)
             {
