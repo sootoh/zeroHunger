@@ -61,10 +61,10 @@ namespace ZeroHunger.Pages.ReceiverAccountApplication
 
                 await _db.SaveChangesAsync();
 
-                string emailBody = "We appreciate you taking the time to apply as a receiver to ZeroHunger. "
+                /*string emailBody = "We appreciate you taking the time to apply as a receiver to ZeroHunger. "
                     + "However, in order to make the best use of the resources available to us, we had to make the painful decision to refuse your application.";
 
-                SendEmail(emailBody, email);
+                SendEmail(emailBody, email);*/
 
                 message = "The application is removed. An email is sent to the applicant's e-mail address.";
                 TempData["alertMessage"] = "The application is approved. An email is sent to the applicant." +
