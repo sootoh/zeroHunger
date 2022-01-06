@@ -74,14 +74,14 @@ namespace ZeroHunger.Pages
 
                 await _db.SaveChangesAsync();
 
-                emailBody = "We appreciate you taking the time to apply as a receiver to ZeroHunger. "
+                /*emailBody = "We appreciate you taking the time to apply as a receiver to ZeroHunger. "
                     + "We are pleased to tell you that your application is approved.\\"
                     + "Please login to your account with the following information:\\"
                     + "Email: " + application.receiverEmail
                     + "\\Password: 123"
                     + "\\https://localhost:44306/login";
 
-                SendEmail(emailBody, application.receiverEmail);
+                SendEmail(emailBody, application.receiverEmail);*/
 
                 message = "The application is approved. An email is sent to the applicant's e-mail address. " +
                     "email: " + application.receiverEmail + " " +
