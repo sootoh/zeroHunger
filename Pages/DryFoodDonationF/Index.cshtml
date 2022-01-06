@@ -5,8 +5,9 @@
 
 <br />
 <div class="container row p-0 m-0">
-    <div class="col-8">
-        <h2>Dry Food Donation</h2>
+    <div class="col-9">
+        <h4>Dry Food Donation</h4>
+        <a style="font-size:large;color:grey;"asp-page="HistoryDonation">Donation History</a>
     </div>
     <div clss="col-4">
         <a asp-page="AddDryFoodDonation" class="btn btn-info">Create New Donation</a>
@@ -19,6 +20,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Quantity</th>
+                    <th>Delivery Method</th>
                     <th>Pick Up Date</th>
                     <th>Remark</th>
                     <th></th>
@@ -48,64 +50,5 @@
     }
 
     
-    @*<form method="Post">
-            @if (Model.DFD.Count() > 0)
-            {
-                <table class="table table-striped border">
-                    <tr class="table-secondary">
-                        <th>
-                            <label asp-for="DFD.FirstOrDefault().DryFoodName">Food Name</label>
-                        </th>
-                        <th>
-                            <label asp-for="DFD.FirstOrDefault().DryFoodQuantity">Quantity</label>
-                        </th>
-                        <th>
-                            <label asp-for="DFD.FirstOrDefault().DryFoodPickDate">Pick-up Date</label>
-                        </th>
-                        <th>
-                            <label asp-for="DFD.FirstOrDefault().DryFoodRemark">Remark</label>
-                        </th>
-                        <th>
-                            <label asp-for="DFD.FirstOrDefault().deliverer_Id">Deliverer</label>
-                        </th>
-                    </tr>
-                    @foreach (var item in Model.DFD)
-                    {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(m => item.DryFoodName)
-
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.DryFoodQuantity)
-
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.DryFoodPickDate)
-
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.DryFoodRemark)
-
-                    </td>
-                    <td>
-
-                        @Html.DisplayFor(m => item.deliverer_Id)
-
-                    </td>
-
-                    <td>
-
-                        <a class="btn btn-success btn-sm text-white" asp-page="EditDryFoodDonation" asp-route-Id="@item.Id">Edit</a>
-                    </td>
-                </tr>
-                    }
-                </table>
-            }
-            else
-            {
-                <p> No Donation</p>
-            }
-        </form>*@
-    @*</div>*@
+   
 </div>
