@@ -41,6 +41,7 @@
         </div>
         @section Scripts{
             <script src="~/js/RAAList.js"></script>
+	    <script>
 	    function generatePDF() {
                 var pTable = document.getElementById('printTable').innerHTML;
                 var win = window.open('', '', 'height=100%,width=100%');
@@ -54,6 +55,7 @@
                 win.print(); 
                 setTimeout(function(){win.close()}, 500);  
         	}
+	    </script>
         }
     </body>
 }
