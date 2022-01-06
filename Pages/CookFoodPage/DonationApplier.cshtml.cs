@@ -29,7 +29,11 @@ namespace ZeroHunger.Pages.CookFoodPage
             int cid;
             int.TryParse(Request.Query["cookFood"], out cid);
             CR = await _db.CookReservation.Where(b => b.cookId.Equals(cid)).ToListAsync();
+     
             int index = 0;
+            int c = CR.Count;
+            if(c!=0)
+             { 
             foreach (var item in CR)
             {
                 item.reservationRefCook = await _db.CookedFoodDonation.FindAsync(item.cookId);
@@ -45,7 +49,7 @@ namespace ZeroHunger.Pages.CookFoodPage
 
               
             }
-
+            }
 
 
 
