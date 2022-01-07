@@ -141,6 +141,12 @@ namespace ZeroHunger.Pages
             questionnaire.date = Date.Now.ToString();
 
             await _db.ReceiverQuestionnaire.AddAsync(questionnaire);
+
+            if(receiver.applicationStatusID == 2)
+            {
+                receiver.applicationStatusID = 3;
+                _db.Receiver.Update(receiver);
+            }
             
             await _db.SaveChangesAsync();
             return RedirectToPage("FamilyStatus",new { id= questionnaire.receiverIC });
