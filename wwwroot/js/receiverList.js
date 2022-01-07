@@ -36,7 +36,7 @@ function loadDataTable() {
                     if (data == 2) {
                         return "Seen";
                     }
-                    else if (data == 1) {
+                    else if (data == 3) {
                         return "New Updates!";
                     }
                 }
