@@ -107,7 +107,7 @@ namespace ZeroHunger.Pages
             }
             if (rGambling)
             {
-                receiverToUpdate.unhealthyHabit += "<>Gambling<br>";
+                receiverToUpdate.unhealthyHabit += "Gambling<br>";
             }
             if (receiverToUpdate.unhealthyHabit.Equals(""))
             {

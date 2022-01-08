@@ -102,7 +102,7 @@ namespace ZeroHunger.Pages
                     }
                     else
                     {
-                        questionnaire.property += "*is able to rent out spare room<br>";
+                        questionnaire.property += "*not able to rent out spare room<br>";
                     }
 
                 }
@@ -127,15 +127,16 @@ namespace ZeroHunger.Pages
                 else
                 {
                     questionnaire.additional += "No 15 years old and above children work as part time during weekends/ holiday to support family.<br>";
+                    if (willingPartTime)
+                    {
+                        questionnaire.additional += "*Willing to let them work part-time<br>";
+                    }
+                    else
+                    {
+                        questionnaire.additional += "*Not willing to let them work part-time<br>";
+                    }
                 }
-                if(willingPartTime)
-                {
-                    questionnaire.additional += "*Willing to let them work part-time<br>";
-                }
-                else
-                {
-                    questionnaire.additional += "*Not willing to let them work part-time<br>";
-                }
+                
             }
 
             questionnaire.date = Date.Now.ToString();
