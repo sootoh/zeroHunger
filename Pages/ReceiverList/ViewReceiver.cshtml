@@ -10,6 +10,12 @@
     </head>
 
     <body>
+    @if(null != TempData["alertMessage"])
+               {
+                  <script type="text/javascript">
+                   alert('@TempData["alertMessage"]');
+                  </script>
+               }
     <div class="container row p-0 m-0">
         <div class="col-3">
             <a asp-page="Index" class="btn btn-info">
@@ -168,7 +174,18 @@
                 </table>
             }
         </div>
+        <div class="col-12 m-3 p-3 text-center">
         
+        
+            <a href="/ReceiverList/ViewReceiver?id=@Model.receiver.receiverIC&action=email" class='btn btn-success text-white' style='cursor:pointer; width:40%;'>
+                Send Questionnaire
+            </a>
+            &nbsp;
+            <a href="/ReceiverList/ViewReceiver?id=@Model.receiver.receiverIC&action=delete" class='btn btn-danger text-white' style='cursor:pointer; width:40%;'>
+                Remove Receiver
+            </a>
+        
+        </div>
         
         <br>
 
