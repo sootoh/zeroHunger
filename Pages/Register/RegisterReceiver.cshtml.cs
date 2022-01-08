@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocketLabs.InjectionApi;
+using SocketLabs.InjectionApi.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,27 +33,45 @@ namespace ZeroHunger.Pages.Register
         public string city { get; set; }
         public string state { get; set; }
         public string message { get; set; } = "";
-        public static void SendEmail(string emailbody, string userEmail)
-        {
-            // Specify the from and to email address
-            MailMessage mailMessage = new MailMessage("vtechzerohunger@gmail.com", userEmail);
-            // Specify the email body
-            mailMessage.Body = emailbody;
-            // Specify the email Subject
-            mailMessage.Subject = "We had received your application!";
+        //public static void SendEmail(string emailbody, string userEmail)
+        //{
+        //    // Specify the from and to email address
+        //    MailMessage mailMessage = new MailMessage("vtechzerohunger@gmail.com", userEmail);
+        //    // Specify the email body
+        //    mailMessage.Body = emailbody;
+        //    // Specify the email Subject
+        //    mailMessage.Subject = "We had received your application!";
 
-            // Specify the SMTP server name and post number
-            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-            // Specify your gmail address and password
-            smtpClient.Credentials = new System.Net.NetworkCredential()
-            {
-                UserName = "vtechzerohunger@gmail.com",
-                Password = "ad_0hunger"
-            };
-            // Gmail works on SSL, so set this property to true
-            smtpClient.EnableSsl = true;
-            // Finall send the email message using Send() method
-            smtpClient.Send(mailMessage);
+        //    // Specify the SMTP server name and post number
+        //    SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+        //    // Specify your gmail address and password
+        //    smtpClient.Credentials = new System.Net.NetworkCredential()
+        //    {
+        //        UserName = "vtechzerohunger@gmail.com",
+        //        Password = "ad_0hunger"
+        //    };
+        //    // Gmail works on SSL, so set this property to true
+        //    smtpClient.EnableSsl = true;
+        //    // Finall send the email message using Send() method
+        //    smtpClient.Send(mailMessage);
+        //}
+        public void anotherSendEmail(string emailbody, string userEmail)
+        {
+
+            var client = new SocketLabsClient(42290, "e5N6HwBb2k8A3Mrc9R7K"); //Your SocketLabs ServerId and Injection API key
+
+            var message = new BasicMessage();
+
+            message.Subject = "We had received your application!";
+            message.HtmlBody = emailbody;
+            message.PlainTextBody = emailbody;
+
+            message.From.Email = "vtechzerohunger@gmail.com";
+
+            //A basic message supports up to 50 recipients and supports several different ways to add recipients
+            message.To.Add(userEmail); //Add a To address by passing the email address
+
+            var response = client.Send(message);
         }
         public void OnGet()
         {
@@ -112,7 +132,7 @@ namespace ZeroHunger.Pages.Register
             await _db.Receiver.AddAsync(Application);
             await _db.SaveChangesAsync();
 
-           /* string emailBody = "Thank you for trusting Zero Hunger. "
+           string emailBody = "Thank you for trusting Zero Hunger. "
                     + "We had received your application to become a receiver to us. "
                     + "The below is a summary of your information:\n"
                     + "Name: " + Application.receiverName
@@ -124,19 +144,12 @@ namespace ZeroHunger.Pages.Register
                     + "\nAddress: " + Application.receiverAdrs1 + Application.receiverAdrs2
                     + "\n\nWe will contact you as soon as possible. Please contact us if there is any problem.";
 
-            SendEmail(emailBody, Application.receiverEmail);*/
+            anotherSendEmail(emailBody, Application.receiverEmail);
 
-            //if(Application.receiverFamilyNo == 0)
-            //{
-            //    await _db.Receiver.AddAsync(application);
-            //    await _db.SaveChangesAsync();
-            //    return RedirectToPage("Index");
-            //}
-            //else
-            //{
+           
             return RedirectToPage("RegisterReceiver_Family", Application);
-            //}
             
+
         }
     }
 
