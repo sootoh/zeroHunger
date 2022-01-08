@@ -84,7 +84,7 @@ namespace ZeroHunger.Pages.ReceiverList
                         + "https://zerohunger20211219221449.azurewebsites.net/ReceiverQuestionnaire?id="+receiver.receiverIC
                         +"\nThanks for the cooperation.";
 
-                        //anotherSendEmail(emailBody, receiver.receiverEmail,action);
+                        anotherSendEmail(emailBody, receiver.receiverEmail,action);
 
                         TempData["alertMessage"] = "The questionnaire is emailed to the receiver.";
 
@@ -103,7 +103,7 @@ namespace ZeroHunger.Pages.ReceiverList
                     + "However, in order to make the best use of the resources available to us, we had to make the painful decision to remove your account as a receiver." +
                     " If you have needs, please don't hesitate to register again to give us a chance to reconsider it.";
 
-                        //anotherSendEmail(emailBody, receiver.receiverEmail,action);
+                        anotherSendEmail(emailBody, receiver.receiverEmail,action);
 
                         //return RedirectToPage("Index");
                         Response.Redirect("Index");
