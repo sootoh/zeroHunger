@@ -3,22 +3,27 @@
 @{
 @if (@HttpContext.Request.Cookies["role"] != null && @HttpContext.Request.Cookies["role"].Equals("3"))
 {
+    <head>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+     
+    </head>
     <br />
 <h2 class="text-info">Donate Cook Food</h2>
 <br />
 
+<ul id="error" style="color: red;">
 
-
+</ul>
 <div class="border container" style="padding:30px">
-    <form method="post" class="form-v10-content" enctype="multipart/form-data">
+
+    <form method="post" class="form-v10-content" id="addForm" enctype="multipart/form-data">
        
-        <div class="text-danger" asp-validation-summary="ModelOnly"></div>       
         <div class="form-group row">
                  <div class="col-4" style="">
                    <label asp-for="cook.ShopName">Shop Name</label>
                 </div>
                 <div class="col-6" >
-					<input asp-for="cook.ShopName" class="form-control" placeholder="Restaurant ABC" required>
+					<input asp-for="cook.ShopName" id="shop" class="form-control" placeholder="Restaurant ABC">
                 </div>
                </div>
                <div class="form-group row">
@@ -26,7 +31,7 @@
                    <label asp-for="cook.CookName">Food Name</label>
                 </div>
                 <div class="col-6" >
-					<input asp-for="cook.CookName" class="form-control" placeholder="Porridge" required>
+					<input asp-for="cook.CookName" id="food" class="form-control" placeholder="Porridge">
                 </div>
                 </div>
                 <div class="form-group row">
@@ -35,7 +40,7 @@
 					
                 </div>
                 <div class="col-6">
-					<input asp-for="cook.CookQuantity" placeholder="Minimum 5" class="form-control" required>
+					<input asp-for="cook.CookQuantity" id="quantity" placeholder="Minimum 5" class="form-control" min='5'>
                 </div>
                 </div>
                 <div class="form-group row">
@@ -44,7 +49,7 @@
 					
                 </div>
                 <div class="col-6">
-					<input asp-for="cook.OpenDate" type="datetime-local" class="form-control" value="date" required>
+					<input asp-for="cook.OpenDate" type="datetime-local" class="form-control" id="open">
                 </div>
                 </div>
                 <div class="form-group row">
@@ -53,7 +58,7 @@
 					
                 </div>
                 <div class="col-6">
-					<input asp-for="cook.CloseDate" class="form-control" required>
+					<input asp-for="cook.CloseDate" class="form-control" id="close" >
                 </div>
                 </div>
                  <div class="form-group row">
@@ -166,6 +171,72 @@
                 
              </div>
        </form>
+
+<script>
+$("#addForm").submit(
+function(event){
+    if(document.getElementById("shop").value=="" || document.getElementById("food").value=="" || document.getElementById("quantity").value==0 || document.getElementById("open").value=="" || document.getElementById("close").value==""){
+    var ul =document.getElementById("error");
+    while(ul.hasChildNodes()){
+        ul.removeChild(ul.firstChild);
+    }
+    
+
+        if(document.getElementById("shop").value==""){
+        var ul = document.getElementById("error");
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode("Please enter the shop name."));
+        ul.appendChild(li);
+    }
+    if(document.getElementById("food").value==""){
+        var ul = document.getElementById("error");
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode("Please enter the food name."));
+        ul.appendChild(li);
+    }
+    if(document.getElementById("quantity").value==0){
+        var ul = document.getElementById("error");
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode("Donation quantity should be at least 5."));
+        ul.appendChild(li);
+    }
+    var todaysDate = new Date();
+
+    var month;
+    if((todaysDate.getMonth()+1)<10){
+        month="0"+(todaysDate.getMonth()+1);
+    }else{
+        month=(todaysDate.getMonth()+1);
+    }
+    var datetime = todaysDate.getFullYear() + "-" + month + "-" + todaysDate.getDate() + "T" + todaysDate.getHours() + ":" + todaysDate.getMinutes();
+    
+    if(document.getElementById("open").value==""){
+        var ul = document.getElementById("error");
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode("Please give an opening time."));
+        ul.appendChild(li);
+    }
+    if(document.getElementById("close").value==""){
+        var ul = document.getElementById("error");
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode("Please give a closing time."));
+        ul.appendChild(li);
+    }
+    if(document.getElementById("close").value!="" || document.getElementById("open").value!=""){
+    if(document.getElementById("open").value<=datetime || document.getElementById("close").value<=datetime){
+        var ul = document.getElementById("error");
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode("Opening Time or Closing Time had already passed."));
+        ul.appendChild(li);
+    }
+    }
+    event.preventDefault();    
+    }
+else{
+        
+    }
+});
+</script>
 </div>
 <br /><br /><br />
 }else{
