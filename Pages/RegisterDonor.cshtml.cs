@@ -59,6 +59,7 @@ namespace ZeroHunger.Pages
             else
             {
                 message = "This email was registered. Please login instead.";
+                ViewData["Message"] = string.Format("This email was registered. Please login instead.");
                 return Page();
             }
             
