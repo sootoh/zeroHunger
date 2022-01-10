@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model ZeroHunger.Pages.RegisterVolunteerModel
 @{
 <head>
@@ -11,13 +11,22 @@
 	<link rel="stylesheet" type="text/css" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
 	<!-- Main Style Css -->
     <link rel="stylesheet" href="css/style2.css"/>
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script language="javascript">
+		function submit()
+		{
+			alert("Congratulations, you are now a registered volunteer.")
+		}
+	</script>
 </head>
 <body class="form-v10">
 	
 	<div class="page-content" style="display:block; padding:50px;">
 		<div style="width:100%; text-align: center;"><h1>Volunteer Registration</h1></div>
+		<ul id="error" style="color: red;">
+		</ul>
 		<div class="form-v10-content" style="width:90%;margin:20px auto 20px auto;">
-			<form class="form-detail" method="post" id="volform">
+			<form class="form-detail" method="post" id="myform">
 				<div class="form-left">
 					<h2>General Infomation</h2>
 					<div class="form-row">
@@ -33,51 +42,44 @@
 					</div>
 					<div class="form-group">
 						<div class="form-row form-row-1">
-							<input type="text" asp-for="fName"  class="input-text" placeholder="First Name" required>
+							<input type="text" asp-for="fName"  class="input-text" placeholder="First Name" id="fname">
 						</div>
 						<div class="form-row form-row-2">
-							<input type="text" asp-for="lName" class="input-text" placeholder="Last Name" required>
+							<input type="text" asp-for="lName" class="input-text" placeholder="Last Name" id="lname">
 						</div>
 					</div>
 					<div class="form-row">
-						<input type="password" asp-for="user.UserPwd" placeholder="Password" required>
+						<input type="password" asp-for="user.UserPwd" id="pwd" placeholder="Password">
+						<span style="font-size:x-small;">include 6-20 characters, 1 numeric digit, 1 uppercase and 1 lowercase letter</span>
 					</div> 
 					<div class="form-row">
-						<input type="text" asp-for="user.UserEmail" class="email" id="email" placeholder="Email" required>
+						<input type="text" asp-for="user.UserEmail" class="email" id="email" placeholder="Email">
 					</div> 
 					<div class="form-row">
-						<input type="date" asp-for="user.UserBirth"  placeholder="BirthDate"  required>
+						<input type="date" asp-for="user.UserBirth" id="birth" placeholder="BirthDate">
 						</div>
 						</div>
 				<div class="form-right">
 					<h2>Contact Details</h2>
 					<div class="form-row">
-						<input type="text" asp-for="add1" class="street" id="add1" placeholder="Address 1" required>
+						<input type="text" asp-for="add1" class="street" id="add1" placeholder="Address 1">
 					</div>
 					<div class="form-row">
-						<input type="text" asp-for="add2" class="additional" id="add2" placeholder="Address 2" required>
+						<input type="text" asp-for="add2" class="additional" id="add2" placeholder="Address 2">
 					</div>
 					<div class="form-group">
 						<div class="form-row form-row-1">
-							<input type="text" asp-for="zip" class="zip" id="zip" placeholder="Zip Code" required>
+							<input type="text" asp-for="zip" class="zip" id="zip" placeholder="Zip Code">
 						</div>
 						<div class="form-row form-row-2">
-						<input type="text" asp-for="city" class="zip" id="zip" placeholder="City" required>
-							<!--<select name="district">
-							    <option value="place">Place</option>
-							    <option value="Street">Street</option>
-							    <option value="District">District</option>
-							    <option value="City">City</option>
-							</select>
-							<span class="select-btn">
-							  	<i class="zmdi zmdi-chevron-down"></i>
-							</span>-->
+						<input type="text" asp-for="city" class="zip" id="city" placeholder="City">
+							
 						</div>
 					</div>
 					<div class="form-row">
-						<select asp-for="state" required>
-							<option value="state" disabled selected>State</option>
-						    <option value="Johor">Johor</option>
+						<select asp-for="state" id="state" required>
+							<option value="state" >State</option>
+						    <option value="Johor" selected>Johor</option>
 							<option value="others">Others</option>
 						</select>
 						<span class="select-btn">
@@ -86,10 +88,10 @@
 					</div>
 					<div class="form-group">
 						<div class="form-row form-row-1">
-							<input type="text" asp-for="code" class="code" id="code" placeholder="Code +" required>
+							<input type="text" asp-for="code" class="code" id="code" placeholder="Code +">
 						</div>
 						<div class="form-row form-row-2">
-							<input type="text" asp-for="phone" class="phone" id="phone" placeholder="Phone Number" required>
+							<input type="text" asp-for="phone" class="phone" id="phone" placeholder="Phone Number">
 						</div>
 					</div>
 					<!--div class="form-row">
@@ -106,6 +108,15 @@
 					</div>
 				</div>
 			</form>
+			@if (ViewData["Message"] != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewData["Message"]");
+            };
+        </script>
+    }
+			<script src="/js/validation.js"></script>
 		</div>
 	</div>
 
