@@ -95,11 +95,11 @@ namespace ZeroHunger.Pages
                 await _db.SaveChangesAsync();
 
                 emailBody = "We appreciate you taking the time to apply as a receiver to ZeroHunger. "
-                    + "We are pleased to tell you that your application is approved.\n"
-                    + "Please login to your account with the following information and change the password:\n"
+                    + "We are pleased to tell you that your application is approved.<br>"
+                    + "Please login to your account with the following information and change the password:<br>"
                     + "Email: " + application.receiverEmail
-                    + "\nPassword: 123"
-                    + "\nhttps://zerohunger20211219221449.azurewebsites.net/login" ;
+                    + "<br>Password: 123"
+                    + "<br>https://zerohunger20211219221449.azurewebsites.net/login" ;
 
                 anotherSendEmail(emailBody, application.receiverEmail);
 
