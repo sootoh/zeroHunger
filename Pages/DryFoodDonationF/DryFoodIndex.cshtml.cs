@@ -5,23 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using ZeroHunger.Data;
 using ZeroHunger.Model;
 
 namespace ZeroHunger.Pages.DryFoodDonationF
 {
-    
-    public class AddDryFoodDonationModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _db;
-        public AddDryFoodDonationModel(ApplicationDbContext db)
+        public IndexModel(ApplicationDbContext db)
         {
-            _db=db;
+            _db = db;
         }
-        [BindProperty]
-        public DryFoodDonation DFD { get; set; }
+        public IEnumerable<DryFoodDonation> DFD { get; set; }
         public async Task<IActionResult> OnGet()
         {
+            DFD= await _db.DryFoodDonation.Where(b=>b.DryFoodRemainQuantity!=0).ToListAsync();
+            
             string uids = HttpContext.Session.GetString("userid");
             if (uids == null)
             {
@@ -32,26 +33,22 @@ namespace ZeroHunger.Pages.DryFoodDonationF
                 return Page();
             }
         }
-        public async Task<IActionResult> OnPost(DryFoodDonation dfd)
+        public async Task<IActionResult> OnGetDelete(int id)
         {
             string uids = HttpContext.Session.GetString("userid");
-            int uid;
-            int.TryParse(uids, out uid);
-
-            if (ModelState.IsValid)
+            if (uids == null)
             {
-                dfd.donorid = uid;
-                dfd.DryFoodRemainQuantity = dfd.DryFoodQuantity;
-                dfd.donor_Id = _db.User.Find(dfd.donorid);
-                await _db.DryFoodDonation.AddAsync(dfd);
-                await _db.SaveChangesAsync();
-                return RedirectToPage("DryFoodIndex");
-                
+                return RedirectToPage("../login");
             }
-            else
+            var DFDs = await _db.DryFoodDonation.FindAsync(id);
+            if (DFDs == null)
             {
-                return Page();
+                return NotFound();
             }
+            _db.DryFoodDonation.Remove(DFDs);
+            await _db.SaveChangesAsync();
+            return RedirectToPage("DryFoodIndex");
         }
+
     }
 }

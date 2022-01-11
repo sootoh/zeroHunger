@@ -26,6 +26,17 @@
                 <div class="col-6">
                     <input asp-for="DFD.DryFoodQuantity" class="'form-control'" min="0" required>
                 </div>
+                
+                    <div class="col-4">
+                        <label asp-for="DFD.DeliveryMethod">Delivery Method</label>
+                    </div>
+                    <div class="col-6">
+                        <Select asp-for="DFD.DeliveryMethod" class="'form-control'" required>
+                            <option value="Self Pick">Self Delivery</option>
+                            <option value="448 Delivery">448 Delivery</option>
+                        </Select>
+                    </div>
+                
                 <div class="col-4">
                     <label asp-for="DFD.DryFoodPickDate">Pick-up Date Available</label>
                 </div>
@@ -46,7 +57,7 @@
 
                 </div>
                 <div class="col-5 offset-4">
-                    <a asp-page="Index" class="btn btn-sucess form-control">Back to List</a>
+                    <a asp-page="DryFoodIndex" class="btn btn-sucess form-control">Back to List</a>
                 </div>
             </div>
         </div>

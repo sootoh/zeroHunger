@@ -33,10 +33,11 @@ namespace ZeroHunger.Pages.DryFoodDonationF
                 DryFoodDonation DFDFromDb= await _db.DryFoodDonation.FindAsync(DFD.Id);
                 DFDFromDb.DryFoodName = DFD.DryFoodName;
                 DFDFromDb.DryFoodQuantity= DFD.DryFoodQuantity;
+                DFDFromDb.DeliveryMethod = DFD.DeliveryMethod;
                 DFDFromDb.DryFoodPickDate = DFD.DryFoodPickDate;
                 DFDFromDb.DryFoodRemark = DFD.DryFoodRemark;
                 await _db.SaveChangesAsync();
-                return RedirectToPage("Index");
+                return RedirectToPage("DryFoodIndex");
             }
             else
             {
