@@ -80,9 +80,9 @@ namespace ZeroHunger.Pages.ReceiverList
                 {
                     if (action.Equals("email"))
                     {
-                        string emailBody = "Please spend some time to update your information through this questionnaire. "
-                        + "https://zerohunger20211219221449.azurewebsites.net/ReceiverQuestionnaire?id="+receiver.receiverIC
-                        +"\nThanks for the cooperation.";
+                        string emailBody = "Please spend some time to update your information through this questionnaire through the link below. "
+                        + "<br>https://zerohunger20211219221449.azurewebsites.net/ReceiverQuestionnaire?id="+receiver.receiverIC
+                        +"<br><br>Thanks for the cooperation.";
 
                         anotherSendEmail(emailBody, receiver.receiverEmail,action);
 
@@ -100,7 +100,7 @@ namespace ZeroHunger.Pages.ReceiverList
                         TempData["alertMessage"] = "The receiver is removed.";
 
                         string emailBody = "We appreciate you taking the time to apply as a receiver to ZeroHunger. "
-                    + "However, in order to make the best use of the resources available to us, we had to make the painful decision to remove your account as a receiver." +
+                    + "However, in order to make the best use of the resources available to us, we had to make the painful decision to remove your account as a receiver. " +
                     " If you have needs, please don't hesitate to register again to give us a chance to reconsider it.";
 
                         anotherSendEmail(emailBody, receiver.receiverEmail,action);
