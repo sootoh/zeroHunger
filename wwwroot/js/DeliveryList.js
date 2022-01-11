@@ -2,16 +2,15 @@ var dataTable;
 
 $(document).ready(function () {
     loadDataTable();
-    alertMsg();
 });
 
 function alertMsg() {
     var i = 1;
-    var msg = "<%= ViewData['Message'+i] %>";
+    var msg = "@ViewData['Message'+i]";
     while(msg != null) {
         alert(msg);
         i++;
-        msg = "<%= ViewData['Message'+i] %>";
+        msg = "@ViewData['Message'+i]";
         if (msg == null) {
             break;
         }
@@ -60,7 +59,7 @@ function loadDataTable() {
                 "data": "deliveryID",
                 "render": function (data) {
                     return `
-                        <a href="/Deliveries/DeliveryItem?id=${data}" class='btn btn-info text-white' style='cursor:pointer; width:110px;'>
+                        <a href="/Deliveries/DeliveryItem?id=${data}" class='btn btn-info text-white' style='cursor:pointer; width:105px;'>
                             Update &nbsp;<i class="bi bi-pencil-square"></i>
                         </a>`;
                 }, "width": "10%"
@@ -68,11 +67,11 @@ function loadDataTable() {
             {
                 "data": "deliveryID",
                 "render": function (data) {
-                    return `<a href="/Deliveries/Edit?id=${data}" class="btn btn-success mx-2 text-white" style="cursor:pointer;width:110px">
+                    return `<a href="/Deliveries/Edit?id=${data}" class="btn btn-success mx-2 text-white" style="cursor:pointer;width:105px">
                         Edit &nbsp;<i class="bi bi-pencil-square"></i>
                         </a>
-                        <br>
-                        <a class="btn btn-danger mx-2 text-white" style = "cursor:pointer;width:110px"
+                        <br><br>
+                        <a class="btn btn-danger mx-2 text-white" style = "cursor:pointer;width:105px"
                         onclick = Delete('/api/delivery?id=' + ${ data }) >
                         Delete &nbsp; <i class="bi bi-trash-fill"></i>
                         </a>`;
