@@ -8,12 +8,7 @@
         return false;
     }
 }
-function checkPhone() {
-    var phone = document.getElementByName("phone")[0].value;
-    if (!phone.match(/\d{9,11}/g)) {
-        return false;
-    }
-}
+
 function ValidateEmail() {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.getElementById("email").value)) {
         return true;
@@ -66,7 +61,7 @@ function checkDate() {
         function (event) {
             if (document.getElementById("fname").value == "" || document.getElementById("lname").value == "" || document.getElementById("pwd").value == "" || document.getElementById("email").value == "" || document.getElementById("birth").value == "" ||
                 document.getElementById("add1").value == "" || document.getElementById("add2").value == "" || document.getElementById("zip").value == "" || document.getElementById("city").value == "" || document.getElementById("code").value == "" || document.getElementById("phone").value == "" ||
-                !CheckPassword() || !checkDate() || !ValidateEmail() || !checkPhone()
+                !CheckPassword() || !checkDate() || !ValidateEmail() 
                 ) {
                 var ul = document.getElementById("error");
                 while (ul.hasChildNodes()) {
@@ -130,12 +125,6 @@ function checkDate() {
                     var ul = document.getElementById("error");
                     var li = document.createElement("li");
                     li.appendChild(document.createTextNode("Please enter country code and contact number."));
-                    ul.appendChild(li);
-                }
-                if (!checkPhone()) {
-                    var ul = document.getElementById("error");
-                    var li = document.createElement("li");
-                    li.appendChild(document.createTextNode("Please re-check your phone number. (eg. 0123456789)."));
                     ul.appendChild(li);
                 }
             event.preventDefault();
