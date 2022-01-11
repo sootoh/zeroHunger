@@ -38,7 +38,34 @@
 			
 			document.getElementsByName("receiverDOB")[0].value=dob.toISOString().substr(0, 10);
 		}
-		
+		function validation()
+		{
+			var phone=document.getElementsByName("receiverPhone")[0].value;
+			if(!phone.match(/\d{10,11}/g) )
+			{
+				document.getElementById("validatesummary").innerHTML += "<li>Please re-check your phone number. (eg. 0123456789)</li>";
+			}
+			
+			var fname=document.getElementById("first_name").value;
+			if(!fname.match(/[A-zÀ-ž\s]/g) )
+			{
+				document.getElementById("validatesummary").innerHTML += "<li>Please re-check your First Name. It should not contain any symbols.</li>";
+			}
+			var lname=document.getElementById("last_name").value;
+			if(!lname.match(/[A-zÀ-ž\s]/g) )
+			{
+				document.getElementById("validatesummary").innerHTML += "<li>Please re-check your Last Name. It should not contain any symbols.</li>";
+			}
+
+			var ic=document.getElementsByName("receiverIC")[0].value;
+			if(!ic.match(/\d{12}/g) )
+			{
+				document.getElementById("validatesummary").innerHTML += "<li>Please re-check your IC No. (eg. 000102030405)</li>";
+			}
+
+
+
+		}
 	</script>
 	</head>
 	<body class="form-v10">
@@ -47,13 +74,15 @@
 			<div style="width:100%; text-align: center;"><h1>Applying Receiver Account</h1></div>
 			<div class="text-danger" asp-validation-summary="ModelOnly"></div>
 			<div class="form-v10-content" style="width:90%;margin:20px auto 20px auto;" >
+			<ul style="color:red;">
+				<div id="validatesummary"></div>
 				@if(Model.message!="")
 				{
-					<ul style="color:red;">
+					
 						<li>@Model.message</li>
-					</ul>
+					
 				}
-			
+			</ul>
 				<form class="form-detail" method="post" id="myform" >
 					<div class="form-left">
 						<h2>General Infomation</h2>
@@ -61,10 +90,10 @@
 						<!--name-->
 							<div class="form-group">
 								<div class="form-row form-row-1">
-									<input asp-for="fName" type="text" id="first_name" class="input-text" placeholder="First Name" required>
+									<input asp-for="fName" type="text" id="first_name" class="input-text" placeholder="First Name" pattern="([A-zÀ-ž\s]){1,}" required>
 								</div>
 								<div class="form-row form-row-2">
-									<input asp-for="lName" type="text" id="last_name" class="input-text" placeholder="Last Name" required>
+									<input asp-for="lName" type="text" id="last_name" class="input-text" placeholder="Last Name" pattern="([A-zÀ-ž\s]){1,}" required>
 								</div>
 							</div>
 					
@@ -169,21 +198,21 @@
 						</div>
 					
 						<div class="form-row">
-							<input asp-for="application.receiverPhone" type="tel" name="receiverPhone" class="phone" id="phone" placeholder="Phone Number" pattern="\d{10,11}" required>
+							<input asp-for="application.receiverPhone" type="tel" name="receiverPhone" class="phone" id="phone" placeholder="Phone Number (eg. 0123456789)" pattern="\d{10,11}" required>
 						</div>
 					
 						<div class="form-row">
 							<input asp-for="application.receiverEmail" type="email" name="receiverEmail" id="your_email" class="input-text"  placeholder="Your Email" required>
 						</div>
 						<div class="form-checkbox">
-							<label class="container"><p>I do accept the <a href="#" class="text">Terms and Conditions</a> of your site.</p>
-						  		<input type="checkbox" name="checkbox">
+							<label class="container"><p>I do accept the <a asp-page="TermsCondition" class="text">Terms and Conditions</a> of your site.</p>
+						  		<input type="checkbox" name="checkbox" required>
 						  		<span class="checkmark"></span>
 							</label>
 						</div>
 						<div class="form-row-last ">
 							
-							<input type="submit" class="register" value="Next">
+							<input type="submit" class="register" value="Next" onclick="validation();">
 							
 						</div>
 					</div>
