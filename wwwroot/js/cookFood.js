@@ -61,15 +61,18 @@ function loadFoodTable() {
             },
 
             {
+                "data": "remainQuantity",
+                 "width": "15%"
+            },
+
+            {
                 "data": "cookID",
                 "render": function (data, type, row) {
                     return `<div class="text-center"><a class='btn btn-info text-white' style='cursor:pointer;'
-                             href=DonationApplier?cookFood=${data}>` + row.remainQuantity + '</a>';
-                
-                }, "width": "15%"
+                             href=DonationApplier?cookFood=${data}>` + row.reservation + '</a>';
+                },
+                "width": "5%"
             },
-
-            { "data": "reservation", "width": "5%" },
             { "data": "shopName", "width": "8%" },
             {
                 "data": "cookID",
