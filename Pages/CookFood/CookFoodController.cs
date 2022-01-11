@@ -39,13 +39,15 @@ namespace ZeroHunger.Pages.CookFood
             foreach (var item in CR)
             {
                 item.reservationRefCook = await _db.CookedFoodDonation.FindAsync(item.cookId);
+                
             }
             CRP = CR.Where(c => c.status.Equals("Pending"));
             
-            CR = CR.Where(c => c.status.Equals("Success") || c.status == "Expired");
+            CR = CR.Where(c => c.status.Equals("Success") || c.status.Equals("Expired")||c.status.Equals("Confirmed"));
+            
             return Json(new { data = CR });
         }
-
+        
        
         
     }
