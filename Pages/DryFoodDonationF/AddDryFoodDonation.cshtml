@@ -1,9 +1,9 @@
 ﻿@page
 @model ZeroHunger.Pages.DryFoodDonationF.AddDryFoodDonationModel
-
+<script src="~/js/validationricky.js"></script>
 
     <div class="border container" style="padding:30px">
-        <form method="Post" class="form-v10-content">
+        <form method="Post" class="form-v10-content" onsubmit="return ValidateDryFood();">
             <h2 class="text-info" style="text-align:center;margin:0px 10px 30px 10px;">Donate Dry Food</h2>
             <div class="text-danger" asp-validation-summary="ModelOnly"></div>
 
@@ -40,7 +40,7 @@
                     <label asp-for="DFD.DryFoodPickDate">Pick-up Date Available</label>
                 </div>
                 <div class="col-6">
-                    <input type='date' asp-for="DFD.DryFoodPickDate" class="form-control" required>
+                    <input type='date' asp-for="DFD.DryFoodPickDate" class="form-control" id='pickDate' required>
                 </div>
             </div>
             <div class="form-group row">
