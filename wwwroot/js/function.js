@@ -56,7 +56,7 @@ function initMaps() {
             // Browser doesn't support Geolocation
             handleLocationError(false, infoWindow, map.getCenter());
         }
-    });
+        return false;});
 
 
     //setMarker(map);

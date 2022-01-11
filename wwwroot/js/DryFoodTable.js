@@ -22,11 +22,11 @@ function loadDataTable() {
                 "render": function (data) {
                     return `<div class="text-center">
                         
-                        <a class="btn btn-success btn-sm" href="DryFoodDonationF/EditDryFoodDonation?id=${data}">Edit</a>
+                        <a class="btn btn-success btn-sm" href="EditDryFoodDonation?id=${data}">Edit</a>
                         </a>
                         &nbsp;
                         
-                        <a class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')" href="DryFoodDonationF?id=${data}&handler=Delete">Delete</a>
+                        <a class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')" href="DryFoodIndex?id=${data}&handler=Delete">Delete</a>
                         
                         </div>`;
                 }, "width": "50%"
