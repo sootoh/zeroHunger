@@ -34,7 +34,7 @@
                             <th>@item.reservationRefUser.UserPhone</th>
                             <th>@item.status</th>
                             <th>
-                                @if (item.status.Equals("Confirmed"))
+                                @if (item.status.Equals("Confirmed")||item.status.Equals("Pending"))
                                 { }
                                 else
                                 {<button class="btn btn-success" style="width:200px;text-align:left;" asp-route-id="@item.Id" asp-page-handler="Confirm"><i class="bi bi-check-square" style="margin:10px 10px 10px 10px;font:red;"></i>Confirm</button>}

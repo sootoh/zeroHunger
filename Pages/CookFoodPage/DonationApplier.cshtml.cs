@@ -24,12 +24,9 @@ namespace ZeroHunger.Pages.CookFoodPage
         {
             int uid;
             int.TryParse(HttpContext.Session.GetString("userid"), out uid);
-            
-            
             int cid;
             int.TryParse(Request.Query["cookFood"], out cid);
             CR = await _db.CookReservation.Where(b => b.cookId.Equals(cid)).ToListAsync();
-     
             int index = 0;
             int c = CR.Count;
             if(c!=0)
@@ -39,8 +36,9 @@ namespace ZeroHunger.Pages.CookFoodPage
                 item.reservationRefCook = await _db.CookedFoodDonation.FindAsync(item.cookId);
                 if (item.reservationRefCook.DonorUserID!= uid)
                 {
-                    CR.RemoveAt(index);
-                }
+                        //CR.RemoveAt(index);
+                        Response.Redirect("CookFoodView");
+                    }
                 index++;
             }
             foreach (var item in CR)
