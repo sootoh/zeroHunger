@@ -92,15 +92,15 @@
 							<input type="text" asp-for="code" class="code" id="code" placeholder="Code +">
 						</div>
 						<div class="form-row form-row-2">
-							<input type="text" asp-for="phone" class="phone" id="phone" placeholder="Phone Number">
+							<input type="text" asp-for="phone" class="phone" id="phone" placeholder="Phone Number" pattern="\d{9,10}" required>
 						</div>
 					</div>
 					<!--div class="form-row">
 						<input type="text" name="your_email" id="your_email" class="input-text"  placeholder="Your Email">
 					</div-->
 					<div class="form-checkbox">
-						<label class="container"><p>I do accept the <a href="#" class="text">Terms and Conditions</a> of your site.</p>
-						  	<input type="checkbox" name="checkbox">
+						<label class="container"><p>I do accept the <a asp-page="TermsCondition" class="text">Terms and Conditions</a> of your site.</p>
+						  	<input type="checkbox" name="checkbox" required>
 						  	<span class="checkmark"></span>
 						</label>
 					</div>
