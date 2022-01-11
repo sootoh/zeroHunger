@@ -96,7 +96,7 @@ namespace ZeroHunger.Pages
 
                 emailBody = "We appreciate you taking the time to apply as a receiver to ZeroHunger. "
                     + "We are pleased to tell you that your application is approved.\n"
-                    + "Please login to your account with the following information:\n"
+                    + "Please login to your account with the following information and change the password:\n"
                     + "Email: " + application.receiverEmail
                     + "\nPassword: 123"
                     + "\nhttps://zerohunger20211219221449.azurewebsites.net/login" ;
