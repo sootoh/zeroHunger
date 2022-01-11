@@ -1,0 +1,19 @@
+@page
+@model ZeroHunger.Pages.Deliveries.EditDeliveryItemModel
+
+<form method="post">
+        <input hidden asp-for="DeliveryItem.DeliveryID" value="@Model.DeliveryId"/>
+        <div class="mb-3">
+        Delivery Item
+        <select id="deliveryitem" asp-for="DeliveryItem.DryFoodID" asp-items="Model.DeliveryItemList" class="form-control" required>
+            <option>--Select Delivery Item--</option>
+        </select>
+        </div>
+        <div class="mb-3">
+            Quantity
+            <input id="quantity" asp-for="DeliveryItem.Quantity" min="1" class="form-control" required/>
+        </div>
+         <button type="submit" asp-route-id="@Model.DeliveryId"class="btn btn-primary form-control">Add Delivery Item</button>
+        <a asp-page="DeliveryItem" class="btn form-control">Back to List</a> 
+</form>
+

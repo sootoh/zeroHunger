@@ -1,0 +1,58 @@
+@page
+@model ZeroHunger.Pages.Deliveries.IndexModel
+
+<partial name="_Notification"/>
+
+<div class="container p=3">
+    <div class="row pt-4">
+        <div class="col-8">
+            <h2 class="text-info">Delivery</h2>
+        </div>
+        <div class="col-4 mt-2">
+            <a asp-page="Create" class="btn btn-info">
+                <i class="bi bi-pencil-square"></i> &nbsp; Create New Delivery Request
+            </a>
+        </div>
+    </div>  
+</div>
+<br/><br/>
+
+<table id="delivery_load" onload="CheckDeliveryItem()" class="table table-bordered table-striped" style="text-align:center">
+    <thead>
+        <tr>
+            <th>
+                Delivery ID
+            </th>
+            <th>
+                Volunteer Name
+            </th>
+            <th>
+                Delivery Time
+            </th>
+            <th>
+                Delivery Status
+            </th>
+                <th>
+                Receiver Name
+            </th>
+            <th>
+                Receiver Phone
+            </th>
+            <th>
+                Receiver Address
+            </th>
+            <th>
+                Delivery Item
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+</table>         
+
+
+@section Scripts{
+    <script src="~/js/DeliveryList.js"></script>
+    @{
+    <partial name="_ValidationScriptsPartial"></partial>
+    }
+}
