@@ -2,18 +2,33 @@ var dataTable;
 
 $(document).ready(function () {
     loadDataTable();
+    alertMsg();
 });
 
+function alertMsg() {
+    var i = 1;
+    var msg = "<%= ViewData['Message'+i] %>";
+    while(msg != null) {
+        alert(msg);
+        i++;
+        msg = "<%= ViewData['Message'+i] %>";
+        if (msg == null) {
+            break;
+        }
+    } 
+}
+
 function loadDataTable() {
-    dataTable = $('#Delivery_load').DataTable({
+    dataTable = $('#delivery_load').DataTable({
         "ajax": {
             "url": "/api/delivery",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "volunteer.userName", "width": "5%" },
-            { "data": "deliveryTime", "width": "15%" },
+            { "data": "deliveryID", "width": "1%" },
+            { "data": "volunteer.userName","width": "5%" },
+            { "data": "deliveryTime", "width": "10%" },
             {
                 "data": "deliveryStatus",
                 "render": function (data) {
@@ -38,41 +53,33 @@ function loadDataTable() {
             {
                 "data": "receiver.userAdrs1",
                 "render": function (data, type, row) {
-                    return data + ' ' + row.receiver.userAdrs2;
-            }, "width": "15%"
+                    return data+''+row.receiver.userAdrs2;
+                }, "width": "15%"
             },
             {
                 "data": "deliveryID",
                 "render": function (data) {
-                    return `<td>
-                        <a href="/Deliveries/DeliveryItem?id=${data}" class='btn btn-info text-white' style='cursor:pointer; width:100px;'>
+                    return `
+                        <a href="/Deliveries/DeliveryItem?id=${data}" class='btn btn-info text-white' style='cursor:pointer; width:110px;'>
                             Update &nbsp;<i class="bi bi-pencil-square"></i>
-                        </a>
-                        </td>`;
+                        </a>`;
                 }, "width": "10%"
             },
             {
                 "data": "deliveryID",
                 "render": function (data) {
-                    return `<td>
-                        <a href="/Deliveries/Edit?id=${data}" class="btn btn-success mx-2 text-white" style="cursor:pointer;width:100px">
+                    return `<a href="/Deliveries/Edit?id=${data}" class="btn btn-success mx-2 text-white" style="cursor:pointer;width:110px">
                         Edit &nbsp;<i class="bi bi-pencil-square"></i>
                         </a>
-                        </td>`;
-                }, "width": "10%"
-            },
-            {
-                "data": "deliveryID",
-                "render": function (data) {
-                    return `<td>
-                        <a class="btn btn-danger mx-2 text-white" style="cursor:pointer;width:100px"
-                           onclick=Delete('/api/delivery?id='+${data})>
-                        Delete &nbsp;<i class="bi bi-trash-fill"></i>
-                        </a>
-                        </td>`;
+                        <br>
+                        <a class="btn btn-danger mx-2 text-white" style = "cursor:pointer;width:110px"
+                        onclick = Delete('/api/delivery?id=' + ${ data }) >
+                        Delete &nbsp; <i class="bi bi-trash-fill"></i>
+                        </a>`;
                 }, "width": "10%"
             }
         ],
+
         "language": {
             "emptyTable": "no data found"
         },
@@ -106,6 +113,8 @@ function Delete(url) {
         }
     });
 }
+
+
 
 
 
