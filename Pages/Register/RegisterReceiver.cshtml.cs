@@ -134,15 +134,15 @@ namespace ZeroHunger.Pages.Register
 
            string emailBody = "Thank you for trusting Zero Hunger. "
                     + "We had received your application to become a receiver to us. "
-                    + "The below is a summary of your information:\n"
+                    + "<br>The below is a summary of your information:<br>"
                     + "Name: " + Application.receiverName
-                    + "\nIC no: " + Application.receiverIC
-                    + "\nOccupation: " + Application.receiverOccupation
-                    + "\nSalary: RM" + Application.receiverSalaryGroup.salaryRange
-                    + "\nPhone No.: " + Application.receiverPhone
-                    + "\nEmail: " + Application.receiverEmail
-                    + "\nAddress: " + Application.receiverAdrs1 + Application.receiverAdrs2
-                    + "\n\nWe will contact you as soon as possible. Please contact us if there is any problem.";
+                    + "<br>IC no: " + Application.receiverIC
+                    + "<br>Occupation: " + Application.receiverOccupation
+                    + "<br>Salary: RM" + Application.receiverSalaryGroup.salaryRange
+                    + "<br>Phone No.: " + Application.receiverPhone
+                    + "<br>Email: " + Application.receiverEmail
+                    + "<br>Address: " + Application.receiverAdrs1 + Application.receiverAdrs2
+                    + "<br><br>We will contact you as soon as possible. Please contact us if there is any problem.";
 
             anotherSendEmail(emailBody, Application.receiverEmail);
 
