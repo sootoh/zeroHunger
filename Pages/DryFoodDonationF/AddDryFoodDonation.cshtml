@@ -1,8 +1,9 @@
 ﻿@page
 @model ZeroHunger.Pages.DryFoodDonationF.AddDryFoodDonationModel
 <script src="~/js/validationricky.js"></script>
-
+    
     <div class="border container" style="padding:30px">
+        <div id="errorMessagediv" style="display:none;margin:10px 0px 10px 0px;color:red;"></div>
         <form method="Post" class="form-v10-content" onsubmit="return ValidateDryFood();">
             <h2 class="text-info" style="text-align:center;margin:0px 10px 30px 10px;">Donate Dry Food</h2>
             <div class="text-danger" asp-validation-summary="ModelOnly"></div>
@@ -12,7 +13,7 @@
                     <label asp-for="DFD.DryFoodName">Dry Food Name</label>
                 </div>
                 <div class="col-6">
-                    <input asp-for="DFD.DryFoodName" class="form-control" required>
+                    <input asp-for="DFD.DryFoodName" class="form-control" id='dryName' required>
 
                 </div>
             </div>
@@ -29,9 +30,9 @@
                     <label asp-for="DFD.DeliveryMethod">Delivery Method</label>
                 </div>
                 <div class="col-6">
-                    <Select asp-for="DFD.DeliveryMethod" class="form-control" required>
+                    <Select asp-for="DFD.DeliveryMethod" class="form-control" id="deliveryMethod" required>
                         <option value="Self Pick">Self Delivery</option>
-                        <option value="448 Delivery">448 Delivery</option>
+                        <option value="448 Delivery" selected>448 Delivery</option>
                     </Select>
                 </div>
             </div>

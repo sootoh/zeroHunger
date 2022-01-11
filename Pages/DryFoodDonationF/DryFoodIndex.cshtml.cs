@@ -11,10 +11,10 @@ using ZeroHunger.Model;
 
 namespace ZeroHunger.Pages.DryFoodDonationF
 {
-    public class IndexModel : PageModel
+    public class DryFoodIndexModel : PageModel
     {
         private readonly ApplicationDbContext _db;
-        public IndexModel(ApplicationDbContext db)
+        public DryFoodIndexModel(ApplicationDbContext db)
         {
             _db = db;
         }
