@@ -5,13 +5,24 @@ let biggest = 0;
 let distanceList = [];
 //Google Map Function
 function initMaps() {
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 3.8925533126426664, lng: 102.10080302222984 },
-        zoom: 8, 
-        mapId: 'ca3e1b773e1fd477',
-    });
+    var ulat = parseFloat(document.getElementById("userLat").value);
+    var ulon = parseFloat(document.getElementById("userLon").value);
+    if (ulat != null && ulon != null) {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat:ulat,lng:ulon},
+            zoom: 8,
+            mapId: 'ca3e1b773e1fd477',
+        })
+    }
+    else {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 3.8925533126426664, lng: 102.10080302222984 },
+            zoom: 8,
+            mapId: 'ca3e1b773e1fd477',
+        });
+    }
     infoWindow = new google.maps.InfoWindow();
-
+    
     const locationButton = document.createElement("button");
     //locationButton.textContent = "Pan to Current Location";
     locationButton.classList.add("custom-map-control-button");
@@ -63,7 +74,6 @@ function initMaps() {
     };
     for (var i = 0; i < y.length; i++) {
         var x = { lat: parseFloat(document.getElementsByName('itemLat')[i].innerHTML), lng: parseFloat(document.getElementsByName('itemLon')[i].innerHTML) };
-        console.log(x);
         var marker = new google.maps.Marker(
             {
                 position: x,
@@ -286,66 +296,30 @@ function success(pos) {
             itemLat = parseFloat(itemLat);
             itemLon = parseFloat(itemLon);
             var x = distance(itemLat, itemLon, crd.latitude, crd.longitude);
-            x = x.toFixed(2);
+            
             distanceList.push([i, x]);
             
             document.getElementsByName('itemDistance')[i].innerHTML = x + "km";
             document.getElementsByName('itemDistance')[i].style.fontWeight = "bold";
             }
     
-    } sort();
-    //SortDistance();
-    pageLoading();
+    } 
 }
-function sort() {
+function fillLatLon(pos) {
+    
+    document.getElementById('userLat').value = pos.coords.latitude;
+    document.getElementById('userLon').value = pos.coords.longitude;
+    console.log(document.getElementById('userLat').value);
+    console.log(document.getElementById('userLon').value);
+    document.getElementById('updateForm').submit();
 
-    
-    
-    for (var j = 0; j < distanceList.length; j++) {
-        smallest = j;
-        for (var i = j; i < distanceList.length ; i++) {
-        if (distanceList[i][1] < distanceList[smallest][1]) {
-            smallest = i;
-        }
-
-        }
-        var tem = distanceList[j];
-        
-        distanceList[j] = distanceList[smallest];
-        distanceList[smallest] = tem;
-    }
-    for (x of distanceList) {
-        
-    }
-    
 }
+
 function error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
-function distance(lat1, lon1, lat2, lon2) {
 
-
-    if ((lat1 == lat2) && (lon1 == lon2)) {
-        return 0;
-    }
-    else {
-        var radlat1 = Math.PI * lat1 / 180;
-        var radlat2 = Math.PI * lat2 / 180;
-        var theta = lon1 - lon2;
-        var radtheta = Math.PI * theta / 180;
-
-        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-        if (dist > 1) {
-            dist = 1;
-        }
-        dist = Math.acos(dist);
-        dist = dist * 180 / Math.PI;
-        dist = dist * 60 * 1.1515;
-        dist = dist * 1.609344
-        return dist;
-    }
-}
 
 //End Function Calculate Cookfood distance
 
@@ -376,116 +350,13 @@ function closeRePrompt()
 }
 //End of Prompt Box Function
 
-
-//Paging Function
-
-//Called when html loaded
-function pageLoading() {
-    document.getElementById('pPage').disabled = 'true';
-    var x;
-    for (var i = 0; i < 4; i++)
-    {
-        if (distanceList[i] != null) {
-        if (document.getElementsByName('itemContainer')[distanceList[i][0]] != null)
-        {
-            x = document.getElementsByName('itemContainer')[distanceList[i][0]];
-            x.style.display = "flex";
-            x.style.order = i;
-            }
-        }
-    }
-    if (distanceList.length < 4) {
-        (document.getElementById('nPage')).disabled = true;
-    
-
-    (document.getElementById('pPage')).disabled = true;
-    }
-    
-    
-   
-}
-
-//call when client click next page
-function nextPage()
-{
-    page = page + 1;
-    var n = page;
-    var pageSize = 4
-    var x = distanceList;
-    
-    for (var i = n * 4; i <= (n + 1) * 4 - 1; i++) {
-        
-            if (document.getElementsByName('itemContainer')[x[i - pageSize - 4][0]] != null)
-            {
-                document.getElementsByName('itemContainer')[x[i - pageSize - 4][0]] .style.display = "none";
-            }
-
-        if (x[i-pageSize]!=null)
-            {
-                if (document.getElementsByName('itemContainer')[x[i - pageSize][0]] != null) {
-                    document.getElementsByName('itemContainer')[x[i - pageSize][0]].style.display = "flex";
-                }
-            }
-            
-            
-            //disable next page button
-            if (Math.ceil((x.length / 4)) == page)
-            {
-                
-                (document.getElementById('nPage')).disabled = true;
-            }
-            
-                (document.getElementById('pPage')).disabled = false;
-            
-            
-    }
-    (document.getElementById('pPage')).disabled = false;
-    return false;
-    }
-
-
-//called when client click previous page
-function previousPage() {
-    var n = page;
-    var x = distanceList;
-    var pageSize = 4;
-    for (var i = n * 4 - 1; i >= ((n - 1) * 4); i--) {
-
-        if (x[i] != null) {
-            if (document.getElementsByName('itemContainer')[x[i][0]] != null) {
-                document.getElementsByName('itemContainer')[x[i][0]].style.display = 'none';
-
-            }
-        }
-        if (x[i - pageSize] != null) {
-            if (document.getElementsByName('itemContainer')[x[i - pageSize][0]] != null) {
-                document.getElementsByName('itemContainer')[x[i - pageSize][0]].style.display = 'flex';
-            }
-        }
-        
-    }
-    page = page - 1;
-    //Disable previous page button
-    if (page == 1) {
-        document.getElementById('pPage').disabled = true;
-
-    }
-    document.getElementById('nPage').disabled = false;
-}
-
-//End of Paging Function
-
-//Google Map Marker
-function setMarker(m) {
-   
-}
 function Change(hide, show) {
-    hide.className= "";
-    show.className= "ReservationTitle";
+    hide.className = "";
+    show.className = "ReservationTitle";
     console.log("hello");
     document.getElementById(hide.id + 'Container').style.display = "none";
     document.getElementById(show.id + 'Container').style.display = "flex";
-    
+
 
 
 
