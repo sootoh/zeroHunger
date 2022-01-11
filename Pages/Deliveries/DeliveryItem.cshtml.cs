@@ -32,7 +32,7 @@ namespace ZeroHunger.Pages.Deliveries
             DeliveryId = id;
             //Delivery = _db.Delivery.Find(id);
             DeliveryItems = _db.DeliveryItem.Where(d => d.DeliveryID == id).ToList();
-            DryFoods = _db.DryFoodDonation;
+            DryFoods = _db.DryFoodDonation.Where(d => d.DryFoodRemainQuantity > 0);
         }
 
         public async Task<IActionResult> OnPost(int itemid)

@@ -1,10 +1,7 @@
 using ZeroHunger.Data;
 using ZeroHunger.Model;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using ZeroHunger.Model;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 
 namespace ZeroHunger.Pages.Deliveries

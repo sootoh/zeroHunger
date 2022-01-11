@@ -6,9 +6,9 @@
 <div class="container p=3">
     <div class="row pt-4">
         <div class="col-8">
-            <h2>Manage Delivery Request</h2>
+            <h2 class="text-info">Delivery</h2>
         </div>
-        <div class="col-4">
+        <div class="col-4 mt-2">
             <a asp-page="Create" class="btn btn-info">
                 <i class="bi bi-pencil-square"></i> &nbsp; Create New Delivery Request
             </a>
@@ -17,31 +17,33 @@
 </div>
 <br/><br/>
 
-    <table id="Delivery_load" class="table table-bordered table-striped" style="text-align:center">
+<table id="delivery_load" onload="CheckDeliveryItem()" class="table table-bordered table-striped" style="text-align:center">
     <thead>
         <tr>
             <th>
+                Delivery ID
+            </th>
+            <th>
                 Volunteer Name
             </th>
-            <th width="11%">
+            <th>
                 Delivery Time
             </th>
             <th>
                 Delivery Status
             </th>
-             <th>
+                <th>
                 Receiver Name
             </th>
             <th>
                 Receiver Phone
             </th>
-            <th width="15%">
+            <th>
                 Receiver Address
             </th>
-            <th width="13%">
+            <th>
                 Delivery Item
             </th>
-            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -49,8 +51,8 @@
 
 
 @section Scripts{
+    <script src="~/js/DeliveryList.js"></script>
     @{
-        <script src="~/js/DeliveryList.js"></script>
-        <partial name="_ValidationScriptsPartial"></partial>
+    <partial name="_ValidationScriptsPartial"></partial>
     }
 }

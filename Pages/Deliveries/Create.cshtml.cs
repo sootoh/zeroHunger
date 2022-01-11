@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ZeroHunger.Pages.Deliveries
@@ -28,7 +29,7 @@ namespace ZeroHunger.Pages.Deliveries
             var items = await _db.User.Where(u => u.UserType.TypeID == 2).ToListAsync();
             VolunteerList = new SelectList(items, "UserID", "UserName");
             
-            var ritems = await _db.User.Where(u => u.UserType.TypeID == 3).ToListAsync();
+            var ritems = await _db.User.Where(u => u.UserType.TypeID == 1).ToListAsync();
             ReceiverList = new SelectList(ritems, "UserID", "UserName");
 
         }
@@ -37,6 +38,11 @@ namespace ZeroHunger.Pages.Deliveries
             if(Delivery.DeliveryStatus != 0)
             {
                 ModelState.AddModelError("Delivery.DeliveryStatus", "The delivery status must be pending now.");
+            }
+           
+            if (Delivery.DeliveryTime < System.DateTime.Now || Delivery.DeliveryTime > System.DateTime.Now.Date)
+            {
+                ModelState.AddModelError("Delivery.DeliveryTime", "The delivery time must be the time from now on and within today only.");
             }
             if (ModelState.IsValid)
             {

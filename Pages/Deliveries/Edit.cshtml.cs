@@ -25,13 +25,21 @@ namespace ZeroHunger.Pages.Deliveries
         {
             var items = await _db.User.Where(u => u.UserType.TypeID == 2).ToListAsync();
             VolunteerList = new SelectList(items, "UserID", "UserName");
-            var bitems = await _db.User.Where(u => u.UserType.TypeID == 3).ToListAsync(); ;
+            var bitems = await _db.User.Where(u => u.UserType.TypeID == 1).ToListAsync(); ;
             ReceiverList = new SelectList(bitems, "UserID", "UserName");
 
             Delivery = _db.Delivery.Find(id);
         }
         public async Task<IActionResult> OnPost()
         {
+            if (Delivery.DeliveryStatus != 0)
+            {
+                ModelState.AddModelError("Delivery.DeliveryStatus", "The delivery status must be pending now.");
+            }
+            if (Delivery.DeliveryTime < System.DateTime.Now)
+            {
+                ModelState.AddModelError("Delivery.DeliveryTime", "The delivery time must be the time from now on.");
+            }
             if (ModelState.IsValid)
             {
                 _db.Delivery.Update(Delivery);

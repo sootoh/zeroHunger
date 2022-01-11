@@ -1,49 +1,76 @@
-using ZeroHunger.Data;
-using ZeroHunger.Model;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+@page
+@model ZeroHunger.Pages.Deliveries.DeliveryItemModel
 
-namespace ZeroHunger.Pages.Deliveries
+<partial name="_Notification"/>
+
+<div class="container p=3">
+    <div class="row pt-4">
+        <div class="col-8">
+            <h2 class="text-info">Manage Delivery Item</h2>
+        </div>
+        <div class="col-4 mt-2">
+            <a asp-page="AddDeliveryItem" asp-route-id="@Model.DeliveryId" class="btn btn-info form-control">
+                <i class="bi bi-pencil-square"></i> &nbsp; Add New Delivery Item
+            </a>
+        </div>
+    </div>  
+</div>
+<br/><br/>
+    @if(Model.DeliveryItems.Count()>0){
+    <table class="table table-bordered table-striped" style="text-align:center">
+    <thead>
+        <tr>
+            <th>
+                Delivery Item Name
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+     @foreach(var obj in Model.DeliveryItems){
+            <tr>
+             @foreach(var dryfood in Model.DryFoods){
+                  if(@dryfood.Id == @obj.DryFoodID){
+                        var dryfoodname = @dryfood.DryFoodName;
+                        <td>@dryfoodname</td>
+                        break;
+                    }  
+             }
+            <td>@obj.Quantity</td>
+            <td>
+                <form method="post">
+                <input value="@obj.ItemID" name="itemid" type="hidden"/>
+                <button type="submit" asp-page="EditDeliveryItem" asp-route-id="@obj.ItemID" class="btn btn-success mx-2" style="width:100px">
+                Edit &nbsp;<i class="bi bi-pencil-square"></i>
+                </button>
+                <br/><br/>
+                <button type="submit" asp-page="DeliveryItem" class="btn btn-danger mx-2" style="width:100px">
+                Delete &nbsp;<i class="bi bi-trash-fill"></i>
+                </button>       
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+    </table>
+}
+else
 {
-    public class DeliveryItemModel : PageModel
-    {
-        private readonly ApplicationDbContext _db;
-        
-        public int DeliveryId { get; set; }
-        [BindProperty]
-        public Delivery Delivery { set; get; }
-        public DeliveryItem DeliveryItem { set; get; }
-        public IEnumerable<DeliveryItem> DeliveryItems { set; get; }
-        public IEnumerable<DryFoodDonation> DryFoods { set; get; }
+    <p>No Delivery Item Yet</p>
+    
+}
+<br />
+<a asp-page="Index" class="btn btn-secondary" style="width: 150px">Back to Delivery</a>
 
-        public DeliveryItemModel(ApplicationDbContext db)
-        {
-            _db = db;
-        }
 
-        public void OnGet(int id)
-        {
-            DeliveryId = id;
-            //Delivery = _db.Delivery.Find(id);
-            DeliveryItems = _db.DeliveryItem.Where(d => d.DeliveryID == id).ToList();
-            DryFoods = _db.DryFoodDonation;
-        }
-
-        public async Task<IActionResult> OnPostDelete(int itemid)
-        {
-            List<DeliveryItem> delItemlist = await _db.DeliveryItem.ToListAsync();
-            DeliveryItem = delItemlist.Where(d =>d.ItemID == itemid).FirstOrDefault();
-            List<DryFoodDonation> dfdlist = await _db.DryFoodDonation.ToListAsync();
-            var dryfood = dfdlist.Where(d => d.Id == DeliveryItem.DryFoodID).FirstOrDefault();
-            dryfood.DryFoodRemainQuantity += DeliveryItem.Quantity;
-            _db.DeliveryItem.Remove(DeliveryItem);
-            await _db.SaveChangesAsync();
-            TempData["success"] = "Delivery item deleted successfully";
-            return Page();
-        }
+@section Scripts{
+    <script src="~/js/DeliveryItem.js"></script>
+    @{
+        <partial name="_ValidationScriptsPartial"></partial>
     }
 }

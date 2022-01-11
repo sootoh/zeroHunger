@@ -8,27 +8,27 @@
     <input type="hidden" asp-for="Delivery.DeliveryID" />
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary pl-3">Create Delivery Request</h2>
+            <h2 class="text-primary pl-3">Edit Delivery Request</h2>
             <hr/>
         </div>
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="mb-3">
             Volunteer Name
-            <select asp-for="Delivery.VolunteerID"  asp-items="Model.VolunteerList" class="form-control">-->
+            <select asp-for="Delivery.VolunteerID"  asp-items="Model.VolunteerList" class="form-control" required>
             <option>--Select the Volunteer--</option>
             </select>
         </div>
         <div class="mb-3">
             <label asp-for="Delivery.DeliveryTime"></label>
-            <input asp-for="Delivery.DeliveryTime" class="form-control"/>
+            <input asp-for="Delivery.DeliveryTime" class="form-control" required/>
         </div>
         <div class="mb-3">
             <label asp-for="Delivery.DeliveryStatus"></label>
-            <select class="form-control" asp-for="Delivery.DeliveryStatus" asp-items="Html.GetEnumSelectList<DeliveryStatus>()"></select>
+            <select class="form-control" asp-for="Delivery.DeliveryStatus" asp-items="Html.GetEnumSelectList<DeliveryStatus>()" required></select>
         </div>
         <div class="mb-3">
             Receiver Name
-            <select id="receiver" asp-for="Delivery.ReceiverID" asp-items="Model.ReceiverList" class="form-control">
+            <select id="receiver" asp-for="Delivery.ReceiverID" asp-items="Model.ReceiverList" class="form-control" required>
                 <option>--Select the Receiever--</option>
             </select>
         </div>
@@ -41,8 +41,8 @@
             <div id="receiveradrs1" class="form-control">----</div>
             <div id="receiveradrs2" class="form-control">----</div>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:150px;">Edit</button>
-        <a asp-page="Index" class="btn btn-secondary" style="width: 150px;">Back to List</a>  
+        <button type="submit" class="btn btn-primary form-control" style="width:150px;">Edit</button>
+        <a asp-page="Index" class="btn btn-secondary form-control" style="width:150px;">Back to List</a>  
      </div>
 </form>
 <br/><br/><br/><br/><br/>

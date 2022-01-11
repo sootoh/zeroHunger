@@ -25,15 +25,9 @@ namespace ZeroHunger.Pages.Deliveries
             _db = db;
         }
 
-        public void OnGet()
+        public void OnGet(int id)
         {
-            MyDeliveries = _db.Delivery.Include(d => d.Receiver).Where(r => r.VolunteerID == 2);
-
-            foreach (var obj in MyDeliveries)
-            {
-                DeliveryItem = _db.DeliveryItem.FirstOrDefault(d => d.DeliveryID == obj.DeliveryID);
-                DeliveryItems.Add(DeliveryItem);
-            }
+            DeliveryItems = _db.DeliveryItem.Where(d => d.DeliveryID == id).ToList();
             DryFoods = _db.DryFoodDonation;
         }
     }
