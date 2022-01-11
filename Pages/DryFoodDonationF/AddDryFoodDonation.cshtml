@@ -22,7 +22,7 @@
                     <label asp-for="DFD.DryFoodQuantity">Dry Food Quantity</label>
                 </div>
                 <div class="col-6">
-                    <input asp-for="DFD.DryFoodQuantity" class="'form-control'" min="0" required>
+                    <input asp-for="DFD.DryFoodQuantity" class="'form-control'" min="1" required>
                 </div>
             </div>
             <div class="form-group row">
@@ -49,7 +49,7 @@
                     <label asp-for="DFD.DryFoodRemark">Remark</label>
                 </div>
                 <div class="col-6">
-                    <textarea asp-for="DFD.DryFoodRemark" class="'form-control'"></textarea>
+                    <textarea asp-for="DFD.DryFoodRemark" class="'form-control'" required></textarea>
                 </div>
             </div>
 
