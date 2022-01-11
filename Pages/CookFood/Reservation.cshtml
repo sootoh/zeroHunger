@@ -55,8 +55,15 @@
     }
 
 </div>
+
 <div id="HistoryContainer">
-    <div class="col-12 border p-3">
+   
+    <div>
+        <button align="right" class="btn btn-danger" style="margin:10px 0px 10px 0px;float:right;" onclick="javascript:generatePDF();">Generate PDF</button>
+    </div>
+    
+    <div class="col-12 border p-3" id="printTable">
+        
         <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
@@ -84,4 +91,19 @@
 
 @section Scripts{
     <script src="~/js/JavaScript.js"></script>
+    <script>
+        function generatePDF() {
+            var pTable = document.getElementById('printTable').innerHTML;
+            var win = window.open('', '', 'height=100%,width=100%');
+            win.document.write('<html><head><title>Reservation History </title>');
+            win.document.write('<style> h2{text-align:center;} #printTable{margin-left:auto; margin-right:auto;} th,td{border: 1px solid black;} table,th,td{ border-collapse:collapse; margin:20px auto;} th:last-child,td:last-child{display:none; border:0;} td{text-align:center;}</style>');
+            win.document.write('</head><body>');
+            win.document.write('<h2>Reservation History </h2>');
+            win.document.write(pTable);
+            win.document.write('</body></html>');
+            win.document.close();
+            win.print();
+            setTimeout(function () { win.close() }, 500);
+        }
+    </script>
 }
