@@ -5,7 +5,8 @@
 {
     <head>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-     
+    <script>
+</script>
     </head>
     <br />
 <h2 class="text-info">Donate Cook Food</h2>
@@ -78,7 +79,7 @@
                 <div class="col-6">
 					<input asp-for="cook.CookLongtitude" id="long" placeholder="Longtitude" class="form-control" readonly required>
                     <br>
-                    <input type="button" class="btn btn-primary" onclick="getLatLon()" value="Get Current Location" />
+                    <input type="button" class="btn btn-primary" onclick="navigator.geolocation.getCurrentPosition(getLatLon, error, options);" value="Get Current Location" />
                 </div>
                 </div>
                 @*<div class="col-4">
@@ -94,7 +95,6 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2fBiU-KdwozQVPPLeB_IW0y26-zwthaQ&maps_ids=ca3e1b773e1fd477&callback=initMap"></script>    
     <script>
         //let map, infoWindow;
-
         function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: -34.397, lng: 150.644 },
@@ -102,20 +102,31 @@
         mapId: 'ca3e1b773e1fd477',
     });
     infoWindow = new google.maps.InfoWindow();
-
-    const locationButton = document.createElement("button");
-    //locationButton.textContent = "Pan to Current Location";
-    locationButton.classList.add("custom-map-control-button");
-    locationButton.innerHTML = "<img src='https://i.ibb.co/FnJMDQp/zerohungerlogotransparent.png' style='margin:0px 0px 0px 0px;' alt='Your Location' width='100' height='100'>";
-    locationButton.style.marginTop = "0px";
-    locationButton.style.padding = '0px 0px 0px 0px';
     
-    locationButton.style.backgroundColor = "transparent";
-    locationButton.style.border = 'unset';
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(locationButton);
-    locationButton.addEventListener("click", () => {
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
+}
+
+var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+};
+function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+ function getLatLon(position){
+
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            document.getElementById("la").value=latitude;
+            document.getElementById("long").value=longitude;
+ map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 6,
+        mapId: 'ca3e1b773e1fd477',
+    });
+ infoWindow = new google.maps.InfoWindow();
+
+if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const pos = {
@@ -131,13 +142,8 @@
                     handleLocationError(true, infoWindow, map.getCenter());
                 }
             );
-        } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
         }
-    });
-}
-
+        }
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
             infoWindow.setPosition(pos);
             infoWindow.setContent(
@@ -147,15 +153,8 @@
             );
             infoWindow.open(map);
         }
-
 		navigator.geolocation.getCurrentPosition(getLatLon);
-        function getLatLon(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-            document.getElementById("la").value=latitude;
-            document.getElementById("long").value=longitude;
-        }
-
+       
     </script>
 </div>
             <div class="form-group row">
@@ -171,7 +170,9 @@
                 
              </div>
        </form>
+       
 
+        
 <script>
 $("#addForm").submit(
 function(event){
