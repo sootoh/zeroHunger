@@ -34,5 +34,7 @@ namespace ZeroHunger.Model
         public int DonorUserID { get; set; }
         [ForeignKey("DonorUserID"),Required]
         public virtual User DonorId { get; set; }
+        [NotMapped]
+        public float distance { get; set; }
     }
 }
