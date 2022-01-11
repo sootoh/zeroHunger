@@ -45,7 +45,7 @@
                 <label asp-for="product.amount">Amount</label>
             </div>
             <div class="col-6">
-                <input asp-for="product.amount" class="form-control" required />
+                <input asp-for="product.amount" min="1" class="form-control" required />
             </div>
             <span asp-validation-for="product.amount" class="text-danger"></span>
         </div>
