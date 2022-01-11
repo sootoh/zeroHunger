@@ -33,7 +33,7 @@ namespace ZeroHunger.Pages
         public int p { get; set; }
         public string n { get; set; } = "";
         public string a { get; set; } = "";
-
+        public User u { get; set; }
 
         private Random _random = new Random();
 
@@ -66,6 +66,22 @@ namespace ZeroHunger.Pages
             a = RandomString(20, true);
         }
 
-        
+        public async Task<IActionResult> OnPostUpdate(string userLat, string userLon, string handler)
+        {
+            string userlat = userLat;
+            string userlon = userLon;
+            string uids = HttpContext.Session.GetString("userid");
+            int uid;
+            int.TryParse(uids, out uid);
+            u = await _db.User.FindAsync(uid);
+            float userlatitude;
+            float userlongitute;
+            float.TryParse(userlat, out userlatitude);
+            float.TryParse(userlon, out userlongitute);
+            u.latitude = userlatitude;
+            u.longitute = userlongitute;
+            await _db.SaveChangesAsync();
+            return RedirectToPage("Index");
+        }
     }
 }
