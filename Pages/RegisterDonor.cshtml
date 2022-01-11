@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
 	<!-- Main Style Css -->
     <link rel="stylesheet" href="css/style2.css"/>
-	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
 
 		function submit()
@@ -53,6 +53,8 @@
 					</div>
 					<div class="form-row">
 						<input type="password" asp-for="user.UserPwd" id="pwd" placeholder="Password" >
+						
+				  <i id="togglePassword" class="fa fa-eye fa-xs" ></i>
 						<span style="font-size:x-small;">include 6-20 characters, 1 numeric digit, 1 uppercase and 1 lowercase letter</span>
 					</div> 
 					<div class="form-row">
@@ -112,6 +114,15 @@
 					</div>
 				</div>
 			</form>
+			<script type="text/javascript">
+    var togglePassword = document.querySelector('#togglePassword');
+    var password = document.querySelector('#pwd');
+    togglePassword.addEventListener('click', function (e) {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+</script> 
 			@if (ViewData["Message"] != null)
     {
         <script type="text/javascript">
