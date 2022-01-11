@@ -137,7 +137,16 @@
             &copy; 2021 - ZeroHunger - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
+ <!-- START Bootstrap-Cookie-Alert -->
+<div class="alert text-center cookiealert" role="alert">
+    <b>Do you like cookies?</b> &#x1F36A; We use cookies to ensure you get the best experience on our website. <a href="https://cookiesandyou.com/" target="_blank">Learn more</a>
 
+    <button type="button" class="btn btn-primary btn-sm acceptcookies">
+        I agree
+    </button>
+</div>
+<!-- END Bootstrap-Cookie-Alert -->
+<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
