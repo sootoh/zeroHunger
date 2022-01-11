@@ -14,11 +14,7 @@ namespace ZeroHunger.Model
         [Required]
         public int Quantity { get; set; }
 
-        [ForeignKey("DryFoodID")]
-        public virtual DryFoodDonation DryFood { get; set; }
 
-        [ForeignKey("DeliveryID")]
-        public virtual Delivery Delivery { get; set; }
 
     }
 }
