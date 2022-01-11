@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model ZeroHunger.Pages.loginModel
 @{
 	<head>
@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<link rel="stylesheet" href="css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	</head>
 	<body>
@@ -38,8 +39,12 @@
 					<span class="text-danger" asp-validation-for="user.UserEmail"></span>
 	            <div class="form-group d-flex">
 				<label asp-for="user.UserPwd" style="display:none;"></label>
-	              <input type="password" asp-for="user.UserPwd" class="form-control rounded-left" placeholder="Password" required>
-	            </div>
+	              <input type="password" asp-for="user.UserPwd" class="form-control rounded-left" id="pwd" placeholder="Password" required>
+	            <div style="padding-top:5px;">
+				  <i id="togglePassword" class="fa fa-eye" ></i>
+				  </div>
+				  </div>
+				  
 				<span class="text-danger" asp-validation-for="user.UserPwd"></span>
 	            <div class="form-group d-md-flex">
 	            	<div class="w-50 form-check">
@@ -64,6 +69,15 @@
     }
 	            </div>
 	          </form>
+			  <script type="text/javascript">
+    var togglePassword = document.querySelector('#togglePassword');
+    var password = document.querySelector('#pwd');
+    togglePassword.addEventListener('click', function (e) {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+</script> 
 	        </div>
 				</div>
 			</div>
