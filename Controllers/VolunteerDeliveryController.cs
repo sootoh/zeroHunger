@@ -26,13 +26,13 @@ namespace ZeroHunger.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll() 
+        public async Task<IActionResult> GetAll()
         {
             /*
             int uid;
             int.TryParse(HttpContext.Session.GetString("userid"), out uid);*/
             loginUser = (_db.User.Where(b => b.UserEmail.Equals(@User.Identity.Name)).FirstOrDefault());
-            Deliveries = _db.Delivery.Where(r => r.ReceiverID.Equals(loginUser.UserID)).OrderByDescending(d => d.DeliveryTime).Include(d => d.Receiver);
+            Deliveries = _db.Delivery.Where(r => r.VolunteerID.Equals(loginUser.UserID)).OrderByDescending(d => d.DeliveryTime).Include(d => d.Receiver);
             Deliveries = Deliveries.Where(d => (int)d.DeliveryStatus != 4);
             foreach (var item in Deliveries)
             {
