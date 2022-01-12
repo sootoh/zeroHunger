@@ -26,7 +26,7 @@ namespace ZeroHunger.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(int id)
+        public async Task<IActionResult> GetAll() 
         {
             /*
             int uid;
