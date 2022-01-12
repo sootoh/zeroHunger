@@ -11,15 +11,16 @@ namespace ZeroHunger.Model
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        
         public int cookId { get; set; }
+        
         public int userId { get; set; }
         [Required]
         public string date { get; set; }
         public string status { get; set; }
-        [ForeignKey("resRefCook")]
-        public virtual CookedFoodDonation reservationRefCook { get; set; }
-        [ForeignKey("resRefUser")]
+        [ForeignKey("cookId"),Required]
+        public virtual CookedFoodDonation reservationRefCook{ get; set; }
+        [ForeignKey("userId")]
         public virtual User reservationRefUser { get; set; }
 
     }
