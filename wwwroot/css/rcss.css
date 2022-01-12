@@ -1,19 +1,21 @@
 ﻿#CookFoodContainer {
     display: flex;
-    flex-direction: row;
+    display:block;
     justify-content: space-around;
+  
 }
 
 #list {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex: 1 0 21%;
-    margin: 5px 5px 5px 25px;
+    margin: 20px 5px 5px 5px;
     border: 1px solid black;
     border-radius:15px;
     padding: 10px 10px 10px 10px;
-    width: fit-content;
-    background-color: #CDF2CA;
+    width: 80vw;
+    justify-content:space-between;
+    
 }
 
 #cookfooditem {
@@ -63,7 +65,7 @@
 }
 
 #itemContainer {
-    display: none;
+    display: flex;
     flex-direction: row;
     align-content: center;
     align-items: center;
@@ -123,6 +125,8 @@
 #pageButtonContainer {
     display: flex;
     justify-content: space-between;
+    align-content:center;
+    align-items:center;
 }
 
 #nPage:hover {
@@ -143,6 +147,7 @@
 #HistoryContainer
 {
     display:none;
+    flex-direction:column;
     width:100%;
     position:relative;
 }
