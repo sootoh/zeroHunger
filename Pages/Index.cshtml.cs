@@ -40,6 +40,16 @@ namespace ZeroHunger.Pages
                 }
                 }
             }
+            if (!User.Identity.IsAuthenticated)
+            {
+                if (Request.Cookies["role"] != null)
+                {
+                    Response.Cookies.Delete("role");
+                    Response.Cookies.Delete("userid");
+                    Response.Redirect("Index");
+                }
+
+            }
             //
             //HttpContext.Session.setString("userid", User.Identity.Name);
             products = await _db.ProductInNeed.ToListAsync();
