@@ -12,6 +12,7 @@ function loadDataTable() {
             "datatype": "json"
         },
         "columns": [
+            { "data": "deliveryID", "width": "2%" },
             { "data": "receiver.userName", "width": "5%" },
             { "data": "receiver.userPhone", "width": "5%" },
             {

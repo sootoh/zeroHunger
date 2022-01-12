@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
-    loadDataTable();
-    $("#receiver").change(function () {
+
+    $("#receiver").on('click',function () {
         var item = $(this).val();
         $.ajax({
             type: 'GET',
@@ -20,7 +20,7 @@
         });
     });
 
-    $("#deliveryitem").change(function () {
+    $("#deliveryitem").on('click',function (){
         var dryItem = $(this).val();
         $.ajax({
             type: 'GET',

@@ -27,7 +27,7 @@ function loadDataTable() {
         "columns": [
             { "data": "deliveryID", "width": "1%" },
             { "data": "volunteer.userName","width": "5%" },
-            { "data": "deliveryTime", "width": "10%" },
+            { "data": "deliveryTime", "width": "15%" },
             {
                 "data": "deliveryStatus",
                 "render": function (data) {
