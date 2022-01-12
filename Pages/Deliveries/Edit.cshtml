@@ -8,14 +8,13 @@
     <input type="hidden" asp-for="Delivery.DeliveryID" />
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary pl-3">Edit Delivery Request</h2>
+            <h2 class="text-primary">Edit Delivery Request</h2>
             <hr/>
         </div>
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="mb-3">
             Volunteer Name
             <select asp-for="Delivery.VolunteerID"  asp-items="Model.VolunteerList" class="form-control" required>
-            <option>--Select the Volunteer--</option>
             </select>
         </div>
         <div class="mb-3">
@@ -29,7 +28,6 @@
         <div class="mb-3">
             Receiver Name
             <select id="receiver" asp-for="Delivery.ReceiverID" asp-items="Model.ReceiverList" class="form-control" required>
-                <option>--Select the Receiever--</option>
             </select>
         </div>
         <div class="mb-3">

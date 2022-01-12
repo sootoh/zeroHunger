@@ -32,14 +32,6 @@ namespace ZeroHunger.Pages.Deliveries
         }
         public async Task<IActionResult> OnPost()
         {
-            if (Delivery.DeliveryStatus != 0)
-            {
-                ModelState.AddModelError("Delivery.DeliveryStatus", "The delivery status must be pending now.");
-            }
-            if (Delivery.DeliveryTime < System.DateTime.Now)
-            {
-                ModelState.AddModelError("Delivery.DeliveryTime", "The delivery time must be the time from now on.");
-            }
             if (ModelState.IsValid)
             {
                 _db.Delivery.Update(Delivery);

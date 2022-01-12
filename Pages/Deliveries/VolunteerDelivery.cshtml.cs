@@ -20,18 +20,20 @@ namespace ZeroHunger.Pages.Deliveries
         {
             _db = db;
         }
-        public async Task<IActionResult> OnGet()
+        public void OnGet(int id)
         {
+            MyDeliveries = _db.Delivery.Include(d => d.Receiver).Where(r => r.VolunteerID == id).ToListAsync();
+            /*
             string userid = HttpContext.Session.GetString("userid");
             if (userid == null)
             {
                 return RedirectToPage("../login");
             }
             else
-            {
-                MyDeliveries = await _db.Delivery.Include(d => d.Receiver).Where(r => r.VolunteerID == int.Parse(userid)).ToListAsync();
-                return Page();
-            }
+            {*/
+            //MyDeliveries = await _db.Delivery.Include(d => d.Receiver).Where(r => r.VolunteerID == int.Parse(id)).ToListAsync();
+            /*return Page();
+        }*/
         }
         /*
         public async Task<IActionResult> OnPostAccept(int id)

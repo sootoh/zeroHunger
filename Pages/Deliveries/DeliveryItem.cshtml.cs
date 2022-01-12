@@ -32,7 +32,7 @@ namespace ZeroHunger.Pages.Deliveries
             DeliveryId = id;
             //Delivery = _db.Delivery.Find(id);
             DeliveryItems = _db.DeliveryItem.Where(d => d.DeliveryID == id).ToList();
-            DryFoods = _db.DryFoodDonation.Where(d => d.DryFoodRemainQuantity > 0);
+            DryFoods = _db.DryFoodDonation.Where(d => d.DryFoodRemainQuantity>0);
         }
 
         public async Task<IActionResult> OnPost(int itemid)
@@ -41,10 +41,14 @@ namespace ZeroHunger.Pages.Deliveries
             DeliveryItem = delItemlist.Where(d =>d.ItemID == itemid).FirstOrDefault();
             List<DryFoodDonation> dfdlist = await _db.DryFoodDonation.ToListAsync();
             var dryfood = dfdlist.Where(d => d.Id == DeliveryItem.DryFoodID).FirstOrDefault();
-            dryfood.DryFoodRemainQuantity += DeliveryItem.Quantity;
-            _db.DeliveryItem.Remove(DeliveryItem);
-            await _db.SaveChangesAsync();
-            TempData["success"] = "Delivery Item deleted successfully";
+            if (dryfood != null)
+            {
+                dryfood.DryFoodRemainQuantity += DeliveryItem.Quantity;
+                _db.DeliveryItem.Remove(DeliveryItem);
+                await _db.SaveChangesAsync();
+                TempData["success"] = "Delivery Item deleted successfully";
+                return Page();
+            }
             return Page();
         }
     }

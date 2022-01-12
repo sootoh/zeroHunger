@@ -39,11 +39,11 @@ namespace ZeroHunger.Pages.Deliveries
             {
                 ModelState.AddModelError("Delivery.DeliveryStatus", "The delivery status must be pending now.");
             }
-           
+            /*
             if (Delivery.DeliveryTime < System.DateTime.Now || Delivery.DeliveryTime > System.DateTime.Now.Date)
             {
                 ModelState.AddModelError("Delivery.DeliveryTime", "The delivery time must be the time from now on and within today only.");
-            }
+            }*/
             if (ModelState.IsValid)
             {
                 await _db.Delivery.AddAsync(Delivery);

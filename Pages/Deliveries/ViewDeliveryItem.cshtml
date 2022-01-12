@@ -27,15 +27,15 @@
     </thead>
     <tbody>
      @foreach(var obj in Model.DeliveryItems){
-            <tr>
+        <tr>
              @foreach(var dryfood in Model.DryFoods){
                   if(@dryfood.Id == @obj.DryFoodID){
                         var dryfoodname = @dryfood.DryFoodName;
                         <td>@dryfoodname</td>
+                        <td>@obj.Quantity</td>
                         break;
-                    }  
+                  }
              }
-            <td>@obj.Quantity</td>
         </tr>
         }
     </tbody>
@@ -43,10 +43,8 @@
 }
 else
 {
-    <p class="text-center"><h3>No Delivery Item Yet</h3></p>
-    
+    <p style="text-align:center"><h4>No Delivery Item Yet</h4></p>
 }
-<br />
-<a asp-page="VolunteerDelivery" class="btn form-control" style="display:block;margin:auto">Back to Delivery Request</a>
-<!--width:300px-->
+<br/>
+<a asp-page="VolunteerDelivery" class="btn btn-secondary form-control" style="width:300px;display:block;margin:auto">Back to Delivery Request</a>
 

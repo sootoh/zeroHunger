@@ -6,17 +6,17 @@
 <div class="container p=3">
     <div class="row pt-4">
         <div class="col-8">
-            <h2 class="text-info">Manage Delivery Item</h2>
+            <h2>Delivery Item</h2>
         </div>
-        <div class="col-4 mt-2">
-            <a asp-page="AddDeliveryItem" asp-route-id="@Model.DeliveryId" class="btn btn-info form-control">
+        <div class="col-4 mt-2 text-right">
+            <a asp-page="AddDeliveryItem" asp-route-id="@Model.DeliveryId" class="btn btn-info">
                 <i class="bi bi-pencil-square"></i> &nbsp; Add New Delivery Item
             </a>
         </div>
     </div>  
 </div>
 <br/><br/>
-    @if(Model.DeliveryItems.Count()>0){
+@if(Model.DeliveryItems.Count()>0){
     <table class="table table-bordered table-striped" style="text-align:center">
     <thead>
         <tr>
@@ -38,22 +38,22 @@
                   if(@dryfood.Id == @obj.DryFoodID){
                         var dryfoodname = @dryfood.DryFoodName;
                         <td>@dryfoodname</td>
+                        <td>@obj.Quantity</td>
+                        <td>
+                            <form method="post">
+                            <input value="@obj.ItemID" name="itemid" type="hidden"/>
+                            <button type="submit" asp-page="EditDeliveryItem" asp-route-id="@obj.ItemID" class="btn btn-success mx-2" style="width:100px">
+                            Edit &nbsp;<i class="bi bi-pencil-square"></i>
+                            </button>
+                            <br/><br/>
+                            <button type="submit" asp-page="DeliveryItem" class="btn btn-danger mx-2" style="width:100px">
+                            Delete &nbsp;<i class="bi bi-trash-fill"></i>
+                            </button>       
+                            </form>
+                        </td>
                         break;
-                    }  
+                  } 
              }
-            <td>@obj.Quantity</td>
-            <td>
-                <form method="post">
-                <input value="@obj.ItemID" name="itemid" type="hidden"/>
-                <button type="submit" asp-page="EditDeliveryItem" asp-route-id="@obj.ItemID" class="btn btn-success mx-2" style="width:100px">
-                Edit &nbsp;<i class="bi bi-pencil-square"></i>
-                </button>
-                <br/><br/>
-                <button type="submit" asp-page="DeliveryItem" class="btn btn-danger mx-2" style="width:100px">
-                Delete &nbsp;<i class="bi bi-trash-fill"></i>
-                </button>       
-                </form>
-            </td>
         </tr>
         }
     </tbody>
@@ -61,11 +61,10 @@
 }
 else
 {
-    <p>No Delivery Item Yet</p>
-    
+    <p style="text-align:center"><h4>No Delivery Item Yet</h4></p>
 }
-<br />
-<a asp-page="Index" class="btn btn-secondary" style="width: 150px">Back to Delivery</a>
+<br/>
+<a asp-page="Index" align="center" class="btn btn-secondary" style="width:150px;margin-left:auto;margin-right:auto;">Back to Delivery</a>
 
 
 @section Scripts{

@@ -51,7 +51,7 @@ namespace ZeroHunger.Pages.Deliveries
                 dryfood.DryFoodRemainQuantity -= DeliveryItem.Quantity;
                 await _db.SaveChangesAsync();
                 TempData["success"] = "Delivery Item added successfully";
-                return RedirectToPage("DeliveryItem");
+                return RedirectToPage("DeliveryItem?id="+DeliveryId);
             }
             return Page();
         }

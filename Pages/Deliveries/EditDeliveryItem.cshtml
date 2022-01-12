@@ -2,6 +2,8 @@
 @model ZeroHunger.Pages.Deliveries.EditDeliveryItemModel
 
 <form method="post">
+    <div class="border p-3 mt-4">
+        <div asp-validation-summary="All" class="text-danger"></div>
         <input hidden asp-for="DeliveryItem.DeliveryID" value="@Model.DeliveryId"/>
         <div class="mb-3">
         Delivery Item
@@ -13,7 +15,8 @@
             Quantity
             <input id="quantity" asp-for="DeliveryItem.Quantity" min="1" class="form-control" required/>
         </div>
-         <button type="submit" asp-route-id="@Model.DeliveryId"class="btn btn-primary form-control" style="width:150px;">Add Delivery Item</button>
+         <button type="submit" asp-route-id="@Model.DeliveryId"class="btn btn-primary form-control" style="width:180px;">Add Delivery Item</button>
         <a asp-page="DeliveryItem" class="btn btn-secondary form-control" style="width:150px;">Back to List</a> 
+    </div>
 </form>
 
