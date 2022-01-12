@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using ZeroHunger.Model;
 using Microsoft.AspNetCore.Hosting;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
 
 namespace ZeroHunger.Controllers
 {
@@ -18,6 +17,7 @@ namespace ZeroHunger.Controllers
         private readonly IWebHostEnvironment _hostEnvironment;
         public Delivery Delivery { get; set; }
         public IEnumerable<Delivery> Deliveries { get; set; }
+        private User loginUser;
 
         public VolunteerDeliveryController(ApplicationDbContext db, IWebHostEnvironment hostEnvironment)
         {
@@ -26,12 +26,14 @@ namespace ZeroHunger.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(int id)
         {
+            /*
             int uid;
-            int.TryParse(HttpContext.Session.GetString("userid"), out uid);
-            Deliveries = _db.Delivery.Where(r => r.ReceiverID.Equals(uid)).OrderByDescending(d => d.DeliveryTime).Include(d => d.Receiver);
-            Deliveries = Deliveries.Where(d => (int) d.DeliveryStatus != 4);
+            int.TryParse(HttpContext.Session.GetString("userid"), out uid);*/
+            loginUser = (_db.User.Where(b => b.UserEmail.Equals(@User.Identity.Name)).FirstOrDefault());
+            Deliveries = _db.Delivery.Where(r => r.ReceiverID.Equals(loginUser.UserID)).OrderByDescending(d => d.DeliveryTime).Include(d => d.Receiver);
+            Deliveries = Deliveries.Where(d => (int)d.DeliveryStatus != 4);
             foreach (var item in Deliveries)
             {
                 item.Receiver = await _db.User.FindAsync(item.ReceiverID);
