@@ -39,6 +39,7 @@ namespace ZeroHunger.Pages
 
         //}
         public IEnumerable<User> Users { get; set; }
+        public bool remember { get; set; } = true;
         public void OnGet()
         {
             
@@ -93,13 +94,19 @@ namespace ZeroHunger.Pages
                     };
                         //Session["UserID"] = obj.UserId.ToString();
                         //Session["UserName"] = obj.UserName.ToString();
-                        var identity = new ClaimsIdentity(claims, "ZeroHungerCookie");
+                       var identity = new ClaimsIdentity(claims, "ZeroHungerCookie");
                         ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
-
+                    
+                        if (remember==true){
+                            obj.RememberMe = true;
+                        }
                         var authProperties = new AuthenticationProperties
                         {
-                            IsPersistent = user.RememberMe
+                            
+                            IsPersistent = obj.RememberMe
+                            
                         };
+                    await _db.SaveChangesAsync();
                         string userid = "";
                         //userid = dt.Rows[0]["UserID"].ToString();
                         userid = obj.UserID.ToString();
