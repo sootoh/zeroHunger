@@ -37,6 +37,10 @@ namespace ZeroHunger.Pages.CookFood
             {
                 item.reservationRefCook = await _db.CookedFoodDonation.FindAsync(item.cookId);
             }
+            if(CR.Count()!=0)
+            {
+                donor = await _db.User.FindAsync(CR.ElementAt(0).reservationRefCook.DonorUserID);
+            }
             CRP = CR.Where(c => c.status.Equals("Pending"));
 
             CR = CR.Where(c => c.status.Equals("Success") || c.status == "Expired");
