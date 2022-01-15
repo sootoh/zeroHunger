@@ -159,7 +159,7 @@ namespace ZeroHunger.Pages.CookFood
         }
         public void anotherSendEmail(string emailbody,string userEmail)
         {
-            userEmail = "sootohxin@graduate.utm.my";
+            //userEmail = "sootohxin@graduate.utm.my";
             var client = new SocketLabsClient(42290, "e5N6HwBb2k8A3Mrc9R7K"); //Your SocketLabs ServerId and Injection API key
 
             var message = new BasicMessage();
