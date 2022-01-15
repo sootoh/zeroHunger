@@ -60,44 +60,52 @@ function validateDate() {
         birthYear = birthDate.getFullYear();
         if (birthYear < currYear) {
 
-            errorMessage+= '<ul><li>Pick-up date should be after the current date</li></ul>';
+            errorMessage += '<ul><li>Pick-up date should be after the current date</li></ul>';
             return false;
         }
-        else if (birthDate.getMonth() + 1 < todaysDate.getMonth() + 1) {
-            errorMessage+= '<ul><li>Pick-up date should be after the current date</li></ul>';
-            return false
-        }
-        else if (birthDate.getDate() <= todaysDate.getDate()) {
-            if (deliveryMethod.value == "448 Delivery") {
-                if (birthDate.getDate() == todaysDate.getDate()) {
-
-
-                    errorMessage+= '<ul><li>Since 448 Delivery is choosed, pick-up date should be one day after the current date.</li></ul>';
-                    
-                    return false;
-                }
-                else {
-                    errorMessage+= '<ul><li>Pick-up date should be after the current date</li></ul>';
-                    
-                    return false
-                }
+        else {
+            if (birthDate.getMonth() + 1 < todaysDate.getMonth() + 1) {
+                errorMessage += '<ul><li>Pick-up date should be after the current date</li></ul>';
+                return false
             }
             else {
-                if (birthDate.getDate() == todaysDate.getDate()) {
-                    return true;
+                if (birthDate.getMonth() == todaysDate.getMonth()) {
+                    if (birthDate.getDate() <= todaysDate.getDate()) {
+                        if (deliveryMethod.value == "448 Delivery") {
+                            if (birthDate.getDate() == todaysDate.getDate()) {
+
+
+                                errorMessage += '<ul><li>Since 448 Delivery is choosed, pick-up date should be one day after the current date.</li></ul>';
+
+                                return false;
+                            }
+                            else {
+                                errorMessage += '<ul><li>Pick-up date should be after the current date</li></ul>';
+
+                                return false
+                            }
+                        }
+                        else {
+                            if (birthDate.getDate() == todaysDate.getDate()) {
+                                return true;
+                            }
+                            else {
+                                errorMessage += '<ul><li>Pick-up date should be after the current date</li></ul>';
+
+                                return false;
+                            }
+                        }
+
+
+                    }
                 }
-                else {
-                    errorMessage += '<ul><li>Pick-up date should be after the current date</li></ul>';
-                    
-                    return false;
-                }
+                
             }
-
-
         }
-        else {
+        
+        
             return true;
-        }
+        
 
     }
 }
