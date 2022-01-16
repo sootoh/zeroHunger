@@ -28,22 +28,33 @@ namespace ZeroHunger.Pages.CookFood
         public User donor { get; set; }
 
 
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
             int uid;
             int.TryParse(HttpContext.Session.GetString("userid"), out uid);
+            string uids = HttpContext.Session.GetString("userid");
+            if (uids == null)
+            {
+                return RedirectToPage("../login");
+            }
+            else
+            {
+                if (!HttpContext.Request.Cookies["role"].Equals("1"))
+                {
+
+                    return NotFound();
+                }
+
+            }
             CR = await _db.CookReservation.Where(b => b.userId.Equals(uid)).ToListAsync();
             foreach (var item in CR)
             {
                 item.reservationRefCook = await _db.CookedFoodDonation.FindAsync(item.cookId);
             }
-            if(CR.Count()!=0)
-            {
-                donor = await _db.User.FindAsync(CR.ElementAt(0).reservationRefCook.DonorUserID);
-            }
             CRP = CR.Where(c => c.status.Equals("Pending"));
 
             CR = CR.Where(c => c.status.Equals("Success") || c.status == "Expired");
+            return Page();
 
         }
         public async Task<IActionResult> OnPostComplete(int id)

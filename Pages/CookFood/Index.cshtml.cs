@@ -54,6 +54,10 @@ namespace ZeroHunger.Pages.CookFood
             {
                 return RedirectToPage("../login");
             }
+            else if (!HttpContext.Request.Cookies["role"].Equals("1"))
+             {
+                return NotFound();
+             }
             int uid;
             int.TryParse(uids, out uid);
             u = await _db.User.FindAsync(uid);
