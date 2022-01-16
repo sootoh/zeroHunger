@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ZeroHunger.Data;
 using ZeroHunger.Model;
 
@@ -21,6 +23,20 @@ namespace ZeroHunger.Pages.ReceiverList
 
         public void OnGet()
         {
+            string uids = HttpContext.Session.GetString("userid");
+            if (uids == null)
+            {
+                Response.Redirect("../login");
+            }
+            else
+            {
+                if (HttpContext.Request.Cookies["role"] != null && !HttpContext.Request.Cookies["role"].Equals("4"))
+                {
+
+                    Response.Redirect("../index");
+                }
+
+            }
             receiverList = _db.Receiver;
             salaryGroups = _db.SalaryGroup;
 
@@ -33,7 +49,6 @@ namespace ZeroHunger.Pages.ReceiverList
                 }
 
             }
-
         }
     }
 }

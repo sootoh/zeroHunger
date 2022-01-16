@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SocketLabs.InjectionApi;
@@ -57,6 +58,20 @@ namespace ZeroHunger.Pages.ReceiverList
 
             if (id != null)
             {
+                string uids = HttpContext.Session.GetString("userid");
+                if (uids == null)
+                {
+                    Response.Redirect("../login");
+                }
+                else
+                {
+                    if (HttpContext.Request.Cookies["role"] != null && !HttpContext.Request.Cookies["role"].Equals("4"))
+                    {
+
+                        Response.Redirect("../index");
+                    }
+
+                }
                 receiver = _db.Receiver.Where(i => i.receiverIC.Equals(id)).Single();
                 questionnaire = _db.ReceiverQuestionnaire.Where(i => i.receiverIC.Equals(id)).OrderBy(j => j.questionnaireId).LastOrDefault();
 
