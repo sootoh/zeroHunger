@@ -33,7 +33,15 @@ namespace ZeroHunger.Pages.DryFoodDonationF
             }
             else
             {
-                return Page();
+                if(HttpContext.Request.Cookies["role"].Equals("3"))
+                {
+                    return Page();
+                }
+                else
+                {
+                    return NotFound();
+                }
+                
             }
         }
         public async Task<IActionResult> OnPost(DryFoodDonation dfd)

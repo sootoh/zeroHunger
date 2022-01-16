@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZeroHunger.Data;
@@ -19,9 +20,27 @@ namespace ZeroHunger.Pages.DryFoodDonationF
         }
         [BindProperty]
         public DryFoodDonation DFD { get; set; }
-        public async Task OnGet(int id)
+        public async Task<IActionResult> OnGet(int id)
         {
-            DFD = await _db.DryFoodDonation.FindAsync(id);
+            string uids = HttpContext.Session.GetString("userid");
+            if (uids == null)
+            {
+                return RedirectToPage("../login");
+            }
+            else
+            {
+                if (HttpContext.Request.Cookies["role"].Equals("3"))
+                {
+                    DFD = await _db.DryFoodDonation.FindAsync(id);
+                    return Page();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            
+
 
         }
         public async Task<IActionResult> OnPost()
