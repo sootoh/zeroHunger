@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,21 @@ namespace ZeroHunger.Pages
         public ReceiverQuestionnaire questionnaire { get; set; }
         public async Task OnGetAsync(string? id)
         {
-            application=new Receiver();
+            string uids = HttpContext.Session.GetString("userid");
+            if (uids == null)
+            {
+                Response.Redirect("../login");
+            }
+            else
+            {
+                if (HttpContext.Request.Cookies["role"] != null && !HttpContext.Request.Cookies["role"].Equals("4"))
+                {
+
+                    Response.Redirect("../index");
+                }
+
+            }
+            application =new Receiver();
             questionnaire=new ReceiverQuestionnaire();
             salaryGroups = _db.SalaryGroup;
 

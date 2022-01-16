@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SocketLabs.InjectionApi;
@@ -64,6 +65,20 @@ namespace ZeroHunger.Pages.ReceiverAccountApplication
 
         public async Task<IActionResult> OnGetAsync(string? id)
         {
+            string uids = HttpContext.Session.GetString("userid");
+            if (uids == null)
+            {
+                return RedirectToPage("../login");
+            }
+            else
+            {
+                if (HttpContext.Request.Cookies["role"] != null && !HttpContext.Request.Cookies["role"].Equals("4"))
+                {
+
+                    return RedirectToPage("../index");
+                }
+
+            }
             application = new Receiver();
             if (id != null)
             {
