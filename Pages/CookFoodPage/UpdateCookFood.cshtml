@@ -1,0 +1,92 @@
+﻿@page
+@model ZeroHunger.Pages.CookFoodPage.UpdateCookFoodModel
+@{
+}
+<div class="page-content">
+    <form method="post" class="form-v10-content">
+        <input asp-for="cookfood.CookID" class="'form-control'" type='hidden'>
+        <h2 class="text-info" style="text-align:center;margin:0px 10px 30px 10px;">Edit </h2>
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div>
+            <div class="form-group row">
+
+                 cookfoodFromDB.CookName = cookfood.CookName;
+                cookfoodFromDB.CookQuantity = cookfood.CookQuantity;
+                cookfoodFromDB.CookLongtitude = cookfood.CookLongtitude;
+                cookfoodFromDB.CookLatitude = cookfood.CookLatitude;
+                cookfoodFromDB.OpenDate = cookfood.OpenDate;
+                cookfoodFromDB.CloseDate = cookfood.CloseDate;
+                cookfoodFromDB.Reservation=cookfood.Reservation;
+                cookfoodFromDB.RemainQuantity = cookfood.RemainQuantity;
+
+                <div class="col-4">
+                   <label asp-for="cookfood.CookName">Food Name</label>
+                </div>
+                <div class="col-6">
+					<input asp-for="cookfood.CookName" class="input-text" required>
+                </div> 
+                <div class="col-4">
+					<label asp-for="cookfood.CookQuantity">Quantity</label>
+					
+                </div>
+                <div class="col-6">
+					<input asp-for="cookfood.CookQuantity" class="input-text" required>
+                </div>
+                <div class="col-4">
+					<label asp-for="cookfood.CookLongtitude">Location Longitude</label>
+							
+                </div>
+                <div class="col-6">
+                   <input asp-for="cookfood.CookLongtitude" required>
+                </div>
+				<div class="col-4">
+					<label asp-for="cookfood.CookLatitude">Location Latitude</label>
+							
+                </div>
+                <div class="col-6">
+					<input asp-for="cookfood.CookLatitude" required>
+                </div>
+				<div class="col-4">
+					<label asp-for="cookfood.OpenDate">Opening Time</label>
+							
+                </div>
+                <div class="col-6">
+					<input asp-for="cookfood.OpenDate"  required>
+                </div>
+                
+                <div class="col-4">
+					<label asp-for="cookfood.CloseDate">Closing Time</label>
+							
+                </div>
+                <div class="col-6">
+					<input asp-for="cookfood.CloseDate" required>
+                </div>
+				<div class="col-4">
+					<label asp-for="cookfood.Reservation">Reserved Quantity</label>
+							
+                </div>
+                <div class="col-6">
+					<input asp-for="cookfood.Reservation" required>
+                </div>
+                <div class="col-4">
+					<label asp-for="cookfood.RemainQuantity">Remaining Quantity</label>
+							
+                </div>
+                <div class="col-6">
+					<input asp-for="cookfood.RemainQuantity" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-5 offset-4">
+                    <input type="submit" value="Save" class="btn btn-primary form-control" />
+
+
+                </div>
+                <div class="col-5 offset-4">
+                    <a asp-page="UserView" class="btn btn-sucess form-control">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div></div>
