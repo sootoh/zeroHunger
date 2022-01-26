@@ -28,11 +28,8 @@ namespace ZeroHunger.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            /*
-            int uid;
-            int.TryParse(HttpContext.Session.GetString("userid"), out uid);*/
-            loginUser = (_db.User.Where(b => b.UserEmail.Equals(@User.Identity.Name)).FirstOrDefault());
-            Deliveries = _db.Delivery.Where(r => r.VolunteerID.Equals(loginUser.UserID)).OrderByDescending(d => d.DeliveryTime).Include(d => d.Receiver);
+            loginUser = _db.User.Where(b => b.UserEmail.Equals(@User.Identity.Name)).FirstOrDefault();
+            Deliveries = _db.Delivery.Where(r => r.VolunteerID.Equals(loginUser.UserID)).Include(d => d.Receiver);
             Deliveries = Deliveries.Where(d => (int)d.DeliveryStatus != 4);
             foreach (var item in Deliveries)
             {
@@ -54,8 +51,6 @@ namespace ZeroHunger.Controllers
             _db.Delivery.Update(Delivery);
             await _db.SaveChangesAsync();
             return Json(new { success = true, message = "Delivery Request Accepted Successfully" });
-            //TempData["success"] = "Delivery request accepted successfully";
-            //return RedirectToPage("VolunteerDelivery");
         }
 
         [HttpPost]
@@ -71,8 +66,6 @@ namespace ZeroHunger.Controllers
             _db.Delivery.Update(Delivery);
             await _db.SaveChangesAsync();
             return Json(new { success = true, message = "Delivery Request Completed Successfully" });
-            //TempData["success"] = "Delivery request completed successfully";
-            //return RedirectToPage("VolunteerDelivery");
         }
 
         [HttpPost]
@@ -84,14 +77,10 @@ namespace ZeroHunger.Controllers
             {
                 return Json(new { success = false, message = "Error while Rejecting Delivery Request" });
             }
-            Delivery.DeliveryStatus = (DeliveryStatus)4;
-            //Delivery.VolunteerID = 0;
-            //Delivery.Volunteer = null;
+            Delivery.DeliveryStatus = (DeliveryStatus)3;
             _db.Delivery.Update(Delivery);
             await _db.SaveChangesAsync();
             return Json(new { success = true, message = "Delivery Request Rejected Successfully" });
-            //TempData["success"] = "Delivery request rejected successfully";
-            //return RedirectToPage("VolunteerDelivery");
         }
     }
 }
