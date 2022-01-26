@@ -4,24 +4,6 @@ $(document).ready(function (){
     loadDataTable();
 });
 
-function alertMsg() {
-    var i = 1;
-    var msg = "@ViewData['Message'+i]";
-    while(msg != null) {
-        alert(msg);
-        i++;
-        msg = "@ViewData['Message'+i]";
-        if (msg == null) {
-            break;
-        }
-    } 
-}
-
-function ChangeTimeFormat() {
-    var dTime = document.getElementById("dTime");
-    dTime.innerHTML = time.format("YYYY-MM-DD hh:mm A");
-}
-
 function loadDataTable() {
     dataTable = $('#delivery_load').DataTable({
         "ajax": {
