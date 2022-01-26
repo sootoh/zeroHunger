@@ -1,8 +1,42 @@
 @page
+@using System.Collections
 @model ZeroHunger.Pages.Deliveries.IndexModel
 
-<partial name="_Notification"/>
+@if (@HttpContext.Request.Cookies["role"] != null && @HttpContext.Request.Cookies["role"].Equals("4"))
+{
+    /*@if(null != TempData["alertMessage"])
+    {
+        <script type="text/javascript">
+        alert('@TempData["alertMessage"]');
+        </script>
+    }*/
+    ArrayList _message = ViewData["Message"] as ArrayList;
+    <script type="text/javascript">
+    foreach (string msg in _message)
+    {
+        alert(msg);
+    }
+    </script>
 
+/*if(ViewData["Message1"]!=null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var message =  '@ViewData["'Message1'"]';
+            alert(message);
+            var i = 2;
+            message = '@ViewData["'Message'"+i.ToString()]';
+            while(msg != null) {
+                alert(message);
+                i++;
+                message = '@ViewData["'Message'"+i]';
+                if (msg == null) {
+                    break;
+                }
+            } 
+        };
+    </script>
+}*/
 <div class="container p=3">
     <div class="row pt-4">
         <div class="col-8 text-left">
@@ -49,10 +83,24 @@
     </thead>
 </table>         
 
-
 @section Scripts{
     <script src="~/js/DeliveryList.js"></script>
+    <script>
+         window.onload=function(){
+              ArrayList _message = ViewData["Message"] as ArrayList;
+    foreach (string msg in _message)
+    {
+        alert(msg);
+    }
+         }
+    </script>
     @{
     <partial name="_ValidationScriptsPartial"></partial>
     }
+}
+}else{
+     <script>
+     alert("Sorry, you are not eligible to enter this page.");
+     location.href = '/Index';
+     </script>
 }

@@ -31,14 +31,10 @@ namespace ZeroHunger.Pages.Deliveries
             Delivery = _db.Delivery.Find(id);
         }
         public async Task<IActionResult> OnPost()
-        {
-            
-                _db.Delivery.Update(Delivery);
-                await _db.SaveChangesAsync();
-                
-                return RedirectToPage("Index");
-            
-            
+        {            
+            _db.Delivery.Update(Delivery);
+            await _db.SaveChangesAsync();              
+            return RedirectToPage("Index");     
         }
     }
 }

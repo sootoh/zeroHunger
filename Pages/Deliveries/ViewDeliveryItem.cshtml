@@ -1,10 +1,8 @@
 ﻿@page
 @model ZeroHunger.Pages.Deliveries.ViewDeliveryItemModel
-@{
-}
 
-<partial name="_Notification"/>
-
+@if (@HttpContext.Request.Cookies["role"] != null && @HttpContext.Request.Cookies["role"].Equals("2"))
+{
 <div class="container p=3">
     <div class="row pt-4">
         <div class="col-8">
@@ -13,7 +11,7 @@
     </div>  
 </div>
 <br/><br/>
-    @if(Model.DeliveryItems.Count()>0){
+@if(Model.DeliveryItems.Count()>0){
     <table class="table table-bordered table-striped" style="text-align:center">
     <thead>
         <tr>
@@ -26,20 +24,20 @@
         </tr>
     </thead>
     <tbody>
-     @foreach(var obj in Model.DeliveryItems){
+        @foreach(var obj in Model.DeliveryItems){
         <tr>
-             @foreach(var dryfood in Model.DryFoods){
-                  if(@dryfood.Id == @obj.DryFoodID){
-                        Model.itemFound=true;
-                        var dryfoodname = @dryfood.DryFoodName;
-                        <td>@dryfoodname</td>
-                        <td>@obj.Quantity</td>
-                        break;
-                  }
-             }
+            @foreach(var dryfood in Model.DryFoods){
+                if(@dryfood.Id==@obj.DryFoodID){
+                    Model.ItemFound=true;
+                    var dryfoodname = @dryfood.DryFoodName;
+                    <td>@dryfoodname</td>
+                    <td>@obj.Quantity</td>
+                    break;
+                }
+            }
         </tr>
         }
-        @if(Model.itemFound==false){
+        @if(Model.ItemFound==false){
         <tr>
             <td colspan="2">No Delivery Item Found</td>
         </tr>
@@ -47,7 +45,7 @@
     </tbody>
     </table>
 }
-else
+else if(Model.DeliveryItems.Count()==0)
 {
     <table class="table table-bordered table-striped" style="text-align:center">
     <thead>
@@ -69,4 +67,10 @@ else
 }
 <br/>
 <a asp-page="VolunteerDelivery" class="btn btn-secondary form-control" style="width:300px;display:block;margin:auto">Back to Delivery Request</a>
+}else{
+     <script>
+     alert("Sorry, you are not eligible to enter this page.");
+     location.href = '/Index';
+     </script>
+}
 

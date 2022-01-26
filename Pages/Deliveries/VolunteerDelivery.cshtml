@@ -1,8 +1,8 @@
 @page
 @model ZeroHunger.Pages.Deliveries.VolunteerDeliveryModel
 
-<partial name="_Notification"/>
-
+@if (@HttpContext.Request.Cookies["role"] != null && @HttpContext.Request.Cookies["role"].Equals("2"))
+{
 <div class="container p=3">
     <div class="row pt-4">
         <div class="col-9">
@@ -27,8 +27,7 @@
             </th>
             <th>
                 Receiver Address
-            </th>
-            
+            </th>       
             <th>
                 Delivery Time
             </th>
@@ -50,6 +49,12 @@
     @{
         <partial name="_ValidationScriptsPartial"></partial>
     }
+}
+}else{
+     <script>
+     alert("Sorry, you are not eligible to enter this page.");
+     location.href = '/Index';
+     </script>
 }
 
 

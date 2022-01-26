@@ -52,7 +52,6 @@ namespace ZeroHunger.Pages.Deliveries
                 var dryfood = _db.DryFoodDonation.Find(DeliveryItem.DryFoodID);
                 dryfood.DryFoodRemainQuantity -= DeliveryItem.Quantity;
                 await _db.SaveChangesAsync();
-                TempData["success"] = "Delivery Item added successfully";
                 return RedirectToPage("DeliveryItem", new { id = DeliveryItem.DeliveryID });
             }
             return Page();

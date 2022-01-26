@@ -21,7 +21,7 @@ namespace ZeroHunger.Pages.Deliveries
         public DeliveryItem DeliveryItem { set; get; }
         public IEnumerable<DeliveryItem> DeliveryItems { set; get; }
         public IEnumerable<DryFoodDonation> DryFoods { set; get; }
-        public bool itemFound { get; set; } = false;
+        public bool ItemFound { get; set; } = false;
 
         public DeliveryItemModel(ApplicationDbContext db)
         {
@@ -47,10 +47,9 @@ namespace ZeroHunger.Pages.Deliveries
                 dryfood.DryFoodRemainQuantity += DeliveryItem.Quantity;
                 _db.DeliveryItem.Remove(DeliveryItem);
                 await _db.SaveChangesAsync();
-                TempData["success"] = "Delivery Item deleted successfully";
-                return Page();
+                return RedirectToPage("DeliveryItem", new { id = DeliveryItem.DeliveryID });
             }
-            return Page();
+            return RedirectToPage("DeliveryItem", new { id = DeliveryItem.DeliveryID });
         }
     }
 }

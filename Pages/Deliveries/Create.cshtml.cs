@@ -31,7 +31,6 @@ namespace ZeroHunger.Pages.Deliveries
             
             var ritems = await _db.User.Where(u => u.UserType.TypeID == 1).ToListAsync();
             ReceiverList = new SelectList(ritems, "UserID", "UserName");
-
         }
         public async Task<IActionResult> OnPost()
         {
@@ -44,11 +43,17 @@ namespace ZeroHunger.Pages.Deliveries
             {
                 ModelState.AddModelError("Delivery.DeliveryTime", "The delivery time must be at least 30 minutes starting from now within today only.");
             }
+            if (!ModelState.IsValid)
+            {
+                var items = await _db.User.Where(u => u.UserType.TypeID == 2).ToListAsync();
+                VolunteerList = new SelectList(items, "UserID", "UserName");
+                var ritems = await _db.User.Where(u => u.UserType.TypeID == 1).ToListAsync();
+                ReceiverList = new SelectList(ritems, "UserID", "UserName");
+            }
             if (ModelState.IsValid)
             {
                 await _db.Delivery.AddAsync(Delivery);
                 await _db.SaveChangesAsync();
-                //TempData["success"] = "Delivery request created successfully";
                 return RedirectToPage("Index");
             }
             return Page();

@@ -1,14 +1,17 @@
 @page
 @model ZeroHunger.Pages.Deliveries.EditDeliveryItemModel
 
+@if (@HttpContext.Request.Cookies["role"] != null && @HttpContext.Request.Cookies["role"].Equals("4"))
+{
 <form method="post">
     <div class="border p-3 mt-4">
         <div asp-validation-summary="All" class="text-danger"></div>
-        <input type="hidden" asp-for="OriID" value="@Model.OriDeliveryItem.ItemID" />
+        <input type="hidden" asp-for="DeliveryItem.DeliveryID"/>
+        <input type="hidden" asp-for="DeliveryItem.ItemID"/>
+        <input type="hidden" asp-for="OriDeliveryItem.ItemID" value="@Model.OriDeliveryItem.ItemID" />
         <div class="mb-3">
         Delivery Item
         <select id="deliveryitem" asp-for="DeliveryItem.DryFoodID" asp-items="Model.DeliveryItemList" class="form-control" required>
-            <!--<option>--Select Delivery Item--</option>-->
         </select>
         </div>
         <div class="mb-3">
@@ -16,11 +19,12 @@
             <input id="quantity" asp-for="DeliveryItem.Quantity" min="1" class="form-control" required/>
         </div>
          <button type="submit" class="btn btn-primary form-control" style="width:180px;">Edit Delivery Item</button>
-         <a asp-page="DeliveryItem" asp-route-id="@Model.DeliveryItemID" class="btn btn-secondary form-control" style="width:150px;">Back to List</a> 
+         <a asp-page="DeliveryItem" asp-route-id="DeliveryItem.DeliveryID" class="btn btn-secondary form-control" style="width:150px;">Back to List</a> 
     </div>
 </form>
-
-<!--
-    <button type="submit" class="btn btn-primary form-control" style="width:180px;">Edit Delivery Item</button>
-        <a asp-page="DeliveryItem" class="btn btn-secondary form-control" style="width:150px;">Back to List</a>
--->
+}else{
+     <script>
+     alert("Sorry, you are not eligible to enter this page.");
+     location.href = '/Index';
+     </script>
+}
