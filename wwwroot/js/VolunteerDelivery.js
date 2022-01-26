@@ -83,7 +83,7 @@ function loadDataTable() {
                          <a class='btn btn-success text-white' style='cursor:pointer; width:100px;'
                              onclick=Accept('/api/volunteerdelivery/Accept?id='+${row.deliveryID})>
                             Accept 
-                        </a></td><br><td>
+                        </a></td><br><br><td>
                         <a class='btn btn-danger text-white' style='cursor:pointer; width:100px;'
                              onclick=Reject('/api/volunteerdelivery/Reject?id='+${row.deliveryID})>
                             Reject
