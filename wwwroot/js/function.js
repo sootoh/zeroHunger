@@ -11,14 +11,12 @@ function initMaps() {
         map = new google.maps.Map(document.getElementById("map"), {
             center: { lat:ulat,lng:ulon},
             zoom: 8,
-            mapId: 'ca3e1b773e1fd477',
         })
     }
     else {
         map = new google.maps.Map(document.getElementById("map"), {
             center: { lat: 3.8925533126426664, lng: 102.10080302222984 },
             zoom: 8,
-            mapId: 'ca3e1b773e1fd477',
         });
     }
     infoWindow = new google.maps.InfoWindow();
@@ -103,7 +101,6 @@ function initMapr() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 3.8925533126426664, lng: 102.10080302222984 },
         zoom: 8,
-        mapId: 'ca3e1b773e1fd477',
     });
     infoWindow = new google.maps.InfoWindow();
 
