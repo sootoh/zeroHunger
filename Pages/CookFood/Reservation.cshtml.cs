@@ -93,8 +93,8 @@ namespace ZeroHunger.Pages.CookFood
         }
         public void anotherSendEmail(string emailbody, string userEmail)
         {
-            //userEmail = "sootohxin@graduate.utm.my";
-            var client = new SocketLabsClient(42290, "e5N6HwBb2k8A3Mrc9R7K"); //Your SocketLabs ServerId and Injection API key
+            
+            var client = new SocketLabsClient(ServerID, "API Key"); //Your SocketLabs ServerId and Injection API key
 
             var message = new BasicMessage();
 
@@ -102,7 +102,7 @@ namespace ZeroHunger.Pages.CookFood
             message.HtmlBody = emailbody;
             message.PlainTextBody = emailbody;
 
-            message.From.Email = "vtechzerohunger@gmail.com";
+            message.From.Email = "Your Email";//Your Email
 
             //A basic message supports up to 50 recipients and supports several different ways to add recipients
             message.To.Add(userEmail); //Add a To address by passing the email address
