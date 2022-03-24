@@ -59,7 +59,7 @@ namespace ZeroHunger.Pages
         public void anotherSendEmail(string emailbody, string userEmail)
         {
 
-            var client = new SocketLabsClient(42290, "e5N6HwBb2k8A3Mrc9R7K"); //Your SocketLabs ServerId and Injection API key
+            var client = new SocketLabsClient(, ""); //Your SocketLabs ServerId and Injection API key
 
             var message = new BasicMessage();
 
@@ -67,7 +67,7 @@ namespace ZeroHunger.Pages
             message.HtmlBody = emailbody;
             message.PlainTextBody = emailbody;
 
-            message.From.Email = "vtechzerohunger@gmail.com";
+            message.From.Email = "";
 
             //A basic message supports up to 50 recipients and supports several different ways to add recipients
             message.To.Add(userEmail); //Add a To address by passing the email address
@@ -85,10 +85,6 @@ namespace ZeroHunger.Pages
                 p = (forgotUser.UserID + 777) - 87;
                 n = RandomString(20, true);
                 a = RandomString(20, true);
-                //var token = await Microsoft.AspNetCore.Identity.UserManager<User>.GeneratePasswordResetTokenAsync(forgotUser);
-                // Build the password reset link
-                //string passwordResetLink = Url.Action("ResetPassword", "Account",
-                //new { email = model.userEmail, token = rnd }, Request.Scheme);
                 resetPasswordLink = "https://zerohunger20220113131943.azurewebsites.net/ResetPassword?n=" + n+"&p=" +p+"&a="+a;
                 string message3 = "<br/><br/>Thanks,<br/>Zero Hunger<br/><b>This a computer auto-generated email, do not reply to this email.</b></p>";
                 anotherSendEmail(("Please reset your password <br>" + resetPasswordLink +message3), userEmail);
